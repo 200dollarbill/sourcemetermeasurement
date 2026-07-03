@@ -24,11 +24,16 @@ fprintf(smu, ":SENS:FUNC 'RES'");
 fprintf(smu, ":FORM:ELEM RES");
 
 %% Trigger a measurement and read the buffer
+% The output must be turned ON before a measurement can be made
+fprintf(smu, ':OUTP ON');
 fprintf(smu, ':READ?');
 
 %% Read measured resistance
 resistance_str = fscanf(smu);
 resistance = str2double(resistance_str);
+
+% Turn output OFF for safety
+fprintf(smu, ':OUTP OFF');
 
 fprintf('Measured Resistance = %.6f Ohms\n', resistance);
 
