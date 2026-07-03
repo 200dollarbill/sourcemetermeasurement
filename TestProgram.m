@@ -1,32 +1,35 @@
-%% Read Resistance (Ohms) from Keithley/Tektronix 2400 SourceMeter
 clear;
 clc;
 
-% Create VISA-GPIB object
-% Change "NI" to "AGILENT" if using Keysight/Agilent VISA
-smu = visadev("GPIB0::24::INSTR");
+addr = 24;
 
-% Optional: Set timeout
-smu.Timeout = 10;
+smu = gpib('adlink', 0, addr);
+fopen(smu);
 
-%% Reset instrument
-writeline(smu, "*RST");
+%  ALWAYS clear instrument state first
+fprintf(smu, '*CLS');
+fprintf(smu, '*RST');
 pause(1);
 
-%% Configure for resistance measurement
-writeline(smu, ":SENS:FUNC 'RES'");
-writeline(smu, ":FORM:ELEM RES");
+%  Set resistance mode
+fprintf(smu, ':SENS:FUNC "RES"');
+fprintf(smu, ':FORM:ELEM RES');
 
-%% Trigger a measurement
-writeline(smu, ":READ?");
+%  IMPORTANT: flush buffer BEFORE query
+flushinput(smu);
 
-%% Read measured resistance
-resistance = str2double(readline(smu));
+%  Send query
+fprintf(smu, ':READ?');
 
-fprintf("Measured Resistance = %.6f Ohms\n", resistance);
+%  Read response (THIS is critical)
+data = fscanf(smu);
 
-%% Clear object
+disp(data);
+
+resistance = str2double(data);
+
+fprintf('Resistance = %.6f Ohms\n', resistance);
+
+fclose(smu);
+delete(smu);
 clear smu;
-%% 
-visadevlist
-
