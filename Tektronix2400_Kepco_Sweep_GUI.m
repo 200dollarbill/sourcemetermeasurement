@@ -225,32 +225,25 @@ function Tektronix2400_Kepco_Sweep_GUI()
     
     function saveManual(~, ~)
         if ~isempty(currData)
-            saveDataToExcel(currData, resData, edit_filename.Value);
-        end
-    end
-    
-    function saveDataToExcel(I_data, R_data, base_name)
-        % Auto-increment filename if it already exists
-        file_idx = 0;
-        while true
-            if file_idx == 0
-                f_xlsx = sprintf('%s.xlsx', base_name);
-            else
-                f_xlsx = sprintf('%s(%d).xlsx', base_name, file_idx);
+            % Ask user for file location and name
+            defaultName = sprintf('%s.xlsx', edit_filename.Value);
+            [file, path] = uiputfile('*.xlsx', 'Save Data As', defaultName);
+            
+            % Check if user cancelled
+            if isequal(file, 0) || isequal(path, 0)
+                return;
             end
-            if ~isfile(f_xlsx)
-                break;
+            
+            fullPath = fullfile(path, file);
+            
+            % Create table and export
+            T = table(currData(:), resData(:), 'VariableNames', {'Kepco_Current_A', 'Tektronix_Resistance_Ohms'});
+            try
+                writetable(T, fullPath);
+                uialert(fig, sprintf('Data successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
+            catch ME
+                uialert(fig, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
             end
-            file_idx = file_idx + 1;
-        end
-        
-        % Create table and export
-        T = table(I_data(:), R_data(:), 'VariableNames', {'Kepco_Current_A', 'Tektronix_Resistance_Ohms'});
-        try
-            writetable(T, f_xlsx);
-            uialert(fig, sprintf('Data successfully saved to:\n%s', f_xlsx), 'Save Complete', 'Icon', 'success');
-        catch ME
-            uialert(fig, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
     end
 end
