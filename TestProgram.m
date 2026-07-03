@@ -1,35 +1,38 @@
+%% Read Resistance (Ohms) from Keithley/Tektronix 2400 SourceMeter
 clear;
 clc;
 
-addr = 24;
+% Clean up any previous unclosed instrument connections
+try delete(instrfind); catch; end
 
-smu = gpib('adlink', 0, addr);
+% Create ADLINK GPIB object (Board 0, Address 24)
+smu = gpib('adlink', 0, 24);
+
+% Optional: Set timeout
+smu.Timeout = 10;
+
+% Open the connection
 fopen(smu);
 
-%  ALWAYS clear instrument state first
-fprintf(smu, '*CLS');
+%% Reset instrument
 fprintf(smu, '*RST');
 pause(1);
 
-%  Set resistance mode
-fprintf(smu, ':SENS:FUNC "RES"');
-fprintf(smu, ':FORM:ELEM RES');
+%% Configure for resistance measurement
+% These commands conform to the SCPI Signal Oriented Measurement Commands
+fprintf(smu, ":SENS:FUNC 'RES'");
+fprintf(smu, ":FORM:ELEM RES");
 
-%  IMPORTANT: flush buffer BEFORE query
-flushinput(smu);
-
-%  Send query
+%% Trigger a measurement and read the buffer
 fprintf(smu, ':READ?');
 
-%  Read response (THIS is critical)
-data = fscanf(smu);
+%% Read measured resistance
+resistance_str = fscanf(smu);
+resistance = str2double(resistance_str);
 
-disp(data);
+fprintf('Measured Resistance = %.6f Ohms\n', resistance);
 
-resistance = str2double(data);
-
-fprintf('Resistance = %.6f Ohms\n', resistance);
-
+%% Close and clear object
 fclose(smu);
 delete(smu);
 clear smu;

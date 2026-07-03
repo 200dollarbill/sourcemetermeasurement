@@ -7,8 +7,9 @@ function Tektronix2400_GUI_ADLINK()
     
     % Connection Panel
     pnl_conn = uipanel(fig, 'Title', 'Connection (ADLINK)', 'Position', [20, 380, 220, 100], 'BackgroundColor', 'w', 'FontWeight', 'bold');
-    btn_connect = uibutton(pnl_conn, 'Position', [10, 40, 100, 30], 'Text', 'Connect', 'ButtonPushedFcn', @connectHW);
-    lbl_status = uilabel(pnl_conn, 'Position', [120, 40, 100, 30], 'Text', '🔴 Disconnected', 'FontColor', 'r', 'FontWeight', 'bold');
+    btn_connect = uibutton(pnl_conn, 'Position', [10, 40, 95, 30], 'Text', 'Connect', 'ButtonPushedFcn', @connectHW);
+    btn_disconnect = uibutton(pnl_conn, 'Position', [115, 40, 95, 30], 'Text', 'Disconnect', 'Enable', 'off', 'ButtonPushedFcn', @disconnectHW);
+    lbl_status = uilabel(pnl_conn, 'Position', [10, 10, 200, 25], 'Text', '🔴 Disconnected', 'FontColor', 'r', 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
     
     % Measurement Panel
     pnl_meas = uipanel(fig, 'Title', 'Measurement Control', 'Position', [20, 260, 220, 110], 'BackgroundColor', 'w', 'FontWeight', 'bold');
@@ -63,12 +64,34 @@ function Tektronix2400_GUI_ADLINK()
             lbl_status.FontColor = [0.47, 0.67, 0.19];
             
             btn_connect.Enable = 'off';
+            btn_disconnect.Enable = 'on';
             btn_start.Enable = 'on';
         catch ME
             uialert(fig, ['Connection failed: ' ME.message], 'Hardware Error');
             lbl_status.Text = '🔴 Disconnected';
             lbl_status.FontColor = 'r';
         end
+    end
+    
+    function disconnectHW(~, ~)
+        % Ensure measurement is stopped
+        stopMeasurement();
+        
+        % Release the instrument connection
+        if ~isempty(smu) && isvalid(smu)
+            try
+                fclose(smu);
+                delete(smu);
+            catch
+            end
+        end
+        smu = [];
+        
+        lbl_status.Text = '🔴 Disconnected';
+        lbl_status.FontColor = 'r';
+        btn_connect.Enable = 'on';
+        btn_disconnect.Enable = 'off';
+        btn_start.Enable = 'off';
     end
     
     function startMeasurement(~, ~)
