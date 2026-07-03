@@ -19,20 +19,22 @@ function Tektronix2400_Kepco_Sweep_GUI()
     % --- Sweep Settings Panel ---
     pnl_sweep = uipanel(fig, 'Title', 'Sweep Settings', 'Position', [20, 250, 260, 210], 'BackgroundColor', 'w', 'FontWeight', 'bold');
     
-    uilabel(pnl_sweep, 'Position', [10, 150, 100, 22], 'Text', 'Start Curr (A):');
-    edit_start = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 150, 120, 22], 'Value', -1.0);
+    uilabel(pnl_sweep, 'Position', [10, 175, 100, 22], 'Text', 'Start Curr (A):');
+    edit_start = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 175, 120, 22], 'Value', -1.0);
     
-    uilabel(pnl_sweep, 'Position', [10, 115, 100, 22], 'Text', 'End Curr (A):');
-    edit_end = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 115, 120, 22], 'Value', 1.0);
+    uilabel(pnl_sweep, 'Position', [10, 145, 100, 22], 'Text', 'End Curr (A):');
+    edit_end = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 145, 120, 22], 'Value', 1.0);
     
-    uilabel(pnl_sweep, 'Position', [10, 80, 100, 22], 'Text', 'Step (A):');
-    edit_step = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 80, 120, 22], 'Value', 0.1);
+    uilabel(pnl_sweep, 'Position', [10, 115, 100, 22], 'Text', 'Step (A):');
+    edit_step = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 115, 120, 22], 'Value', 0.1);
     
-    uilabel(pnl_sweep, 'Position', [10, 45, 100, 22], 'Text', 'Delay (s):');
-    edit_delay = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 45, 120, 22], 'Value', 0.2);
+    uilabel(pnl_sweep, 'Position', [10, 85, 100, 22], 'Text', 'Delay (s):');
+    edit_delay = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 85, 120, 22], 'Value', 0.2);
     
-    uilabel(pnl_sweep, 'Position', [10, 10, 100, 22], 'Text', 'Filename:');
-    edit_filename = uieditfield(pnl_sweep, 'text', 'Position', [120, 10, 120, 22], 'Value', 'Sweep_Data');
+    uilabel(pnl_sweep, 'Position', [10, 55, 100, 22], 'Text', 'Filename:');
+    edit_filename = uieditfield(pnl_sweep, 'text', 'Position', [120, 55, 120, 22], 'Value', 'Sweep_Data');
+    
+    btn_save = uibutton(pnl_sweep, 'Position', [10, 15, 230, 30], 'Text', 'Save to Excel', 'Enable', 'off', 'ButtonPushedFcn', @saveManual);
     
     % --- Measurement Control ---
     pnl_meas = uipanel(fig, 'Title', 'Measurement Control', 'Position', [20, 130, 260, 110], 'BackgroundColor', 'w', 'FontWeight', 'bold');
@@ -52,6 +54,8 @@ function Tektronix2400_Kepco_Sweep_GUI()
     smu = [];
     kepco = [];
     stop_flag = false;
+    currData = [];
+    resData = [];
     
     fig.CloseRequestFcn = @closeApp;
     
@@ -143,6 +147,7 @@ function Tektronix2400_Kepco_Sweep_GUI()
         
         currData = [];
         resData = [];
+        btn_save.Enable = 'off';
         
         try
             % Turn on outputs
@@ -183,9 +188,8 @@ function Tektronix2400_Kepco_Sweep_GUI()
         btn_stop.Enable = 'off';
         btn_disconnect.Enable = 'on';
         
-        % Save to Excel if data was collected
         if ~isempty(currData)
-            saveDataToExcel(currData, resData, edit_filename.Value);
+            btn_save.Enable = 'on';
         end
     end
     
@@ -217,6 +221,12 @@ function Tektronix2400_Kepco_Sweep_GUI()
         safeShutdown();
         disconnectHW();
         delete(fig);
+    end
+    
+    function saveManual(~, ~)
+        if ~isempty(currData)
+            saveDataToExcel(currData, resData, edit_filename.Value);
+        end
     end
     
     function saveDataToExcel(I_data, R_data, base_name)
