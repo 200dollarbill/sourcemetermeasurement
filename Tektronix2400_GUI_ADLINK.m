@@ -104,6 +104,11 @@ function Tektronix2400_GUI_ADLINK()
         cla(ax); % Clear axes
         startTime = tic;
         
+        % Turn on output for measurement
+        if ~isempty(smu) && isvalid(smu)
+            try fprintf(smu, ':OUTP ON'); catch; end
+        end
+        
         % Set up a timer to query the instrument every 0.5 seconds
         appTimer = timer('ExecutionMode', 'fixedRate', 'Period', 0.5, 'TimerFcn', @readSensor);
         start(appTimer);
@@ -118,6 +123,11 @@ function Tektronix2400_GUI_ADLINK()
             stop(appTimer);
             delete(appTimer);
             appTimer = [];
+        end
+        
+        % Turn off the output for safety
+        if ~isempty(smu) && isvalid(smu)
+            try fprintf(smu, ':OUTP OFF'); catch; end
         end
     end
     
