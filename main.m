@@ -20,10 +20,10 @@ function Tektronix2400_Kepco_Sweep_GUI()
     pnl_sweep = uipanel(fig, 'Title', 'Sweep Settings', 'Position', [20, 250, 260, 210], 'BackgroundColor', 'w', 'FontWeight', 'bold');
     
     uilabel(pnl_sweep, 'Position', [10, 175, 100, 22], 'Text', 'Start Curr (A):');
-    edit_start = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 175, 120, 22], 'Value', -1.0);
+    edit_start = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 175, 120, 22], 'Value', -1.0, 'Limits', [-1.05, 1.05]);
     
     uilabel(pnl_sweep, 'Position', [10, 145, 100, 22], 'Text', 'End Curr (A):');
-    edit_end = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 145, 120, 22], 'Value', 1.0);
+    edit_end = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 145, 120, 22], 'Value', 1.0, 'Limits', [-1.05, 1.05]);
     
     uilabel(pnl_sweep, 'Position', [10, 115, 100, 22], 'Text', 'Step (A):');
     edit_step = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 115, 120, 22], 'Value', 0.1);
@@ -126,6 +126,24 @@ function Tektronix2400_Kepco_Sweep_GUI()
         
         s_I = edit_start.Value;
         e_I = edit_end.Value;
+        
+        % Safety limiter: max +/- 1.05A
+        if s_I > 1.05
+            s_I = 1.05;
+            edit_start.Value = s_I;
+        elseif s_I < -1.05
+            s_I = -1.05;
+            edit_start.Value = s_I;
+        end
+        
+        if e_I > 1.05
+            e_I = 1.05;
+            edit_end.Value = e_I;
+        elseif e_I < -1.05
+            e_I = -1.05;
+            edit_end.Value = e_I;
+        end
+        
         step_I = abs(edit_step.Value);
         pause_T = edit_delay.Value;
         
