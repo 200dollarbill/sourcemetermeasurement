@@ -145,13 +145,13 @@ methods (Access = private)
         % table creation
         if length(app.ResData) == length(app.CurrData) && length(app.FieldData) == length(app.CurrData)
             T = table(app.CurrData(:), app.ResData(:), app.FieldData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_T'});
+                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_G'});
         elseif length(app.ResData) == length(app.CurrData)
             T = table(app.CurrData(:), app.ResData(:), ...
                 'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms'});
         elseif length(app.FieldData) == length(app.CurrData)
             T = table(app.CurrData(:), app.FieldData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Magnetic_Field_T'});
+                'VariableNames', {'Kepco_Current_A', 'Magnetic_Field_G'});
         else
             T = table(app.CurrData(:), 'VariableNames', {'Kepco_Current_A'});
         end
@@ -252,6 +252,11 @@ methods (Access = private)
             target_I = I_steps(i);
             fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
             pause(pause_T);
+            
+            % Extra settle time for the first measurement
+            if i == 1
+                pause(0.5);
+            end
 
             app.CurrData(end+1) = target_I;
 
