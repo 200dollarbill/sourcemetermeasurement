@@ -90,6 +90,10 @@ methods (Access = private)
                 fopen(app.Gaussmeter);
 
                 % add code for gaussmeter SCPI setup
+                fprintf(app.Gaussmeter, '*RST');
+                pause(0.5);
+                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'AUTO 1');
 
             case 'All instruments'
                 % source meter connection
@@ -108,6 +112,10 @@ methods (Access = private)
                 fopen(app.Gaussmeter);
 
                 % add code for gaussmeter SCPI setup
+                fprintf(app.Gaussmeter, '*RST');
+                pause(0.5);
+                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'AUTO 1');
 
             end
 
@@ -194,11 +202,34 @@ methods (Access = private)
         end
 
         % plots
+        mode = app.DropDown.Value;
+        if strcmp(mode, 'Supply + Gaussmeter')
+            title(app.UIAxes, 'Magnetic Field vs Current');
+            xlabel(app.UIAxes, 'Input Current (A)');
+            ylabel(app.UIAxes, 'Measured Magnetic Field Strength (T)');
+            
+            title(app.UIAxes2, 'Magnetic Field vs Current');
+            xlabel(app.UIAxes2, 'Input Current (A)');
+            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+        else
+            title(app.UIAxes, 'Resistance vs Current');
+            xlabel(app.UIAxes, 'Input Current (A)');
+            ylabel(app.UIAxes, 'Measured Resistance (Ohms)');
+            
+            title(app.UIAxes2, 'Resistance vs Magnetic Field');
+            xlabel(app.UIAxes2, 'Measured Resistance (Ohms)');
+            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+        end
+
         cla(app.UIAxes);
         cla(app.UIAxes2);
         app.hLine1 = plot(app.UIAxes, nan, nan, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
         xlim(app.UIAxes, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
         app.hLine2 = plot(app.UIAxes2, nan, nan, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+        if strcmp(mode, 'Supply + Gaussmeter')
+            xlim(app.UIAxes2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
+        end
+
         app.CurrData = [];
         app.ResData = [];
         app.FieldData = [];
@@ -241,8 +272,11 @@ methods (Access = private)
                 app.FieldData(end+1) = field_val;
             end
 
-            if length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
+            if ~isempty(app.ResData) && length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
                 set(app.hLine2, 'XData', app.ResData, 'YData', app.FieldData);
+            elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+                set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
+                set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
             end
 
             drawnow limitrate;
@@ -398,6 +432,7 @@ methods (Access = private)
         % Create GaussmeterAddrEditField
         app.GaussmeterAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
         app.GaussmeterAddrEditField.Position = [135 164 100 22];
+        app.GaussmeterAddrEditField.Value = 18;
 
         % Create ConnectButton
         app.ConnectButton = uibutton(app.ConnectionPanel, 'push');
