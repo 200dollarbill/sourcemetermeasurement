@@ -217,8 +217,8 @@ methods (Access = private)
             ylabel(app.UIAxes, 'Measured Resistance (Ohms)');
             
             title(app.UIAxes2, 'Resistance vs Magnetic Field');
-            xlabel(app.UIAxes2, 'Measured Resistance (Ohms)');
-            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
         end
 
         cla(app.UIAxes);
@@ -273,7 +273,7 @@ methods (Access = private)
             end
 
             if ~isempty(app.ResData) && length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
-                set(app.hLine2, 'XData', app.ResData, 'YData', app.FieldData);
+                set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
             elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
                 set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
                 set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
@@ -391,8 +391,8 @@ methods (Access = private)
         % Create UIAxes2
         app.UIAxes2 = uiaxes(app.Tab2);
         title(app.UIAxes2, 'Resistance vs Magnetic Field')
-        xlabel(app.UIAxes2, 'Measured Resistance (Ohms)')
-        ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)')
+        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)')
+        ylabel(app.UIAxes2, 'Measured Resistance (Ohms)')
         zlabel(app.UIAxes2, 'Z')
         app.UIAxes2.Position = [15 12 781 637];
 
