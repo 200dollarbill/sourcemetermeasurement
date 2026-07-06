@@ -1,9 +1,9 @@
 function Tektronix2400_Kepco_Sweep_GUI()
-    % GUI for sweeping Kepco current and measuring Tektronix resistance
+    % figure UI
     
     fig = uifigure('Name', 'Kepco Sweep + Tektronix 2400 (ADLINK)', 'Position', [100, 100, 900, 600], 'Color', 'w');
     
-    % --- Connection Panel ---
+    % Connection
     pnl_conn = uipanel(fig, 'Title', 'Hardware Connection', 'Position', [20, 470, 260, 110], 'BackgroundColor', 'w', 'FontWeight', 'bold');
     
     uilabel(pnl_conn, 'Position', [10, 60, 100, 22], 'Text', 'Kepco Addr:');
@@ -14,9 +14,9 @@ function Tektronix2400_Kepco_Sweep_GUI()
     
     btn_connect = uibutton(pnl_conn, 'Position', [10, 20, 70, 30], 'Text', 'Connect', 'ButtonPushedFcn', @connectHW);
     btn_disconnect = uibutton(pnl_conn, 'Position', [90, 20, 70, 30], 'Text', 'Disconnect', 'Enable', 'off', 'ButtonPushedFcn', @disconnectHW);
-    lbl_status = uilabel(pnl_conn, 'Position', [170, 20, 80, 30], 'Text', '🔴 Offline', 'FontColor', 'r', 'FontWeight', 'bold');
+    lbl_status = uilabel(pnl_conn, 'Position', [170, 20, 80, 30], 'Text', 'Offline', 'FontColor', 'r', 'FontWeight', 'bold');
     
-    % --- Sweep Settings Panel ---
+    % Sweep
     pnl_sweep = uipanel(fig, 'Title', 'Sweep Settings', 'Position', [20, 250, 260, 210], 'BackgroundColor', 'w', 'FontWeight', 'bold');
     
     uilabel(pnl_sweep, 'Position', [10, 175, 100, 22], 'Text', 'Start Curr (A):');
@@ -30,27 +30,25 @@ function Tektronix2400_Kepco_Sweep_GUI()
     
     uilabel(pnl_sweep, 'Position', [10, 85, 100, 22], 'Text', 'Delay (s):');
     edit_delay = uieditfield(pnl_sweep, 'numeric', 'Position', [120, 85, 120, 22], 'Value', 0.2);
-    
     uilabel(pnl_sweep, 'Position', [10, 55, 100, 22], 'Text', 'Filename:');
     edit_filename = uieditfield(pnl_sweep, 'text', 'Position', [120, 55, 120, 22], 'Value', 'Sweep_Data');
-    
     btn_save = uibutton(pnl_sweep, 'Position', [10, 15, 230, 30], 'Text', 'Save to Excel', 'Enable', 'off', 'ButtonPushedFcn', @saveManual);
     
-    % --- Measurement Control ---
+    % Control
     pnl_meas = uipanel(fig, 'Title', 'Measurement Control', 'Position', [20, 130, 260, 110], 'BackgroundColor', 'w', 'FontWeight', 'bold');
     btn_start = uibutton(pnl_meas, 'Position', [10, 50, 110, 30], 'Text', 'Start Sweep', 'Enable', 'off', 'ButtonPushedFcn', @startSweep);
     btn_stop = uibutton(pnl_meas, 'Position', [130, 50, 110, 30], 'Text', 'Stop / Abort', 'Enable', 'off', 'ButtonPushedFcn', @stopSweep);
     
     lbl_res = uilabel(pnl_meas, 'Position', [10, 10, 240, 30], 'Text', 'Resistance: --- \Omega', 'FontSize', 14, 'FontWeight', 'bold');
     
-    % --- Axes ---
+    % Axes
     ax = uiaxes(fig, 'Position', [300, 20, 580, 560]);
     title(ax, 'Resistance vs. Current', 'FontWeight', 'bold');
     xlabel(ax, 'Kepco Current (A)', 'FontWeight', 'bold');
     ylabel(ax, 'Tektronix Resistance (\Omega)', 'FontWeight', 'bold');
     grid(ax, 'on');
     
-    % Vars
+    % var
     smu = [];
     kepco = [];
     stop_flag = false;
@@ -58,8 +56,6 @@ function Tektronix2400_Kepco_Sweep_GUI()
     resData = [];
     
     fig.CloseRequestFcn = @closeApp;
-    
-    % ==================================================
     
     function connectHW(~, ~)
         try
