@@ -92,7 +92,7 @@ methods (Access = private)
                 % add code for gaussmeter SCPI setup
                 fprintf(app.Gaussmeter, '*RST');
                 pause(0.5);
-                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'UNIT 1');
                 fprintf(app.Gaussmeter, 'AUTO 1');
 
             case 'All instruments'
@@ -114,7 +114,7 @@ methods (Access = private)
                 % add code for gaussmeter SCPI setup
                 fprintf(app.Gaussmeter, '*RST');
                 pause(0.5);
-                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'UNIT 1');
                 fprintf(app.Gaussmeter, 'AUTO 1');
 
             end
@@ -145,13 +145,13 @@ methods (Access = private)
         % table creation
         if length(app.ResData) == length(app.CurrData) && length(app.FieldData) == length(app.CurrData)
             T = table(app.CurrData(:), app.ResData(:), app.FieldData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_T'});
+                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_G'});
         elseif length(app.ResData) == length(app.CurrData)
             T = table(app.CurrData(:), app.ResData(:), ...
                 'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms'});
         elseif length(app.FieldData) == length(app.CurrData)
             T = table(app.CurrData(:), app.FieldData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Magnetic_Field_T'});
+                'VariableNames', {'Kepco_Current_A', 'Magnetic_Field_G'});
         else
             T = table(app.CurrData(:), 'VariableNames', {'Kepco_Current_A'});
         end
@@ -206,18 +206,18 @@ methods (Access = private)
         if strcmp(mode, 'Supply + Gaussmeter')
             title(app.UIAxes, 'Magnetic Field vs Current');
             xlabel(app.UIAxes, 'Input Current (A)');
-            ylabel(app.UIAxes, 'Measured Magnetic Field Strength (T)');
+            ylabel(app.UIAxes, 'Measured Magnetic Field Strength (G)');
             
             title(app.UIAxes2, 'Magnetic Field vs Current');
             xlabel(app.UIAxes2, 'Input Current (A)');
-            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)');
         else
             title(app.UIAxes, 'Resistance vs Current');
             xlabel(app.UIAxes, 'Input Current (A)');
             ylabel(app.UIAxes, 'Measured Resistance (Ohms)');
             
             title(app.UIAxes2, 'Resistance vs Magnetic Field');
-            xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)');
             ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
         end
 
@@ -250,6 +250,11 @@ methods (Access = private)
             target_I = I_steps(i);
             fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
             pause(pause_T);
+            
+            % Extra settle time for the first measurement
+            if i == 1
+                pause(0.5);
+            end
 
             app.CurrData(end+1) = target_I;
 
@@ -391,7 +396,7 @@ methods (Access = private)
         % Create UIAxes2
         app.UIAxes2 = uiaxes(app.Tab2);
         title(app.UIAxes2, 'Resistance vs Magnetic Field')
-        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)')
+        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)')
         ylabel(app.UIAxes2, 'Measured Resistance (Ohms)')
         zlabel(app.UIAxes2, 'Z')
         app.UIAxes2.Position = [15 12 781 637];
