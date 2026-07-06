@@ -79,7 +79,7 @@ methods (Access = private)
                 fopen(app.SMU);
                 % source meter 
                 fprintf(app.SMU, "*RST");
-                pause(0.5);
+                pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
@@ -92,7 +92,7 @@ methods (Access = private)
                 % add code for gaussmeter SCPI setup
                 fprintf(app.Gaussmeter, '*RST');
                 pause(0.5);
-                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'UNIT 1');
                 fprintf(app.Gaussmeter, 'AUTO 1');
 
             case 'All instruments'
@@ -102,7 +102,7 @@ methods (Access = private)
                 fopen(app.SMU);
 
                 fprintf(app.SMU, "*RST");
-                pause(0.5);
+                pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
@@ -114,7 +114,7 @@ methods (Access = private)
                 % add code for gaussmeter SCPI setup
                 fprintf(app.Gaussmeter, '*RST');
                 pause(0.5);
-                fprintf(app.Gaussmeter, 'UNIT 2');
+                fprintf(app.Gaussmeter, 'UNIT 1');
                 fprintf(app.Gaussmeter, 'AUTO 1');
 
             end
@@ -206,18 +206,18 @@ methods (Access = private)
         if strcmp(mode, 'Supply + Gaussmeter')
             title(app.UIAxes, 'Magnetic Field vs Current');
             xlabel(app.UIAxes, 'Input Current (A)');
-            ylabel(app.UIAxes, 'Measured Magnetic Field Strength (T)');
+            ylabel(app.UIAxes, 'Measured Magnetic Field Strength (G)');
             
             title(app.UIAxes2, 'Magnetic Field vs Current');
             xlabel(app.UIAxes2, 'Input Current (A)');
-            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)');
         else
             title(app.UIAxes, 'Resistance vs Current');
             xlabel(app.UIAxes, 'Input Current (A)');
             ylabel(app.UIAxes, 'Measured Resistance (Ohms)');
             
             title(app.UIAxes2, 'Resistance vs Magnetic Field');
-            xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)');
+            xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)');
             ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
         end
 
@@ -241,7 +241,9 @@ methods (Access = private)
         if ~isempty(app.SMU)
             fprintf(app.SMU, ':OUTP ON');
         end
-        pause(0.5);
+
+        fprintf(app.Kepco, sprintf('CURR %.3f', s_I))
+        pause(1);
 
         for i = 1:length(I_steps)
             if app.StopFlag; break; end
@@ -391,7 +393,7 @@ methods (Access = private)
         % Create UIAxes2
         app.UIAxes2 = uiaxes(app.Tab2);
         title(app.UIAxes2, 'Resistance vs Magnetic Field')
-        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (T)')
+        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)')
         ylabel(app.UIAxes2, 'Measured Resistance (Ohms)')
         zlabel(app.UIAxes2, 'Z')
         app.UIAxes2.Position = [15 12 781 637];
