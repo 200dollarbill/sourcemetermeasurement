@@ -1,4 +1,4 @@
-Dataset,Board,Sensor,Kepco_Current_A,Resistance_Ohms,Magnetic_Field_T
+Dataset,Board,Sensor,Current_A,Resistance_Ohms,Magnetic_Field_G
 Hsin Tings Board,Board1,A,-1,64151.9,-26.7582
 Hsin Tings Board,Board1,A,-0.975,64104.51,-26.1054
 Hsin Tings Board,Board1,A,-0.95,64054.18,-25.4588
@@ -37,11 +37,11 @@ Hsin Tings Board,Board1,A,-0.15,62516.32,-4.418
 Hsin Tings Board,Board1,A,-0.125,62473.26,-3.7493
 Hsin Tings Board,Board1,A,-0.1,62424.41,-3.1008
 Hsin Tings Board,Board1,A,-0.075,62377.88,-2.4326
-Hsin Tings Board,Board1,A,-0.0499999999999999,62332.58,-1.7524
-Hsin Tings Board,Board1,A,-0.0249999999999999,62284.73,-1.10058
+Hsin Tings Board,Board1,A,-0.05,62332.58,-1.7524
+Hsin Tings Board,Board1,A,-0.025,62284.73,-1.10058
 Hsin Tings Board,Board1,A,0,62239.61,-0.43773
-Hsin Tings Board,Board1,A,0.0249999999999999,62193.07,0.20944
-Hsin Tings Board,Board1,A,0.0499999999999999,62147.73,0.87721
+Hsin Tings Board,Board1,A,0.025,62193.07,0.20944
+Hsin Tings Board,Board1,A,0.05,62147.73,0.87721
 Hsin Tings Board,Board1,A,0.075,62102.07,1.53083
 Hsin Tings Board,Board1,A,0.1,62056.37,2.20113
 Hsin Tings Board,Board1,A,0.125,62010.83,2.8508
@@ -118,11 +118,11 @@ Hsin Tings Board,Board1,B,-0.15,69039.87,-5.4982
 Hsin Tings Board,Board1,B,-0.125,68979.99,-4.7509
 Hsin Tings Board,Board1,B,-0.1,68918.16,-4.0108
 Hsin Tings Board,Board1,B,-0.075,68858.84,-3.2536
-Hsin Tings Board,Board1,B,-0.0499999999999999,68802.05,-2.4894
-Hsin Tings Board,Board1,B,-0.0249999999999999,68741.41,-1.7584
+Hsin Tings Board,Board1,B,-0.05,68802.05,-2.4894
+Hsin Tings Board,Board1,B,-0.025,68741.41,-1.7584
 Hsin Tings Board,Board1,B,0,68683.41,-1.00928
-Hsin Tings Board,Board1,B,0.0249999999999999,68623.69,-0.26574
-Hsin Tings Board,Board1,B,0.0499999999999999,68564.78,0.4878
+Hsin Tings Board,Board1,B,0.025,68623.69,-0.26574
+Hsin Tings Board,Board1,B,0.05,68564.78,0.4878
 Hsin Tings Board,Board1,B,0.075,68506.42,1.22838
 Hsin Tings Board,Board1,B,0.1,68447.62,2.00009
 Hsin Tings Board,Board1,B,0.125,68389.8,2.76789
@@ -199,11 +199,11 @@ Hsin Tings Board,Board1,C,-0.15,50666.17,-2.7292
 Hsin Tings Board,Board1,C,-0.125,50611.8,-2.0788
 Hsin Tings Board,Board1,C,-0.1,50556.46,-1.4203
 Hsin Tings Board,Board1,C,-0.075,50504.07,-0.76358
-Hsin Tings Board,Board1,C,-0.0499999999999999,50451.1,-0.12992
-Hsin Tings Board,Board1,C,-0.0249999999999999,50397.75,0.527
+Hsin Tings Board,Board1,C,-0.05,50451.1,-0.12992
+Hsin Tings Board,Board1,C,-0.025,50397.75,0.527
 Hsin Tings Board,Board1,C,0,50342.37,1.17354
-Hsin Tings Board,Board1,C,0.0249999999999999,50286.86,1.82986
-Hsin Tings Board,Board1,C,0.0499999999999999,50239.01,2.46363
+Hsin Tings Board,Board1,C,0.025,50286.86,1.82986
+Hsin Tings Board,Board1,C,0.05,50239.01,2.46363
 Hsin Tings Board,Board1,C,0.075,50182.74,3.11649
 Hsin Tings Board,Board1,C,0.1,50126.49,3.7841
 Hsin Tings Board,Board1,C,0.125,50074.68,4.4289
@@ -280,11 +280,11 @@ Hsin Tings Board,Board1,D,-0.15,55694.33,-3.3603
 Hsin Tings Board,Board1,D,-0.125,55624.59,-2.7069
 Hsin Tings Board,Board1,D,-0.1,55557.25,-2.0613
 Hsin Tings Board,Board1,D,-0.075,55487.04,-1.8865
-Hsin Tings Board,Board1,D,-0.0499999999999999,55420.3,-0.78623
-Hsin Tings Board,Board1,D,-0.0249999999999999,55352.02,-0.13802
+Hsin Tings Board,Board1,D,-0.05,55420.3,-0.78623
+Hsin Tings Board,Board1,D,-0.025,55352.02,-0.13802
 Hsin Tings Board,Board1,D,0,55284.86,0.50612
-Hsin Tings Board,Board1,D,0.0249999999999999,55217.49,1.15072
-Hsin Tings Board,Board1,D,0.0499999999999999,55149.36,1.79642
+Hsin Tings Board,Board1,D,0.025,55217.49,1.15072
+Hsin Tings Board,Board1,D,0.05,55149.36,1.79642
 Hsin Tings Board,Board1,D,0.075,55082.92,2.43249
 Hsin Tings Board,Board1,D,0.1,55016.03,3.07995
 Hsin Tings Board,Board1,D,0.125,54950.25,3.7118
@@ -361,11 +361,11 @@ Hsin Tings Board,Board2,A,-0.15,68003.2,-4.7575
 Hsin Tings Board,Board2,A,-0.125,67952.32,-4.0836
 Hsin Tings Board,Board2,A,-0.1,67902.03,-3.4175
 Hsin Tings Board,Board2,A,-0.075,67854.55,-2.7788
-Hsin Tings Board,Board2,A,-0.0499999999999999,67803.32,-2.1149
-Hsin Tings Board,Board2,A,-0.0249999999999999,67752.62,-1.4234
+Hsin Tings Board,Board2,A,-0.05,67803.32,-2.1149
+Hsin Tings Board,Board2,A,-0.025,67752.62,-1.4234
 Hsin Tings Board,Board2,A,0,67701.71,-0.76279
-Hsin Tings Board,Board2,A,0.0249999999999999,67650.98,-0.08735
-Hsin Tings Board,Board2,A,0.0499999999999999,67602.52,0.56486
+Hsin Tings Board,Board2,A,0.025,67650.98,-0.08735
+Hsin Tings Board,Board2,A,0.05,67602.52,0.56486
 Hsin Tings Board,Board2,A,0.075,67551.22,1.21847
 Hsin Tings Board,Board2,A,0.1,67500.95,1.91386
 Hsin Tings Board,Board2,A,0.125,67450.61,2.57933
@@ -442,11 +442,11 @@ Hsin Tings Board,Board2,B,-0.15,71778.63,-7.7133
 Hsin Tings Board,Board2,B,-0.125,71721.78,-6.9609
 Hsin Tings Board,Board2,B,-0.1,71667.32,-6.2267
 Hsin Tings Board,Board2,B,-0.075,71607.49,-5.4777
-Hsin Tings Board,Board2,B,-0.0499999999999999,71551.96,-4.7398
-Hsin Tings Board,Board2,B,-0.0249999999999999,71497.34,-3.9835
+Hsin Tings Board,Board2,B,-0.05,71551.96,-4.7398
+Hsin Tings Board,Board2,B,-0.025,71497.34,-3.9835
 Hsin Tings Board,Board2,B,0,71440.34,-3.2546
-Hsin Tings Board,Board2,B,0.0249999999999999,71382.88,-2.4887
-Hsin Tings Board,Board2,B,0.0499999999999999,71326.62,-1.7249
+Hsin Tings Board,Board2,B,0.025,71382.88,-2.4887
+Hsin Tings Board,Board2,B,0.05,71326.62,-1.7249
 Hsin Tings Board,Board2,B,0.075,71271.42,-0.94522
 Hsin Tings Board,Board2,B,0.1,71216.04,-0.18853
 Hsin Tings Board,Board2,B,0.125,71160.85,0.6562
@@ -523,11 +523,11 @@ Hsin Tings Board,Board2,C,-0.15,55810.63,-2.6986
 Hsin Tings Board,Board2,C,-0.125,55745.76,-2.0582
 Hsin Tings Board,Board2,C,-0.1,55680.5,-1.4066
 Hsin Tings Board,Board2,C,-0.075,55615.18,-0.73375
-Hsin Tings Board,Board2,C,-0.0499999999999999,55549.73,-0.09666
-Hsin Tings Board,Board2,C,-0.0249999999999999,55482.6,0.55615
+Hsin Tings Board,Board2,C,-0.05,55549.73,-0.09666
+Hsin Tings Board,Board2,C,-0.025,55482.6,0.55615
 Hsin Tings Board,Board2,C,0,55416.5,1.2177
-Hsin Tings Board,Board2,C,0.0249999999999999,55354.79,1.86433
-Hsin Tings Board,Board2,C,0.0499999999999999,55288.91,2.52817
+Hsin Tings Board,Board2,C,0.025,55354.79,1.86433
+Hsin Tings Board,Board2,C,0.05,55288.91,2.52817
 Hsin Tings Board,Board2,C,0.075,55225.31,3.15391
 Hsin Tings Board,Board2,C,0.1,55159.75,3.8092
 Hsin Tings Board,Board2,C,0.125,55097.76,4.4396
@@ -604,11 +604,11 @@ Hsin Tings Board,Board2,D,-0.15,56739.43,-3.2949
 Hsin Tings Board,Board2,D,-0.125,56670.94,-2.6551
 Hsin Tings Board,Board2,D,-0.1,56604,-1.9969
 Hsin Tings Board,Board2,D,-0.075,56535.78,-1.37821
-Hsin Tings Board,Board2,D,-0.0499999999999999,56467.07,-0.73161
-Hsin Tings Board,Board2,D,-0.0249999999999999,56398.61,-0.09672
+Hsin Tings Board,Board2,D,-0.05,56467.07,-0.73161
+Hsin Tings Board,Board2,D,-0.025,56398.61,-0.09672
 Hsin Tings Board,Board2,D,0,56331.45,0.55269
-Hsin Tings Board,Board2,D,0.0249999999999999,56261.72,1.18005
-Hsin Tings Board,Board2,D,0.0499999999999999,56193.65,1.83998
+Hsin Tings Board,Board2,D,0.025,56261.72,1.18005
+Hsin Tings Board,Board2,D,0.05,56193.65,1.83998
 Hsin Tings Board,Board2,D,0.075,56126.72,2.4751
 Hsin Tings Board,Board2,D,0.1,56061.41,3.10757
 Hsin Tings Board,Board2,D,0.125,55992.38,3.7467
@@ -685,11 +685,11 @@ Hsin Tings Board,Board3,A,-0.15,35534.9,-4.7923
 Hsin Tings Board,Board3,A,-0.125,35530.61,-4.1309
 Hsin Tings Board,Board3,A,-0.1,35526.09,-3.4695
 Hsin Tings Board,Board3,A,-0.075,35522.45,-2.7933
-Hsin Tings Board,Board3,A,-0.0499999999999999,35518.83,-2.1253
-Hsin Tings Board,Board3,A,-0.0249999999999999,35512.43,-1.5144
+Hsin Tings Board,Board3,A,-0.05,35518.83,-2.1253
+Hsin Tings Board,Board3,A,-0.025,35512.43,-1.5144
 Hsin Tings Board,Board3,A,0,35508.88,-0.80504
-Hsin Tings Board,Board3,A,0.0249999999999999,35504.76,-0.13038
-Hsin Tings Board,Board3,A,0.0499999999999999,35501.59,0.54278
+Hsin Tings Board,Board3,A,0.025,35504.76,-0.13038
+Hsin Tings Board,Board3,A,0.05,35501.59,0.54278
 Hsin Tings Board,Board3,A,0.075,35497.64,1.18949
 Hsin Tings Board,Board3,A,0.1,35492.87,1.87884
 Hsin Tings Board,Board3,A,0.125,35489.62,2.55864
@@ -766,11 +766,11 @@ Hsin Tings Board,Board3,B,-0.15,35826.29,-7.8201
 Hsin Tings Board,Board3,B,-0.125,35821.94,-7.0825
 Hsin Tings Board,Board3,B,-0.1,35817.96,-6.3644
 Hsin Tings Board,Board3,B,-0.075,35813.71,-5.5906
-Hsin Tings Board,Board3,B,-0.0499999999999999,35809.17,-4.8508
-Hsin Tings Board,Board3,B,-0.0249999999999999,35805.04,-4.1044
+Hsin Tings Board,Board3,B,-0.05,35809.17,-4.8508
+Hsin Tings Board,Board3,B,-0.025,35805.04,-4.1044
 Hsin Tings Board,Board3,B,0,35801.41,-3.3463
-Hsin Tings Board,Board3,B,0.0249999999999999,35797.6,-2.5974
-Hsin Tings Board,Board3,B,0.0499999999999999,35793.5,-1.8325
+Hsin Tings Board,Board3,B,0.025,35797.6,-2.5974
+Hsin Tings Board,Board3,B,0.05,35793.5,-1.8325
 Hsin Tings Board,Board3,B,0.075,35789.18,-1.07986
 Hsin Tings Board,Board3,B,0.1,35784.78,-0.29448
 Hsin Tings Board,Board3,B,0.125,35780.98,0.60501
@@ -847,11 +847,11 @@ Hsin Tings Board,Board3,C,-0.15,39506.74,-2.535
 Hsin Tings Board,Board3,C,-0.125,39497.95,-1.8916
 Hsin Tings Board,Board3,C,-0.1,39488.88,-1.23307
 Hsin Tings Board,Board3,C,-0.075,39479.8,-0.57633
-Hsin Tings Board,Board3,C,-0.0499999999999999,39471.64,0.07692
-Hsin Tings Board,Board3,C,-0.0249999999999999,39462.23,0.74599
+Hsin Tings Board,Board3,C,-0.05,39471.64,0.07692
+Hsin Tings Board,Board3,C,-0.025,39462.23,0.74599
 Hsin Tings Board,Board3,C,0,39453.23,1.39275
-Hsin Tings Board,Board3,C,0.0249999999999999,39444.39,2.05509
-Hsin Tings Board,Board3,C,0.0499999999999999,39434.23,2.69497
+Hsin Tings Board,Board3,C,0.025,39444.39,2.05509
+Hsin Tings Board,Board3,C,0.05,39434.23,2.69497
 Hsin Tings Board,Board3,C,0.075,39425.37,3.21387
 Hsin Tings Board,Board3,C,0.1,39416.3,3.99
 Hsin Tings Board,Board3,C,0.125,39407.68,4.5703
@@ -928,11 +928,11 @@ Hsin Tings Board,Board3,D,-0.15,42748.16,-3.2661
 Hsin Tings Board,Board3,D,-0.125,42734.84,-2.629
 Hsin Tings Board,Board3,D,-0.1,42725.26,-1.9815
 Hsin Tings Board,Board3,D,-0.075,42713.8,-1.33273
-Hsin Tings Board,Board3,D,-0.0499999999999999,42701.88,-0.7041
-Hsin Tings Board,Board3,D,-0.0249999999999999,42691.23,-0.06567
+Hsin Tings Board,Board3,D,-0.05,42701.88,-0.7041
+Hsin Tings Board,Board3,D,-0.025,42691.23,-0.06567
 Hsin Tings Board,Board3,D,0,42680.55,0.60877
-Hsin Tings Board,Board3,D,0.0249999999999999,42669.2,1.25296
-Hsin Tings Board,Board3,D,0.0499999999999999,42658.56,1.88073
+Hsin Tings Board,Board3,D,0.025,42669.2,1.25296
+Hsin Tings Board,Board3,D,0.05,42658.56,1.88073
 Hsin Tings Board,Board3,D,0.075,42646.65,2.53202
 Hsin Tings Board,Board3,D,0.1,42635.07,3.15972
 Hsin Tings Board,Board3,D,0.125,42626.15,3.8111
@@ -1009,11 +1009,11 @@ Hsin Tings Board,Board4,A,-0.15,65791.23,-4.762
 Hsin Tings Board,Board4,A,-0.125,65771.46,-4.1047
 Hsin Tings Board,Board4,A,-0.1,65748.96,-3.4329
 Hsin Tings Board,Board4,A,-0.075,65730.07,-2.7634
-Hsin Tings Board,Board4,A,-0.0499999999999999,65708.88,-2.1003
-Hsin Tings Board,Board4,A,-0.0249999999999999,65688.54,-1.4485
+Hsin Tings Board,Board4,A,-0.05,65708.88,-2.1003
+Hsin Tings Board,Board4,A,-0.025,65688.54,-1.4485
 Hsin Tings Board,Board4,A,0,65668.34,-0.75763
-Hsin Tings Board,Board4,A,0.0249999999999999,65644.26,-0.10282
-Hsin Tings Board,Board4,A,0.0499999999999999,65623.09,0.57583
+Hsin Tings Board,Board4,A,0.025,65644.26,-0.10282
+Hsin Tings Board,Board4,A,0.05,65623.09,0.57583
 Hsin Tings Board,Board4,A,0.075,65601.64,1.2529
 Hsin Tings Board,Board4,A,0.1,65582.53,1.92445
 Hsin Tings Board,Board4,A,0.125,65560.38,2.58441
@@ -1090,11 +1090,11 @@ Hsin Tings Board,Board4,B,-0.15,71196.46,-8.0711
 Hsin Tings Board,Board4,B,-0.125,71169.7,-7.2898
 Hsin Tings Board,Board4,B,-0.1,71138.97,-6.5445
 Hsin Tings Board,Board4,B,-0.075,71113.63,-5.7931
-Hsin Tings Board,Board4,B,-0.0499999999999999,71086.9,-5.0377
-Hsin Tings Board,Board4,B,-0.0249999999999999,71060.2,-4.2766
+Hsin Tings Board,Board4,B,-0.05,71086.9,-5.0377
+Hsin Tings Board,Board4,B,-0.025,71060.2,-4.2766
 Hsin Tings Board,Board4,B,0,71035.95,-3.5057
-Hsin Tings Board,Board4,B,0.0249999999999999,71007.89,-2.7227
-Hsin Tings Board,Board4,B,0.0499999999999999,70981.66,-1.9897
+Hsin Tings Board,Board4,B,0.025,71007.89,-2.7227
+Hsin Tings Board,Board4,B,0.05,70981.66,-1.9897
 Hsin Tings Board,Board4,B,0.075,70953.13,-1.18247
 Hsin Tings Board,Board4,B,0.1,70924.38,-0.37411
 Hsin Tings Board,Board4,B,0.125,70899.01,0.47262
@@ -1171,11 +1171,11 @@ Hsin Tings Board,Board4,C,-0.15,72852.13,-2.6429
 Hsin Tings Board,Board4,C,-0.125,72809.7,-1.9871
 Hsin Tings Board,Board4,C,-0.1,72768.09,-1.33322
 Hsin Tings Board,Board4,C,-0.075,72724.97,-0.66622
-Hsin Tings Board,Board4,C,-0.0499999999999999,72683.39,-0.02636
-Hsin Tings Board,Board4,C,-0.0249999999999999,72640.54,0.63698
+Hsin Tings Board,Board4,C,-0.05,72683.39,-0.02636
+Hsin Tings Board,Board4,C,-0.025,72640.54,0.63698
 Hsin Tings Board,Board4,C,0,72599.92,1.28455
-Hsin Tings Board,Board4,C,0.0249999999999999,72559.98,1.93111
-Hsin Tings Board,Board4,C,0.0499999999999999,72517.65,2.59494
+Hsin Tings Board,Board4,C,0.025,72559.98,1.93111
+Hsin Tings Board,Board4,C,0.05,72517.65,2.59494
 Hsin Tings Board,Board4,C,0.075,72477.08,3.21936
 Hsin Tings Board,Board4,C,0.1,72434.46,3.8708
 Hsin Tings Board,Board4,C,0.125,72393.7,4.4908
@@ -1252,11 +1252,11 @@ Hsin Tings Board,Board4,D,-0.15,74801.18,-3.3327
 Hsin Tings Board,Board4,D,-0.125,74755.94,-2.6739
 Hsin Tings Board,Board4,D,-0.1,74711.66,-2.02
 Hsin Tings Board,Board4,D,-0.075,74667.58,-1.3779
-Hsin Tings Board,Board4,D,-0.0499999999999999,74624.84,-0.75228
-Hsin Tings Board,Board4,D,-0.0249999999999999,74579.52,-0.11862
+Hsin Tings Board,Board4,D,-0.05,74624.84,-0.75228
+Hsin Tings Board,Board4,D,-0.025,74579.52,-0.11862
 Hsin Tings Board,Board4,D,0,74535.32,0.5557
-Hsin Tings Board,Board4,D,0.0249999999999999,74490.37,1.17787
-Hsin Tings Board,Board4,D,0.0499999999999999,74444.02,1.83885
+Hsin Tings Board,Board4,D,0.025,74490.37,1.17787
+Hsin Tings Board,Board4,D,0.05,74444.02,1.83885
 Hsin Tings Board,Board4,D,0.075,74400.96,2.45137
 Hsin Tings Board,Board4,D,0.1,74357.17,3.02591
 Hsin Tings Board,Board4,D,0.125,74314.37,3.7455
@@ -1333,11 +1333,11 @@ Hsin Tings Board,Board5,A,-0.15,43230.62,-4.8031
 Hsin Tings Board,Board5,A,-0.125,43222.02,-4.1415
 Hsin Tings Board,Board5,A,-0.1,43214.64,-3.4805
 Hsin Tings Board,Board5,A,-0.075,43206.21,-2.8103
-Hsin Tings Board,Board5,A,-0.0499999999999999,43197.35,-2.1495
-Hsin Tings Board,Board5,A,-0.0249999999999999,43189.81,-1.4945
+Hsin Tings Board,Board5,A,-0.05,43197.35,-2.1495
+Hsin Tings Board,Board5,A,-0.025,43189.81,-1.4945
 Hsin Tings Board,Board5,A,0,43182.04,-0.80923
-Hsin Tings Board,Board5,A,0.0249999999999999,43174.27,-0.14023
-Hsin Tings Board,Board5,A,0.0499999999999999,43166.63,0.54056
+Hsin Tings Board,Board5,A,0.025,43174.27,-0.14023
+Hsin Tings Board,Board5,A,0.05,43166.63,0.54056
 Hsin Tings Board,Board5,A,0.075,43159.64,1.20986
 Hsin Tings Board,Board5,A,0.1,43151.45,1.8803
 Hsin Tings Board,Board5,A,0.125,43144.82,2.57135
@@ -1414,11 +1414,11 @@ Hsin Tings Board,Board5,B,-0.15,43440,-8.1166
 Hsin Tings Board,Board5,B,-0.125,43433.12,-7.3879
 Hsin Tings Board,Board5,B,-0.1,43425.03,-6.6502
 Hsin Tings Board,Board5,B,-0.075,43417.42,-5.8941
-Hsin Tings Board,Board5,B,-0.0499999999999999,43410.56,-5.1348
-Hsin Tings Board,Board5,B,-0.0249999999999999,43403.61,-4.3871
+Hsin Tings Board,Board5,B,-0.05,43410.56,-5.1348
+Hsin Tings Board,Board5,B,-0.025,43403.61,-4.3871
 Hsin Tings Board,Board5,B,0,43396.46,-3.6258
-Hsin Tings Board,Board5,B,0.0249999999999999,43389.18,-2.872
-Hsin Tings Board,Board5,B,0.0499999999999999,43381.86,-2.1232
+Hsin Tings Board,Board5,B,0.025,43389.18,-2.872
+Hsin Tings Board,Board5,B,0.05,43381.86,-2.1232
 Hsin Tings Board,Board5,B,0.075,43374.12,-1.432
 Hsin Tings Board,Board5,B,0.1,43366.7,-0.56274
 Hsin Tings Board,Board5,B,0.125,43359.7,0.33666
@@ -1495,11 +1495,11 @@ Hsin Tings Board,Board5,C,-0.15,46050.11,-2.5417
 Hsin Tings Board,Board5,C,-0.125,46036.88,-1.8956
 Hsin Tings Board,Board5,C,-0.1,46023.03,-1.23936
 Hsin Tings Board,Board5,C,-0.075,46010.34,-0.59862
-Hsin Tings Board,Board5,C,-0.0499999999999999,45995.75,0.06929
-Hsin Tings Board,Board5,C,-0.0249999999999999,45983.26,0.71115
+Hsin Tings Board,Board5,C,-0.05,45995.75,0.06929
+Hsin Tings Board,Board5,C,-0.025,45983.26,0.71115
 Hsin Tings Board,Board5,C,0,45970.78,1.34196
-Hsin Tings Board,Board5,C,0.0249999999999999,45957.3,2.02312
-Hsin Tings Board,Board5,C,0.0499999999999999,45944.44,2.67958
+Hsin Tings Board,Board5,C,0.025,45957.3,2.02312
+Hsin Tings Board,Board5,C,0.05,45944.44,2.67958
 Hsin Tings Board,Board5,C,0.075,45931.85,3.31234
 Hsin Tings Board,Board5,C,0.1,45917.96,3.9816
 Hsin Tings Board,Board5,C,0.125,45903.55,4.5731
@@ -1576,11 +1576,11 @@ Hsin Tings Board,Board5,D,-0.15,51786.48,-3.169
 Hsin Tings Board,Board5,D,-0.125,51767.55,-2.5067
 Hsin Tings Board,Board5,D,-0.1,51748.97,-1.8784
 Hsin Tings Board,Board5,D,-0.075,51728.84,-1.22122
-Hsin Tings Board,Board5,D,-0.0499999999999999,51712.69,-0.57788
-Hsin Tings Board,Board5,D,-0.0249999999999999,51692.07,0.05268
+Hsin Tings Board,Board5,D,-0.05,51712.69,-0.57788
+Hsin Tings Board,Board5,D,-0.025,51692.07,0.05268
 Hsin Tings Board,Board5,D,0,51671.14,0.69356
-Hsin Tings Board,Board5,D,0.0249999999999999,51651.5,1.35979
-Hsin Tings Board,Board5,D,0.0499999999999999,51635.09,1.98073
+Hsin Tings Board,Board5,D,0.025,51651.5,1.35979
+Hsin Tings Board,Board5,D,0.05,51635.09,1.98073
 Hsin Tings Board,Board5,D,0.075,51616.21,2.62736
 Hsin Tings Board,Board5,D,0.1,51597.06,3.24479
 Hsin Tings Board,Board5,D,0.125,51577.94,3.8822
@@ -1657,11 +1657,11 @@ Peters Board,Board1,A,-0.15,38469.73,-3.8977
 Peters Board,Board1,A,-0.125,38465.69,-3.2347
 Peters Board,Board1,A,-0.1,38462.93,-2.5782
 Peters Board,Board1,A,-0.075,38458.57,-1.9292
-Peters Board,Board1,A,-0.0499999999999999,38454.8,-1.29976
-Peters Board,Board1,A,-0.0249999999999999,38450.61,-0.65091
+Peters Board,Board1,A,-0.05,38454.8,-1.29976
+Peters Board,Board1,A,-0.025,38450.61,-0.65091
 Peters Board,Board1,A,0,38447.09,0.00197
-Peters Board,Board1,A,0.0249999999999999,38443.21,0.64903
-Peters Board,Board1,A,0.0499999999999999,38439.64,1.30847
+Peters Board,Board1,A,0.025,38443.21,0.64903
+Peters Board,Board1,A,0.05,38439.64,1.30847
 Peters Board,Board1,A,0.075,38435.43,1.93586
 Peters Board,Board1,A,0.1,38432.36,2.58778
 Peters Board,Board1,A,0.125,38429.07,3.23964
@@ -1738,11 +1738,11 @@ Peters Board,Board1,B,-0.15,40471.93,-3.8576
 Peters Board,Board1,B,-0.125,40465.31,-3.2062
 Peters Board,Board1,B,-0.1,40460.32,-2.5645
 Peters Board,Board1,B,-0.075,40454.14,-1.9496
-Peters Board,Board1,B,-0.0499999999999999,40448.37,-1.26555
-Peters Board,Board1,B,-0.0249999999999999,40442.61,-0.60746
+Peters Board,Board1,B,-0.05,40448.37,-1.26555
+Peters Board,Board1,B,-0.025,40442.61,-0.60746
 Peters Board,Board1,B,0,40436.31,0.01126
-Peters Board,Board1,B,0.0249999999999999,40429.95,0.68783
-Peters Board,Board1,B,0.0499999999999999,40424.56,1.33168
+Peters Board,Board1,B,0.025,40429.95,0.68783
+Peters Board,Board1,B,0.05,40424.56,1.33168
 Peters Board,Board1,B,0.075,40418.92,1.97729
 Peters Board,Board1,B,0.1,40413.12,2.61049
 Peters Board,Board1,B,0.125,40407.02,3.27263
@@ -1819,11 +1819,11 @@ Peters Board,Board1,C,-0.15,43530.95,-3.8026
 Peters Board,Board1,C,-0.125,43519.05,-3.1762
 Peters Board,Board1,C,-0.1,43507.65,-2.495
 Peters Board,Board1,C,-0.075,43494.61,-1.8606
-Peters Board,Board1,C,-0.0499999999999999,43482.51,-1.21049
-Peters Board,Board1,C,-0.0249999999999999,43470.08,-0.56008
+Peters Board,Board1,C,-0.05,43482.51,-1.21049
+Peters Board,Board1,C,-0.025,43470.08,-0.56008
 Peters Board,Board1,C,0,43457.32,0.06879
-Peters Board,Board1,C,0.0249999999999999,43446.87,0.72433
-Peters Board,Board1,C,0.0499999999999999,43433.66,1.37017
+Peters Board,Board1,C,0.025,43446.87,0.72433
+Peters Board,Board1,C,0.05,43433.66,1.37017
 Peters Board,Board1,C,0.075,43423.86,2.0113
 Peters Board,Board1,C,0.1,43410.17,2.65994
 Peters Board,Board1,C,0.125,43400.14,3.2342
@@ -1900,11 +1900,11 @@ Peters Board,Board1,D,-0.15,45012.88,-3.7122
 Peters Board,Board1,D,-0.125,44994.75,-3.044
 Peters Board,Board1,D,-0.1,44975.85,-2.4041
 Peters Board,Board1,D,-0.075,44957.71,-1.8345
-Peters Board,Board1,D,-0.0499999999999999,44939.39,-1.12304
-Peters Board,Board1,D,-0.0249999999999999,44920.7,-0.46752
+Peters Board,Board1,D,-0.05,44939.39,-1.12304
+Peters Board,Board1,D,-0.025,44920.7,-0.46752
 Peters Board,Board1,D,0,44901.91,0.16662
-Peters Board,Board1,D,0.0249999999999999,44883.78,0.80882
-Peters Board,Board1,D,0.0499999999999999,44863.71,1.46134
+Peters Board,Board1,D,0.025,44883.78,0.80882
+Peters Board,Board1,D,0.05,44863.71,1.46134
 Peters Board,Board1,D,0.075,44845.92,2.10392
 Peters Board,Board1,D,0.1,44826.37,2.74015
 Peters Board,Board1,D,0.125,44808.51,3.19022
@@ -1981,11 +1981,11 @@ Peters Board,Board1,E,-0.15,42075.57,-3.642
 Peters Board,Board1,E,-0.125,42041.98,-2.9925
 Peters Board,Board1,E,-0.1,42007.88,-2.3371
 Peters Board,Board1,E,-0.075,41974.09,-1.698
-Peters Board,Board1,E,-0.0499999999999999,41939.73,-1.05662
-Peters Board,Board1,E,-0.0249999999999999,41907.55,-0.3995
+Peters Board,Board1,E,-0.05,41939.73,-1.05662
+Peters Board,Board1,E,-0.025,41907.55,-0.3995
 Peters Board,Board1,E,0,41873.34,0.23573
-Peters Board,Board1,E,0.0249999999999999,41839.07,0.87642
-Peters Board,Board1,E,0.0499999999999999,41807.44,1.51454
+Peters Board,Board1,E,0.025,41839.07,0.87642
+Peters Board,Board1,E,0.05,41807.44,1.51454
 Peters Board,Board1,E,0.075,41773.39,2.15621
 Peters Board,Board1,E,0.1,41740.43,2.81279
 Peters Board,Board1,E,0.125,41706.19,3.05362
@@ -2062,11 +2062,11 @@ Peters Board,Board1,F,-0.15,38484.57,-3.6264
 Peters Board,Board1,F,-0.125,38482.31,-2.9672
 Peters Board,Board1,F,-0.1,38480.83,-2.3295
 Peters Board,Board1,F,-0.075,38478.03,-1.6839
-Peters Board,Board1,F,-0.0499999999999999,38476.01,-1.04455
-Peters Board,Board1,F,-0.0249999999999999,38473.17,-0.41159
+Peters Board,Board1,F,-0.05,38476.01,-1.04455
+Peters Board,Board1,F,-0.025,38473.17,-0.41159
 Peters Board,Board1,F,0,38470.2,0.24287
-Peters Board,Board1,F,0.0249999999999999,38467.39,0.88475
-Peters Board,Board1,F,0.0499999999999999,38465.37,1.53644
+Peters Board,Board1,F,0.025,38467.39,0.88475
+Peters Board,Board1,F,0.05,38465.37,1.53644
 Peters Board,Board1,F,0.075,38463.43,2.17689
 Peters Board,Board1,F,0.1,38459.61,2.80132
 Peters Board,Board1,F,0.125,38457.6,3.30895
@@ -2143,11 +2143,11 @@ Peters Board,Board1,G,-0.15,36771.96,-3.8692
 Peters Board,Board1,G,-0.125,36767.48,-3.2353
 Peters Board,Board1,G,-0.1,36764.91,-2.5888
 Peters Board,Board1,G,-0.075,36761.56,-1.9166
-Peters Board,Board1,G,-0.0499999999999999,36758.66,-1.26823
-Peters Board,Board1,G,-0.0249999999999999,36755.59,-0.63281
+Peters Board,Board1,G,-0.05,36758.66,-1.26823
+Peters Board,Board1,G,-0.025,36755.59,-0.63281
 Peters Board,Board1,G,0,36752.32,0.02816
-Peters Board,Board1,G,0.0249999999999999,36748.33,0.66592
-Peters Board,Board1,G,0.0499999999999999,36745.83,1.31876
+Peters Board,Board1,G,0.025,36748.33,0.66592
+Peters Board,Board1,G,0.05,36745.83,1.31876
 Peters Board,Board1,G,0.075,36741.91,1.96304
 Peters Board,Board1,G,0.1,36739.72,2.62126
 Peters Board,Board1,G,0.125,36736.15,3.26032
@@ -2224,11 +2224,11 @@ Peters Board,Board1,H,-0.15,40576.49,-3.8712
 Peters Board,Board1,H,-0.125,40569.84,-3.2057
 Peters Board,Board1,H,-0.1,40563.5,-2.5606
 Peters Board,Board1,H,-0.075,40556.69,-1.9288
-Peters Board,Board1,H,-0.0499999999999999,40551.37,-1.2593
-Peters Board,Board1,H,-0.0249999999999999,40546.21,-0.62188
+Peters Board,Board1,H,-0.05,40551.37,-1.2593
+Peters Board,Board1,H,-0.025,40546.21,-0.62188
 Peters Board,Board1,H,0,40540.58,0.02258
-Peters Board,Board1,H,0.0249999999999999,40534.4,0.67773
-Peters Board,Board1,H,0.0499999999999999,40528.18,1.32194
+Peters Board,Board1,H,0.025,40534.4,0.67773
+Peters Board,Board1,H,0.05,40528.18,1.32194
 Peters Board,Board1,H,0.075,40522.64,1.96906
 Peters Board,Board1,H,0.1,40516.41,2.61201
 Peters Board,Board1,H,0.125,40511.13,3.20186
@@ -2305,11 +2305,11 @@ Peters Board,Board1,I,-0.15,42806.5,-3.934
 Peters Board,Board1,I,-0.125,42797.39,-3.2885
 Peters Board,Board1,I,-0.1,42786.35,-2.6576
 Peters Board,Board1,I,-0.075,42775.3,-1.9902
-Peters Board,Board1,I,-0.0499999999999999,42763.51,-1.35319
-Peters Board,Board1,I,-0.0249999999999999,42752.34,-0.72656
+Peters Board,Board1,I,-0.05,42763.51,-1.35319
+Peters Board,Board1,I,-0.025,42752.34,-0.72656
 Peters Board,Board1,I,0,42740.77,-0.05824
-Peters Board,Board1,I,0.0249999999999999,42730.05,0.57292
-Peters Board,Board1,I,0.0499999999999999,42718.68,1.24142
+Peters Board,Board1,I,0.025,42730.05,0.57292
+Peters Board,Board1,I,0.05,42718.68,1.24142
 Peters Board,Board1,I,0.075,42708.38,1.88388
 Peters Board,Board1,I,0.1,42696.58,2.53372
 Peters Board,Board1,I,0.125,42685.16,3.19373
@@ -2386,11 +2386,11 @@ Peters Board,Board1,J,-0.15,47870.07,-3.5481
 Peters Board,Board1,J,-0.125,47845.78,-2.8813
 Peters Board,Board1,J,-0.1,47822.34,-2.2627
 Peters Board,Board1,J,-0.075,47798.34,-1.6402
-Peters Board,Board1,J,-0.0499999999999999,47774.63,-0.96358
-Peters Board,Board1,J,-0.0249999999999999,47750.35,-0.33082
+Peters Board,Board1,J,-0.05,47774.63,-0.96358
+Peters Board,Board1,J,-0.025,47750.35,-0.33082
 Peters Board,Board1,J,0,47725.67,0.32154
-Peters Board,Board1,J,0.0249999999999999,47700.33,0.96855
-Peters Board,Board1,J,0.0499999999999999,47676.69,1.61014
+Peters Board,Board1,J,0.025,47700.33,0.96855
+Peters Board,Board1,J,0.05,47676.69,1.61014
 Peters Board,Board1,J,0.075,47652.36,2.24376
 Peters Board,Board1,J,0.1,47630.52,2.87371
 Peters Board,Board1,J,0.125,47606.17,3.49958
@@ -2467,11 +2467,11 @@ Peters Board,Board1,K,-0.15,41918.16,-3.4847
 Peters Board,Board1,K,-0.125,41884.81,-2.8373
 Peters Board,Board1,K,-0.1,41851.11,-2.1992
 Peters Board,Board1,K,-0.075,41817.06,-1.5372
-Peters Board,Board1,K,-0.0499999999999999,41784.39,-0.90968
-Peters Board,Board1,K,-0.0249999999999999,41750.29,-0.25301
+Peters Board,Board1,K,-0.05,41784.39,-0.90968
+Peters Board,Board1,K,-0.025,41750.29,-0.25301
 Peters Board,Board1,K,0,41716.71,0.38553
-Peters Board,Board1,K,0.0249999999999999,41683.12,1.02297
-Peters Board,Board1,K,0.0499999999999999,41649.27,1.68468
+Peters Board,Board1,K,0.025,41683.12,1.02297
+Peters Board,Board1,K,0.05,41649.27,1.68468
 Peters Board,Board1,K,0.075,41613.86,2.32463
 Peters Board,Board1,K,0.1,41581.73,2.95748
 Peters Board,Board1,K,0.125,41547.97,3.58487
@@ -2548,11 +2548,11 @@ Peters Board,Board1,L,-0.15,35395.65,-3.5521
 Peters Board,Board1,L,-0.125,35393.75,-2.905
 Peters Board,Board1,L,-0.1,35392.37,-2.2569
 Peters Board,Board1,L,-0.075,35390.13,-1.6292
-Peters Board,Board1,L,-0.0499999999999999,35388.32,-0.97894
-Peters Board,Board1,L,-0.0249999999999999,35386.68,-0.32692
+Peters Board,Board1,L,-0.05,35388.32,-0.97894
+Peters Board,Board1,L,-0.025,35386.68,-0.32692
 Peters Board,Board1,L,0,35384.74,0.30247
-Peters Board,Board1,L,0.0249999999999999,35382.3,0.95144
-Peters Board,Board1,L,0.0499999999999999,35381.32,1.59909
+Peters Board,Board1,L,0.025,35382.3,0.95144
+Peters Board,Board1,L,0.05,35381.32,1.59909
 Peters Board,Board1,L,0.075,35379.16,2.25096
 Peters Board,Board1,L,0.1,35377.04,2.88418
 Peters Board,Board1,L,0.125,35374.79,3.50737
@@ -2629,11 +2629,11 @@ Peters Board,Board2,A,-0.15,56604.63,-3.8396
 Peters Board,Board2,A,-0.125,56594.75,-3.2008
 Peters Board,Board2,A,-0.1,56583.59,-2.5425
 Peters Board,Board2,A,-0.075,56572.82,-1.903
-Peters Board,Board2,A,-0.0499999999999999,56560.17,-1.27944
-Peters Board,Board2,A,-0.0249999999999999,56550.48,-0.60623
+Peters Board,Board2,A,-0.05,56560.17,-1.27944
+Peters Board,Board2,A,-0.025,56550.48,-0.60623
 Peters Board,Board2,A,0,56541.71,0.03378
-Peters Board,Board2,A,0.0249999999999999,56528.46,0.70565
-Peters Board,Board2,A,0.0499999999999999,56515.82,1.34399
+Peters Board,Board2,A,0.025,56528.46,0.70565
+Peters Board,Board2,A,0.05,56515.82,1.34399
 Peters Board,Board2,A,0.075,56505.93,1.985
 Peters Board,Board2,A,0.1,56492.25,2.63104
 Peters Board,Board2,A,0.125,56483.93,3.27685
@@ -2710,11 +2710,11 @@ Peters Board,Board2,B,-0.15,60841.5,-3.8199
 Peters Board,Board2,B,-0.125,60824.51,-3.1789
 Peters Board,Board2,B,-0.1,60806.84,-2.5354
 Peters Board,Board2,B,-0.075,60786.55,-1.8822
-Peters Board,Board2,B,-0.0499999999999999,60770.66,-1.23967
-Peters Board,Board2,B,-0.0249999999999999,60752.91,-0.60006
+Peters Board,Board2,B,-0.05,60770.66,-1.23967
+Peters Board,Board2,B,-0.025,60752.91,-0.60006
 Peters Board,Board2,B,0,60735.18,0.04706
-Peters Board,Board2,B,0.0249999999999999,60719.05,0.68079
-Peters Board,Board2,B,0.0499999999999999,60703.92,1.34222
+Peters Board,Board2,B,0.025,60719.05,0.68079
+Peters Board,Board2,B,0.05,60703.92,1.34222
 Peters Board,Board2,B,0.075,60685.85,1.9878
 Peters Board,Board2,B,0.1,60668.69,2.63961
 Peters Board,Board2,B,0.125,60651.16,3.27083
@@ -2791,11 +2791,11 @@ Peters Board,Board2,C,-0.15,64580.76,-3.7897
 Peters Board,Board2,C,-0.125,64551.31,-3.1583
 Peters Board,Board2,C,-0.1,64521.53,-2.4977
 Peters Board,Board2,C,-0.075,64488.08,-1.8918
-Peters Board,Board2,C,-0.0499999999999999,64457.18,-1.20403
-Peters Board,Board2,C,-0.0249999999999999,64425.95,-0.5601
+Peters Board,Board2,C,-0.05,64457.18,-1.20403
+Peters Board,Board2,C,-0.025,64425.95,-0.5601
 Peters Board,Board2,C,0,64396.46,0.0779
-Peters Board,Board2,C,0.0249999999999999,64366.52,0.72793
-Peters Board,Board2,C,0.0499999999999999,64333.71,1.37981
+Peters Board,Board2,C,0.025,64366.52,0.72793
+Peters Board,Board2,C,0.05,64333.71,1.37981
 Peters Board,Board2,C,0.075,64307.85,2.01408
 Peters Board,Board2,C,0.1,64272.85,2.66829
 Peters Board,Board2,C,0.125,64242.85,3.29514
@@ -2872,11 +2872,11 @@ Peters Board,Board2,D,-0.15,64820.14,-3.697
 Peters Board,Board2,D,-0.125,64774.04,-3.0633
 Peters Board,Board2,D,-0.1,64728.13,-2.4294
 Peters Board,Board2,D,-0.075,64683,-1.9375
-Peters Board,Board2,D,-0.0499999999999999,64637.24,-1.12569
-Peters Board,Board2,D,-0.0249999999999999,64593.73,-0.47075
+Peters Board,Board2,D,-0.05,64637.24,-1.12569
+Peters Board,Board2,D,-0.025,64593.73,-0.47075
 Peters Board,Board2,D,0,64550.16,0.17431
-Peters Board,Board2,D,0.0249999999999999,64504.73,0.81384
-Peters Board,Board2,D,0.0499999999999999,64461.11,1.45483
+Peters Board,Board2,D,0.025,64504.73,0.81384
+Peters Board,Board2,D,0.05,64461.11,1.45483
 Peters Board,Board2,D,0.075,64413.25,2.10582
 Peters Board,Board2,D,0.1,64368.1,2.75871
 Peters Board,Board2,D,0.125,64325.25,3.24814
@@ -2953,11 +2953,11 @@ Peters Board,Board2,D_mod,-0.15,64815.23,-3.6906
 Peters Board,Board2,D_mod,-0.125,64771.62,-3.0588
 Peters Board,Board2,D_mod,-0.1,64725.52,-2.4242
 Peters Board,Board2,D_mod,-0.075,64680.64,-1.7989
-Peters Board,Board2,D_mod,-0.0499999999999999,64635.77,-1.11967
-Peters Board,Board2,D_mod,-0.0249999999999999,64588.03,-0.48257
+Peters Board,Board2,D_mod,-0.05,64635.77,-1.11967
+Peters Board,Board2,D_mod,-0.025,64588.03,-0.48257
 Peters Board,Board2,D_mod,0,64542.59,0.15833
-Peters Board,Board2,D_mod,0.0249999999999999,64495.34,0.80609
-Peters Board,Board2,D_mod,0.0499999999999999,64451.22,1.45918
+Peters Board,Board2,D_mod,0.025,64495.34,0.80609
+Peters Board,Board2,D_mod,0.05,64451.22,1.45918
 Peters Board,Board2,D_mod,0.075,64405.31,2.11972
 Peters Board,Board2,D_mod,0.1,64355.84,2.76009
 Peters Board,Board2,D_mod,0.125,64316.88,3.24643
@@ -3034,11 +3034,11 @@ Peters Board,Board2,E,-0.15,51475.26,-3.6437
 Peters Board,Board2,E,-0.125,51421.3,-3.0223
 Peters Board,Board2,E,-0.1,51367.04,-2.3712
 Peters Board,Board2,E,-0.075,51313.65,-1.7136
-Peters Board,Board2,E,-0.0499999999999999,51259.83,-1.0721
-Peters Board,Board2,E,-0.0249999999999999,51205.99,-0.44071
+Peters Board,Board2,E,-0.05,51259.83,-1.0721
+Peters Board,Board2,E,-0.025,51205.99,-0.44071
 Peters Board,Board2,E,0,51149.81,0.20871
-Peters Board,Board2,E,0.0249999999999999,51097.22,0.85988
-Peters Board,Board2,E,0.0499999999999999,51044.31,1.50754
+Peters Board,Board2,E,0.025,51097.22,0.85988
+Peters Board,Board2,E,0.05,51044.31,1.50754
 Peters Board,Board2,E,0.075,50989.38,2.14125
 Peters Board,Board2,E,0.1,50937.07,2.7925
 Peters Board,Board2,E,0.125,50882.68,3.1985
@@ -3115,11 +3115,11 @@ Peters Board,Board2,F,-0.15,67213.53,-3.6046
 Peters Board,Board2,F,-0.125,67199.58,-2.9455
 Peters Board,Board2,F,-0.1,67186.07,-2.2789
 Peters Board,Board2,F,-0.075,67169.53,-1.6701
-Peters Board,Board2,F,-0.0499999999999999,67155.24,-1.01326
-Peters Board,Board2,F,-0.0249999999999999,67139.17,-0.3672
+Peters Board,Board2,F,-0.05,67155.24,-1.01326
+Peters Board,Board2,F,-0.025,67139.17,-0.3672
 Peters Board,Board2,F,0,67121.87,0.28124
-Peters Board,Board2,F,0.0249999999999999,67109.82,0.92228
-Peters Board,Board2,F,0.0499999999999999,67096.02,1.5598
+Peters Board,Board2,F,0.025,67109.82,0.92228
+Peters Board,Board2,F,0.05,67096.02,1.5598
 Peters Board,Board2,F,0.075,67083.37,2.21654
 Peters Board,Board2,F,0.1,67066.93,2.85516
 Peters Board,Board2,F,0.125,67049.9,3.4414
@@ -3196,11 +3196,11 @@ Peters Board,Board2,G,-0.15,51207.83,-3.9227
 Peters Board,Board2,G,-0.125,51199.33,-3.2863
 Peters Board,Board2,G,-0.1,51189.5,-2.6358
 Peters Board,Board2,G,-0.075,51183.87,-1.9736
-Peters Board,Board2,G,-0.0499999999999999,51176.12,-1.32705
-Peters Board,Board2,G,-0.0249999999999999,51165.84,-0.67992
+Peters Board,Board2,G,-0.05,51176.12,-1.32705
+Peters Board,Board2,G,-0.025,51165.84,-0.67992
 Peters Board,Board2,G,0,51158.82,-0.03431
-Peters Board,Board2,G,0.0249999999999999,51151.12,0.62681
-Peters Board,Board2,G,0.0499999999999999,51142.86,1.26558
+Peters Board,Board2,G,0.025,51151.12,0.62681
+Peters Board,Board2,G,0.05,51142.86,1.26558
 Peters Board,Board2,G,0.075,51134.29,1.91498
 Peters Board,Board2,G,0.1,51124.82,2.5721
 Peters Board,Board2,G,0.125,51115.43,3.22536
@@ -3277,11 +3277,11 @@ Peters Board,Board2,H,-0.15,58904.96,-3.8516
 Peters Board,Board2,H,-0.125,58886.95,-3.2031
 Peters Board,Board2,H,-0.1,58870.74,-2.5555
 Peters Board,Board2,H,-0.075,58854.48,-1.9459
-Peters Board,Board2,H,-0.0499999999999999,58838.82,-1.25623
-Peters Board,Board2,H,-0.0249999999999999,58823.61,-0.59231
+Peters Board,Board2,H,-0.05,58838.82,-1.25623
+Peters Board,Board2,H,-0.025,58823.61,-0.59231
 Peters Board,Board2,H,0,58806.01,0.03581
-Peters Board,Board2,H,0.0249999999999999,58792.47,0.69994
-Peters Board,Board2,H,0.0499999999999999,58774.38,1.34629
+Peters Board,Board2,H,0.025,58792.47,0.69994
+Peters Board,Board2,H,0.05,58774.38,1.34629
 Peters Board,Board2,H,0.075,58757.4,1.98773
 Peters Board,Board2,H,0.1,58744.7,2.6634
 Peters Board,Board2,H,0.125,58725.28,3.28229
@@ -3358,11 +3358,11 @@ Peters Board,Board2,I,-0.15,60873.42,-3.8433
 Peters Board,Board2,I,-0.125,60846.71,-3.2024
 Peters Board,Board2,I,-0.1,60820.68,-2.5705
 Peters Board,Board2,I,-0.075,60792.79,-1.8936
-Peters Board,Board2,I,-0.0499999999999999,60766.3,-1.27057
-Peters Board,Board2,I,-0.0249999999999999,60737.54,-0.61091
+Peters Board,Board2,I,-0.05,60766.3,-1.27057
+Peters Board,Board2,I,-0.025,60737.54,-0.61091
 Peters Board,Board2,I,0,60710.15,0.02182
-Peters Board,Board2,I,0.0249999999999999,60683.36,0.67098
-Peters Board,Board2,I,0.0499999999999999,60658.83,1.32205
+Peters Board,Board2,I,0.025,60683.36,0.67098
+Peters Board,Board2,I,0.05,60658.83,1.32205
 Peters Board,Board2,I,0.075,60631.39,1.95986
 Peters Board,Board2,I,0.1,60603.11,2.61146
 Peters Board,Board2,I,0.125,60577.43,3.24637
@@ -3439,11 +3439,11 @@ Peters Board,Board2,J,-0.15,60606.91,-3.5974
 Peters Board,Board2,J,-0.125,60569.45,-2.9464
 Peters Board,Board2,J,-0.1,60533.29,-2.2953
 Peters Board,Board2,J,-0.075,60494.63,-1.7338
-Peters Board,Board2,J,-0.0499999999999999,60456.41,-0.99897
-Peters Board,Board2,J,-0.0249999999999999,60419.2,-0.3633
+Peters Board,Board2,J,-0.05,60456.41,-0.99897
+Peters Board,Board2,J,-0.025,60419.2,-0.3633
 Peters Board,Board2,J,0,60379.88,0.26928
-Peters Board,Board2,J,0.0249999999999999,60342.84,0.92162
-Peters Board,Board2,J,0.0499999999999999,60306.2,1.55895
+Peters Board,Board2,J,0.025,60342.84,0.92162
+Peters Board,Board2,J,0.05,60306.2,1.55895
 Peters Board,Board2,J,0.075,60268.1,2.20862
 Peters Board,Board2,J,0.1,60227.21,2.83598
 Peters Board,Board2,J,0.125,60190.39,3.44372
@@ -3520,11 +3520,11 @@ Peters Board,Board2,K,-0.15,50560.01,-3.5371
 Peters Board,Board2,K,-0.125,50508.34,-2.8831
 Peters Board,Board2,K,-0.1,50456.87,-2.2423
 Peters Board,Board2,K,-0.075,50406.81,-1.7046
-Peters Board,Board2,K,-0.0499999999999999,50356.73,-0.95255
-Peters Board,Board2,K,-0.0249999999999999,50304.59,-0.31206
+Peters Board,Board2,K,-0.05,50356.73,-0.95255
+Peters Board,Board2,K,-0.025,50304.59,-0.31206
 Peters Board,Board2,K,0,50253.93,0.33683
-Peters Board,Board2,K,0.0249999999999999,50203.76,0.97501
-Peters Board,Board2,K,0.0499999999999999,50153.63,1.60462
+Peters Board,Board2,K,0.025,50203.76,0.97501
+Peters Board,Board2,K,0.05,50153.63,1.60462
 Peters Board,Board2,K,0.075,50103.76,2.26387
 Peters Board,Board2,K,0.1,50053.54,2.88721
 Peters Board,Board2,K,0.125,50004.26,3.01003
@@ -3601,11 +3601,11 @@ Peters Board,Board2,L,-0.15,54452.85,-3.6216
 Peters Board,Board2,L,-0.125,54444.89,-2.9776
 Peters Board,Board2,L,-0.1,54440.3,-2.3319
 Peters Board,Board2,L,-0.075,54433.14,-1.8886
-Peters Board,Board2,L,-0.0499999999999999,54423.92,-1.03309
-Peters Board,Board2,L,-0.0249999999999999,54419.3,-0.39888
+Peters Board,Board2,L,-0.05,54423.92,-1.03309
+Peters Board,Board2,L,-0.025,54419.3,-0.39888
 Peters Board,Board2,L,0,54410.64,0.25092
-Peters Board,Board2,L,0.0249999999999999,54404.69,0.89915
-Peters Board,Board2,L,0.0499999999999999,54397.14,1.54606
+Peters Board,Board2,L,0.025,54404.69,0.89915
+Peters Board,Board2,L,0.05,54397.14,1.54606
 Peters Board,Board2,L,0.075,54392.02,2.21222
 Peters Board,Board2,L,0.1,54385.3,2.83776
 Peters Board,Board2,L,0.125,54379.95,3.46146
@@ -3682,11 +3682,11 @@ Peters Board,Board3,A,-0.15,78615.53,-3.7653
 Peters Board,Board3,A,-0.125,78585.97,-3.1298
 Peters Board,Board3,A,-0.1,78553.27,-2.4856
 Peters Board,Board3,A,-0.075,78522.61,-1.8636
-Peters Board,Board3,A,-0.0499999999999999,78490.98,-1.19395
-Peters Board,Board3,A,-0.0249999999999999,78456.12,-0.55082
+Peters Board,Board3,A,-0.05,78490.98,-1.19395
+Peters Board,Board3,A,-0.025,78456.12,-0.55082
 Peters Board,Board3,A,0,78425.69,0.09333
-Peters Board,Board3,A,0.0249999999999999,78393.69,0.74297
-Peters Board,Board3,A,0.0499999999999999,78363.8,1.3936
+Peters Board,Board3,A,0.025,78393.69,0.74297
+Peters Board,Board3,A,0.05,78363.8,1.3936
 Peters Board,Board3,A,0.075,78330.33,2.03052
 Peters Board,Board3,A,0.1,78301.34,2.67972
 Peters Board,Board3,A,0.125,78267.3,3.21252
@@ -3763,11 +3763,11 @@ Peters Board,Board3,B,-0.15,70047.35,-3.7945
 Peters Board,Board3,B,-0.125,70026.01,-3.1365
 Peters Board,Board3,B,-0.1,70000.08,-2.4764
 Peters Board,Board3,B,-0.075,69973.91,-1.8774
-Peters Board,Board3,B,-0.0499999999999999,69951.54,-1.19732
-Peters Board,Board3,B,-0.0249999999999999,69925.53,-0.56009
+Peters Board,Board3,B,-0.05,69951.54,-1.19732
+Peters Board,Board3,B,-0.025,69925.53,-0.56009
 Peters Board,Board3,B,0,69903.48,0.09272
-Peters Board,Board3,B,0.0249999999999999,69879.04,0.75478
-Peters Board,Board3,B,0.0499999999999999,69853.66,1.39448
+Peters Board,Board3,B,0.025,69879.04,0.75478
+Peters Board,Board3,B,0.05,69853.66,1.39448
 Peters Board,Board3,B,0.075,69829.42,2.05578
 Peters Board,Board3,B,0.1,69808.37,2.694
 Peters Board,Board3,B,0.125,69783.23,3.07464
@@ -3844,11 +3844,11 @@ Peters Board,Board3,C,-0.15,69344.39,-3.7856
 Peters Board,Board3,C,-0.125,69306.63,-3.1327
 Peters Board,Board3,C,-0.1,69272.7,-2.4972
 Peters Board,Board3,C,-0.075,69235.34,-1.8351
-Peters Board,Board3,C,-0.0499999999999999,69199.06,-1.21127
-Peters Board,Board3,C,-0.0249999999999999,69163.5,-0.55787
+Peters Board,Board3,C,-0.05,69199.06,-1.21127
+Peters Board,Board3,C,-0.025,69163.5,-0.55787
 Peters Board,Board3,C,0,69128.51,0.09094
-Peters Board,Board3,C,0.0249999999999999,69091.34,0.74193
-Peters Board,Board3,C,0.0499999999999999,69056.73,1.40126
+Peters Board,Board3,C,0.025,69091.34,0.74193
+Peters Board,Board3,C,0.05,69056.73,1.40126
 Peters Board,Board3,C,0.075,69020.81,2.03761
 Peters Board,Board3,C,0.1,68983.98,2.67884
 Peters Board,Board3,C,0.125,68947.87,3.12048
@@ -3925,11 +3925,11 @@ Peters Board,Board3,D,-0.15,67987.9,-3.7668
 Peters Board,Board3,D,-0.125,67937.17,-3.1509
 Peters Board,Board3,D,-0.1,67886.23,-2.4862
 Peters Board,Board3,D,-0.075,67837.76,-1.8654
-Peters Board,Board3,D,-0.0499999999999999,67788.84,-1.21584
-Peters Board,Board3,D,-0.0249999999999999,67740.52,-0.54436
+Peters Board,Board3,D,-0.05,67788.84,-1.21584
+Peters Board,Board3,D,-0.025,67740.52,-0.54436
 Peters Board,Board3,D,0,67690.14,0.08353
-Peters Board,Board3,D,0.0249999999999999,67639.96,0.73111
-Peters Board,Board3,D,0.0499999999999999,67591.3,1.38142
+Peters Board,Board3,D,0.025,67639.96,0.73111
+Peters Board,Board3,D,0.05,67591.3,1.38142
 Peters Board,Board3,D,0.075,67542.29,2.05292
 Peters Board,Board3,D,0.1,67493.32,2.66823
 Peters Board,Board3,D,0.125,67443.81,3.26107
@@ -4006,11 +4006,11 @@ Peters Board,Board3,E,-0.15,52147.75,-3.6603
 Peters Board,Board3,E,-0.125,52092.36,-3.0006
 Peters Board,Board3,E,-0.1,52035.09,-2.3556
 Peters Board,Board3,E,-0.075,51979.46,-1.7321
-Peters Board,Board3,E,-0.0499999999999999,51923.8,-1.07967
-Peters Board,Board3,E,-0.0249999999999999,51867.37,-0.42358
+Peters Board,Board3,E,-0.05,51923.8,-1.07967
+Peters Board,Board3,E,-0.025,51867.37,-0.42358
 Peters Board,Board3,E,0,51812.09,0.2194
-Peters Board,Board3,E,0.0249999999999999,51756.86,0.87099
-Peters Board,Board3,E,0.0499999999999999,51702.78,1.49606
+Peters Board,Board3,E,0.025,51756.86,0.87099
+Peters Board,Board3,E,0.05,51702.78,1.49606
 Peters Board,Board3,E,0.075,51647.01,2.15125
 Peters Board,Board3,E,0.1,51593.32,2.79076
 Peters Board,Board3,E,0.125,51537.93,3.27287
@@ -4087,11 +4087,11 @@ Peters Board,Board3,F,-0.15,72682.13,-3.565
 Peters Board,Board3,F,-0.125,72672.54,-2.9295
 Peters Board,Board3,F,-0.1,72661.66,-2.2807
 Peters Board,Board3,F,-0.075,72646.66,-1.6283
-Peters Board,Board3,F,-0.0499999999999999,72632.25,-0.98945
-Peters Board,Board3,F,-0.0249999999999999,72618.89,-0.34118
+Peters Board,Board3,F,-0.05,72632.25,-0.98945
+Peters Board,Board3,F,-0.025,72618.89,-0.34118
 Peters Board,Board3,F,0,72605.58,0.29766
-Peters Board,Board3,F,0.0249999999999999,72591.98,0.92679
-Peters Board,Board3,F,0.0499999999999999,72577.38,1.57527
+Peters Board,Board3,F,0.025,72591.98,0.92679
+Peters Board,Board3,F,0.05,72577.38,1.57527
 Peters Board,Board3,F,0.075,72561.97,2.21453
 Peters Board,Board3,F,0.1,72547.87,2.87152
 Peters Board,Board3,F,0.125,72536.88,3.47492
@@ -4168,11 +4168,11 @@ Peters Board,Board3,G,-0.15,58809.31,-3.8641
 Peters Board,Board3,G,-0.125,58797.75,-3.2114
 Peters Board,Board3,G,-0.1,58784.79,-2.5717
 Peters Board,Board3,G,-0.075,58773.07,-1.9204
-Peters Board,Board3,G,-0.0499999999999999,58760.67,-1.27953
-Peters Board,Board3,G,-0.0249999999999999,58748.5,-0.62964
+Peters Board,Board3,G,-0.05,58760.67,-1.27953
+Peters Board,Board3,G,-0.025,58748.5,-0.62964
 Peters Board,Board3,G,0,58736.7,0.02264
-Peters Board,Board3,G,0.0249999999999999,58726.18,0.68154
-Peters Board,Board3,G,0.0499999999999999,58714.88,1.31821
+Peters Board,Board3,G,0.025,58726.18,0.68154
+Peters Board,Board3,G,0.05,58714.88,1.31821
 Peters Board,Board3,G,0.075,58704.05,1.95714
 Peters Board,Board3,G,0.1,58691.26,2.60146
 Peters Board,Board3,G,0.125,58677.84,3.21405
@@ -4249,11 +4249,11 @@ Peters Board,Board3,H,-0.15,69089.52,-3.8125
 Peters Board,Board3,H,-0.125,69065.08,-3.1725
 Peters Board,Board3,H,-0.1,69040.02,-2.543
 Peters Board,Board3,H,-0.075,69014.87,-1.8714
-Peters Board,Board3,H,-0.0499999999999999,68988.79,-1.23741
-Peters Board,Board3,H,-0.0249999999999999,68964.06,-0.59206
+Peters Board,Board3,H,-0.05,68988.79,-1.23741
+Peters Board,Board3,H,-0.025,68964.06,-0.59206
 Peters Board,Board3,H,0,68940.16,0.0613
-Peters Board,Board3,H,0.0249999999999999,68913.79,0.68896
-Peters Board,Board3,H,0.0499999999999999,68892.55,1.34752
+Peters Board,Board3,H,0.025,68913.79,0.68896
+Peters Board,Board3,H,0.05,68892.55,1.34752
 Peters Board,Board3,H,0.075,68867.27,2.00579
 Peters Board,Board3,H,0.1,68843.91,2.66711
 Peters Board,Board3,H,0.125,68819.96,3.30436
@@ -4330,11 +4330,11 @@ Peters Board,Board3,I,-0.15,70993.01,-3.779
 Peters Board,Board3,I,-0.125,70951.48,-3.1379
 Peters Board,Board3,I,-0.1,70911.03,-2.4887
 Peters Board,Board3,I,-0.075,70874.07,-1.8506
-Peters Board,Board3,I,-0.0499999999999999,70834.69,-1.19637
-Peters Board,Board3,I,-0.0249999999999999,70795.6,-0.55337
+Peters Board,Board3,I,-0.05,70834.69,-1.19637
+Peters Board,Board3,I,-0.025,70795.6,-0.55337
 Peters Board,Board3,I,0,70756.73,0.08446
-Peters Board,Board3,I,0.0249999999999999,70716.81,0.72945
-Peters Board,Board3,I,0.0499999999999999,70677.62,1.38923
+Peters Board,Board3,I,0.025,70716.81,0.72945
+Peters Board,Board3,I,0.05,70677.62,1.38923
 Peters Board,Board3,I,0.075,70638.34,2.01405
 Peters Board,Board3,I,0.1,70600.46,2.67154
 Peters Board,Board3,I,0.125,70561.41,3.01031
@@ -4411,11 +4411,11 @@ Peters Board,Board3,J,-0.15,66722.45,-3.6906
 Peters Board,Board3,J,-0.125,66671.2,-3.0391
 Peters Board,Board3,J,-0.1,66626.57,-2.3933
 Peters Board,Board3,J,-0.075,66578.16,-1.757
-Peters Board,Board3,J,-0.0499999999999999,66528.73,-1.10437
-Peters Board,Board3,J,-0.0249999999999999,66478.98,-0.46781
+Peters Board,Board3,J,-0.05,66528.73,-1.10437
+Peters Board,Board3,J,-0.025,66478.98,-0.46781
 Peters Board,Board3,J,0,66434.79,0.18137
-Peters Board,Board3,J,0.0249999999999999,66385.01,0.83794
-Peters Board,Board3,J,0.0499999999999999,66337.93,1.48448
+Peters Board,Board3,J,0.025,66385.01,0.83794
+Peters Board,Board3,J,0.05,66337.93,1.48448
 Peters Board,Board3,J,0.075,66291.07,2.12472
 Peters Board,Board3,J,0.1,66243.99,2.78105
 Peters Board,Board3,J,0.125,66197.37,3.25327
@@ -4492,11 +4492,11 @@ Peters Board,Board3,K,-0.15,53351.85,-3.4899
 Peters Board,Board3,K,-0.125,53290.6,-2.8572
 Peters Board,Board3,K,-0.1,53227.9,-2.1928
 Peters Board,Board3,K,-0.075,53167.46,-1.556
-Peters Board,Board3,K,-0.0499999999999999,53105.53,-0.91697
-Peters Board,Board3,K,-0.0249999999999999,53044.14,-0.27323
+Peters Board,Board3,K,-0.05,53105.53,-0.91697
+Peters Board,Board3,K,-0.025,53044.14,-0.27323
 Peters Board,Board3,K,0,52983.73,0.38008
-Peters Board,Board3,K,0.0249999999999999,52922.35,1.01913
-Peters Board,Board3,K,0.0499999999999999,52861.5,1.66773
+Peters Board,Board3,K,0.025,52922.35,1.01913
+Peters Board,Board3,K,0.05,52861.5,1.66773
 Peters Board,Board3,K,0.075,52801.15,2.31334
 Peters Board,Board3,K,0.1,52741.36,2.95195
 Peters Board,Board3,K,0.125,52683.27,3.04647
@@ -4573,11 +4573,11 @@ Peters Board,Board3,L,-0.15,67296.73,-3.617
 Peters Board,Board3,L,-0.125,67285.09,-2.9675
 Peters Board,Board3,L,-0.1,67280.77,-2.3341
 Peters Board,Board3,L,-0.075,67263.84,-1.7118
-Peters Board,Board3,L,-0.0499999999999999,67251.23,-1.02354
-Peters Board,Board3,L,-0.0249999999999999,67240.95,-0.39814
+Peters Board,Board3,L,-0.05,67251.23,-1.02354
+Peters Board,Board3,L,-0.025,67240.95,-0.39814
 Peters Board,Board3,L,0,67228.36,0.26604
-Peters Board,Board3,L,0.0249999999999999,67215.41,0.90969
-Peters Board,Board3,L,0.0499999999999999,67204.27,1.55276
+Peters Board,Board3,L,0.025,67215.41,0.90969
+Peters Board,Board3,L,0.05,67204.27,1.55276
 Peters Board,Board3,L,0.075,67193.57,2.18196
 Peters Board,Board3,L,0.1,67178.18,2.82405
 Peters Board,Board3,L,0.125,67165.57,3.47696
@@ -4654,11 +4654,11 @@ Peters Board,Board4,A,-0.15,94898.42,-3.8828
 Peters Board,Board4,A,-0.125,94860.09,-3.2241
 Peters Board,Board4,A,-0.1,94820.98,-2.5933
 Peters Board,Board4,A,-0.075,94783.2,-1.9415
-Peters Board,Board4,A,-0.0499999999999999,94742.7,-1.2911
-Peters Board,Board4,A,-0.0249999999999999,94704.27,-0.65036
+Peters Board,Board4,A,-0.05,94742.7,-1.2911
+Peters Board,Board4,A,-0.025,94704.27,-0.65036
 Peters Board,Board4,A,0,94664.2,0.00038
-Peters Board,Board4,A,0.0249999999999999,94629.03,0.6463
-Peters Board,Board4,A,0.0499999999999999,94593.97,1.29385
+Peters Board,Board4,A,0.025,94629.03,0.6463
+Peters Board,Board4,A,0.05,94593.97,1.29385
 Peters Board,Board4,A,0.075,94548.44,1.96103
 Peters Board,Board4,A,0.1,94513.88,2.58396
 Peters Board,Board4,A,0.125,94478.54,3.21879
@@ -4735,11 +4735,11 @@ Peters Board,Board4,B,-0.15,94136.61,-3.923
 Peters Board,Board4,B,-0.125,94090.34,-3.2947
 Peters Board,Board4,B,-0.1,94043.09,-2.6215
 Peters Board,Board4,B,-0.075,93992.18,-1.9891
-Peters Board,Board4,B,-0.0499999999999999,93943.7,-1.31231
-Peters Board,Board4,B,-0.0249999999999999,93895.55,-0.67474
+Peters Board,Board4,B,-0.05,93943.7,-1.31231
+Peters Board,Board4,B,-0.025,93895.55,-0.67474
 Peters Board,Board4,B,0,93843.13,-0.04294
-Peters Board,Board4,B,0.0249999999999999,93802.98,0.61802
-Peters Board,Board4,B,0.0499999999999999,93756.08,1.25833
+Peters Board,Board4,B,0.025,93802.98,0.61802
+Peters Board,Board4,B,0.05,93756.08,1.25833
 Peters Board,Board4,B,0.075,93709.95,1.91281
 Peters Board,Board4,B,0.1,93660.6,2.55543
 Peters Board,Board4,B,0.125,93615.87,3.18067
@@ -4816,11 +4816,11 @@ Peters Board,Board4,C,-0.15,84044.24,-3.8975
 Peters Board,Board4,C,-0.125,83987.84,-3.265
 Peters Board,Board4,C,-0.1,83931.18,-2.6176
 Peters Board,Board4,C,-0.075,83870.86,-1.9919
-Peters Board,Board4,C,-0.0499999999999999,83816.99,-1.34061
-Peters Board,Board4,C,-0.0249999999999999,83762.7,-0.67553
+Peters Board,Board4,C,-0.05,83816.99,-1.34061
+Peters Board,Board4,C,-0.025,83762.7,-0.67553
 Peters Board,Board4,C,0,83716.96,-0.04432
-Peters Board,Board4,C,0.0249999999999999,83648.97,0.61138
-Peters Board,Board4,C,0.0499999999999999,83594.87,1.2578
+Peters Board,Board4,C,0.025,83648.97,0.61138
+Peters Board,Board4,C,0.05,83594.87,1.2578
 Peters Board,Board4,C,0.075,83539.05,1.9049
 Peters Board,Board4,C,0.1,83483.09,2.5688
 Peters Board,Board4,C,0.125,83426.47,3.20312
@@ -4897,11 +4897,11 @@ Peters Board,Board4,D,-0.15,75090.88,-3.7305
 Peters Board,Board4,D,-0.125,75028.84,-3.0741
 Peters Board,Board4,D,-0.1,74964.36,-2.4208
 Peters Board,Board4,D,-0.075,74903.77,-1.8139
-Peters Board,Board4,D,-0.0499999999999999,74843.3,-1.13313
-Peters Board,Board4,D,-0.0249999999999999,74779.32,-0.50836
+Peters Board,Board4,D,-0.05,74843.3,-1.13313
+Peters Board,Board4,D,-0.025,74779.32,-0.50836
 Peters Board,Board4,D,0,74716.77,0.12844
-Peters Board,Board4,D,0.0249999999999999,74649.7,0.77914
-Peters Board,Board4,D,0.0499999999999999,74588.26,1.41947
+Peters Board,Board4,D,0.025,74649.7,0.77914
+Peters Board,Board4,D,0.05,74588.26,1.41947
 Peters Board,Board4,D,0.075,74526.91,2.06621
 Peters Board,Board4,D,0.1,74467.79,2.72574
 Peters Board,Board4,D,0.125,74406.5,3.36497
@@ -4978,11 +4978,11 @@ Peters Board,Board4,E,-0.15,53127.82,-3.6093
 Peters Board,Board4,E,-0.125,53070.09,-2.9414
 Peters Board,Board4,E,-0.1,53010.48,-2.3105
 Peters Board,Board4,E,-0.075,52951.61,-1.9102
-Peters Board,Board4,E,-0.0499999999999999,52895.35,-1.02526
-Peters Board,Board4,E,-0.0249999999999999,52835.36,-0.3756
+Peters Board,Board4,E,-0.05,52895.35,-1.02526
+Peters Board,Board4,E,-0.025,52835.36,-0.3756
 Peters Board,Board4,E,0,52777.38,0.28158
-Peters Board,Board4,E,0.0249999999999999,52719.46,0.8995
-Peters Board,Board4,E,0.0499999999999999,52663.72,1.55786
+Peters Board,Board4,E,0.025,52719.46,0.8995
+Peters Board,Board4,E,0.05,52663.72,1.55786
 Peters Board,Board4,E,0.075,52605.19,2.20197
 Peters Board,Board4,E,0.1,52547.42,2.85751
 Peters Board,Board4,E,0.125,52490.88,3.50115
@@ -5059,11 +5059,11 @@ Peters Board,Board4,F,-0.15,103252.6,-3.5836
 Peters Board,Board4,F,-0.125,103220.9,-2.9396
 Peters Board,Board4,F,-0.1,103190.6,-2.301
 Peters Board,Board4,F,-0.075,103155.4,-1.7067
-Peters Board,Board4,F,-0.0499999999999999,103130.3,-1.00811
-Peters Board,Board4,F,-0.0249999999999999,103092.9,-0.35914
+Peters Board,Board4,F,-0.05,103130.3,-1.00811
+Peters Board,Board4,F,-0.025,103092.9,-0.35914
 Peters Board,Board4,F,0,103061.8,0.28181
-Peters Board,Board4,F,0.0249999999999999,103031,0.93098
-Peters Board,Board4,F,0.0499999999999999,102997,1.57194
+Peters Board,Board4,F,0.025,103031,0.93098
+Peters Board,Board4,F,0.05,102997,1.57194
 Peters Board,Board4,F,0.075,102969.7,2.21626
 Peters Board,Board4,F,0.1,102937.2,2.8471
 Peters Board,Board4,F,0.125,102910.8,3.4542
@@ -5140,11 +5140,11 @@ Peters Board,Board4,G,-0.15,88394.63,-3.8877
 Peters Board,Board4,G,-0.125,88358.16,-3.2205
 Peters Board,Board4,G,-0.1,88329.05,-2.5789
 Peters Board,Board4,G,-0.075,88293.63,-1.9415
-Peters Board,Board4,G,-0.0499999999999999,88259.52,-1.30571
-Peters Board,Board4,G,-0.0249999999999999,88230.55,-0.6363
+Peters Board,Board4,G,-0.05,88259.52,-1.30571
+Peters Board,Board4,G,-0.025,88230.55,-0.6363
 Peters Board,Board4,G,0,88196.59,0.00525
-Peters Board,Board4,G,0.0249999999999999,88162.02,0.66387
-Peters Board,Board4,G,0.0499999999999999,88131.61,1.29409
+Peters Board,Board4,G,0.025,88162.02,0.66387
+Peters Board,Board4,G,0.05,88131.61,1.29409
 Peters Board,Board4,G,0.075,88099.74,1.95485
 Peters Board,Board4,G,0.1,88065.73,2.59876
 Peters Board,Board4,G,0.125,88033.38,3.1813
@@ -5221,11 +5221,11 @@ Peters Board,Board4,H,-0.15,97007.59,-3.8557
 Peters Board,Board4,H,-0.125,96955.59,-3.2295
 Peters Board,Board4,H,-0.1,96906.14,-2.5574
 Peters Board,Board4,H,-0.075,96854.69,-1.9164
-Peters Board,Board4,H,-0.0499999999999999,96803.34,-1.26997
-Peters Board,Board4,H,-0.0249999999999999,96751.33,-0.64462
+Peters Board,Board4,H,-0.05,96803.34,-1.26997
+Peters Board,Board4,H,-0.025,96751.33,-0.64462
 Peters Board,Board4,H,0,96702.85,0.00809
-Peters Board,Board4,H,0.0249999999999999,96651.03,0.65562
-Peters Board,Board4,H,0.0499999999999999,96595.85,1.31834
+Peters Board,Board4,H,0.025,96651.03,0.65562
+Peters Board,Board4,H,0.05,96595.85,1.31834
 Peters Board,Board4,H,0.075,96545.63,1.96721
 Peters Board,Board4,H,0.1,96500.69,2.59577
 Peters Board,Board4,H,0.125,96450.49,3.16965
@@ -5302,11 +5302,11 @@ Peters Board,Board4,I,-0.15,83283.59,-3.8675
 Peters Board,Board4,I,-0.125,83226.38,-3.2199
 Peters Board,Board4,I,-0.1,83169.32,-2.5732
 Peters Board,Board4,I,-0.075,83111.85,-1.9159
-Peters Board,Board4,I,-0.0499999999999999,83054.05,-1.28066
-Peters Board,Board4,I,-0.0249999999999999,82995.03,-0.63153
+Peters Board,Board4,I,-0.05,83054.05,-1.28066
+Peters Board,Board4,I,-0.025,82995.03,-0.63153
 Peters Board,Board4,I,0,82939.89,2e-05
-Peters Board,Board4,I,0.0249999999999999,82883.9,0.65582
-Peters Board,Board4,I,0.0499999999999999,82826.73,1.3166
+Peters Board,Board4,I,0.025,82883.9,0.65582
+Peters Board,Board4,I,0.05,82826.73,1.3166
 Peters Board,Board4,I,0.075,82771.67,1.95088
 Peters Board,Board4,I,0.1,82711.98,2.59837
 Peters Board,Board4,I,0.125,82655.85,3.24185
@@ -5383,11 +5383,11 @@ Peters Board,Board4,J,-0.15,70871.12,-3.6511
 Peters Board,Board4,J,-0.125,70815.66,-2.996
 Peters Board,Board4,J,-0.1,70759.28,-2.3501
 Peters Board,Board4,J,-0.075,70704.87,-1.712
-Peters Board,Board4,J,-0.0499999999999999,70649.38,-1.06399
-Peters Board,Board4,J,-0.0249999999999999,70591.74,-0.42717
+Peters Board,Board4,J,-0.05,70649.38,-1.06399
+Peters Board,Board4,J,-0.025,70591.74,-0.42717
 Peters Board,Board4,J,0,70536.7,0.21642
-Peters Board,Board4,J,0.0249999999999999,70481.56,0.86051
-Peters Board,Board4,J,0.0499999999999999,70425.84,1.52058
+Peters Board,Board4,J,0.025,70481.56,0.86051
+Peters Board,Board4,J,0.05,70425.84,1.52058
 Peters Board,Board4,J,0.075,70370.77,2.13942
 Peters Board,Board4,J,0.1,70316.77,2.79005
 Peters Board,Board4,J,0.125,70262.3,3.18437
@@ -5464,11 +5464,11 @@ Peters Board,Board4,K,-0.15,52550.36,-3.6605
 Peters Board,Board4,K,-0.125,52493.92,-3.0065
 Peters Board,Board4,K,-0.1,52435.93,-2.3643
 Peters Board,Board4,K,-0.075,52380.24,-1.7764
-Peters Board,Board4,K,-0.0499999999999999,52322.59,-1.07268
-Peters Board,Board4,K,-0.0249999999999999,52264.98,-0.43906
+Peters Board,Board4,K,-0.05,52322.59,-1.07268
+Peters Board,Board4,K,-0.025,52264.98,-0.43906
 Peters Board,Board4,K,0,52209.45,0.21277
-Peters Board,Board4,K,0.0249999999999999,52152.5,0.86319
-Peters Board,Board4,K,0.0499999999999999,52096.23,1.51158
+Peters Board,Board4,K,0.025,52152.5,0.86319
+Peters Board,Board4,K,0.05,52096.23,1.51158
 Peters Board,Board4,K,0.075,52039.76,2.15404
 Peters Board,Board4,K,0.1,51985.59,2.79845
 Peters Board,Board4,K,0.125,51929.69,3.15059
@@ -5545,11 +5545,11 @@ Peters Board,Board4,L,-0.15,104395.9,-3.6049
 Peters Board,Board4,L,-0.125,104361.7,-2.9532
 Peters Board,Board4,L,-0.1,104328.6,-2.3051
 Peters Board,Board4,L,-0.075,104294.5,-1.7955
-Peters Board,Board4,L,-0.0499999999999999,104258.8,-1.01518
-Peters Board,Board4,L,-0.0249999999999999,104224.3,-0.36879
+Peters Board,Board4,L,-0.05,104258.8,-1.01518
+Peters Board,Board4,L,-0.025,104224.3,-0.36879
 Peters Board,Board4,L,0,104195.4,0.27261
-Peters Board,Board4,L,0.0249999999999999,104163.3,0.91968
-Peters Board,Board4,L,0.0499999999999999,104126.2,1.55249
+Peters Board,Board4,L,0.025,104163.3,0.91968
+Peters Board,Board4,L,0.05,104126.2,1.55249
 Peters Board,Board4,L,0.075,104095.8,2.22044
 Peters Board,Board4,L,0.1,104061.6,2.84932
 Peters Board,Board4,L,0.125,104029.5,3.46479
