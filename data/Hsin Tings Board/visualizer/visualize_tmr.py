@@ -7,7 +7,7 @@ from collections import defaultdict
 
 def main():
     # Set the data directory to the current directory
-    data_dir = "."
+    data_dir = "../"
 
     # 1. Find all Excel files recursively in Board folders
     file_pattern = os.path.join(data_dir, "Board*", "Board*_*.xlsx")
