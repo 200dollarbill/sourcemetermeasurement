@@ -174,19 +174,19 @@ methods (Access = private)
         s_I = app.StartCurrentAEditField.Value;
         e_I = app.SupplyAddrEditField_4.Value;
 
-        % current check max +/- 1.05A
-        if s_I > 1.05
-            s_I = 1.05;
+        % current check max +/- 1.8
+        if s_I > 2
+            s_I = 2;
             app.StartCurrentAEditField.Value = s_I;
-        elseif s_I < -1.05
-            s_I = -1.05;
+        elseif s_I < -2
+            s_I = -2;
             app.StartCurrentAEditField.Value = s_I;
         end
-        if e_I > 1.05
-            e_I = 1.05;
+        if e_I > 2
+            e_I = 2;
             app.SupplyAddrEditField_4.Value = e_I;
-        elseif e_I < -1.05
-            e_I = -1.05;
+        elseif e_I < -2
+            e_I = -2;
             app.SupplyAddrEditField_4.Value = e_I;
         end
         step_I = abs(app.StepsizeAEditField.Value);
