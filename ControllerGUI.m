@@ -13,6 +13,7 @@ properties (Access = public)
     SteptimesEditField            matlab.ui.control.NumericEditField
     SteptimesEditFieldLabel       matlab.ui.control.Label
     SavetoExcelButton             matlab.ui.control.Button
+    HysteresisCheckBox            matlab.ui.control.CheckBox
     StepsizeAEditField            matlab.ui.control.NumericEditField
     StepsizeAEditFieldLabel       matlab.ui.control.Label
     SupplyAddrEditField_4         matlab.ui.control.NumericEditField
@@ -144,11 +145,30 @@ methods (Access = private)
 
         % table creation
         if length(app.ResData) == length(app.CurrData) && length(app.FieldData) == length(app.CurrData)
-            T = table(app.CurrData(:), app.ResData(:), app.FieldData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_G'});
+            R = app.ResData(:);
+            H = app.FieldData(:);
+            R_min = min(R);
+            MR_Ratio_Percent = (R - R_min) ./ R_min * 100;
+            
+            if length(R) > 1 && length(H) > 1
+                % Calculate total sensitivity for the entire measurement
+                % (Highest Resistance - Lowest Resistance) / (Highest Magnetic Field - Lowest Magnetic Field)
+                total_sensitivity = (max(R) - min(R)) / (max(H) - min(H));
+                Sensitivity_Ohms_per_G = repmat(total_sensitivity, size(R));
+                Sensitivity_Ohms_per_G(~isfinite(Sensitivity_Ohms_per_G)) = 0; % Handle div by 0
+            else
+                Sensitivity_Ohms_per_G = zeros(size(R));
+            end
+            
+            T = table(app.CurrData(:), R, H, MR_Ratio_Percent, Sensitivity_Ohms_per_G, ...
+                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'Magnetic_Field_G', 'MR_Ratio_Percent', 'Sensitivity_Ohms_per_G'});
         elseif length(app.ResData) == length(app.CurrData)
-            T = table(app.CurrData(:), app.ResData(:), ...
-                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms'});
+            R = app.ResData(:);
+            R_min = min(R);
+            MR_Ratio_Percent = (R - R_min) ./ R_min * 100;
+            
+            T = table(app.CurrData(:), R, MR_Ratio_Percent, ...
+                'VariableNames', {'Kepco_Current_A', 'Resistance_Ohms', 'MR_Ratio_Percent'});
         elseif length(app.FieldData) == length(app.CurrData)
             T = table(app.CurrData(:), app.FieldData(:), ...
                 'VariableNames', {'Kepco_Current_A', 'Magnetic_Field_G'});
@@ -199,6 +219,13 @@ methods (Access = private)
         else
             I_steps = s_I : -step_I : e_I;
             if I_steps(end) ~= e_I; I_steps(end+1) = e_I; end
+        end
+
+        % hysteresis loop
+        if app.HysteresisCheckBox.Value
+            if length(I_steps) > 1
+                I_steps = [I_steps, I_steps(end-1:-1:1)];
+            end
         end
 
         % plots
@@ -513,8 +540,13 @@ methods (Access = private)
         % Create SavetoExcelButton
         app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
         app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
-        app.SavetoExcelButton.Position = [17 12 220 33];
+        app.SavetoExcelButton.Position = [137 12 100 33];
         app.SavetoExcelButton.Text = 'Save to Excel';
+
+        % Create HysteresisCheckBox
+        app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
+        app.HysteresisCheckBox.Text = 'Hysteresis';
+        app.HysteresisCheckBox.Position = [17 17 100 22];
 
         % Create SteptimesEditFieldLabel
         app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
