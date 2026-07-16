@@ -311,6 +311,7 @@ methods (Access = private)
             % gaussmeeter reading
             if ~isempty(app.Gaussmeter)
                 fprintf(app.Gaussmeter, 'RDGFIELD?');
+                pause(pause_T);
                 field_str = fscanf(app.Gaussmeter);
                 field_val = str2double(field_str);
                 app.FieldData(end+1) = field_val;
