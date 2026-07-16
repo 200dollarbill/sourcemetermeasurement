@@ -253,7 +253,7 @@ classdef newerui < matlab.apps.AppBase
             end
         end
     end
-    end
+    
 
     % Main start button
     function StartButtonPushed(app, event)
