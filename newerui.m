@@ -440,6 +440,10 @@ classdef newerui < matlab.apps.AppBase
         if ~app.RealTimePlotCheckBox.Value
             app.PlotButton.Enable = 'on';
         end
+        
+        % Play a warning sound and show an alert dialog
+        beep; pause(0.3); beep;
+        uialert(app.UIFigure, 'The measurement sequence has finished.', 'Measurement Finished', 'Icon', 'warning');
     end
     end
 
