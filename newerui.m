@@ -188,11 +188,9 @@ classdef newerui < matlab.apps.AppBase
 
         try
             writetable(T, fullPath);
-<<<<<<< HEAD
             uialert(app.UIFigure, sprintf('Data successfully saved to:%s', fullPath), 'Save Complete', 'Icon', 'success');
-=======
+
             uialert(app.UIFigure, sprintf('Data successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
->>>>>>> bd5abce3f4ead16c21a59cec9d24e8eedcea0329
         catch ME
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
