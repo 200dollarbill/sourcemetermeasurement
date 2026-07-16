@@ -37,6 +37,8 @@ properties (Access = public)
     UIAxes                        matlab.ui.control.UIAxes
     Tab2                          matlab.ui.container.Tab
     UIAxes2                       matlab.ui.control.UIAxes
+    Tab3                          matlab.ui.container.Tab
+    UIAxes3                       matlab.ui.control.UIAxes
 end
 
 % Non-UI properties for hardware handles and sweep data
@@ -50,6 +52,7 @@ properties (Access = private)
     FieldData = []
     hLine1
     hLine2
+    hLine3
 end
 
 % Callbacks that handle component events
@@ -248,14 +251,21 @@ methods (Access = private)
             ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
         end
 
+        title(app.UIAxes3, 'Magnetic Field vs Current');
+        xlabel(app.UIAxes3, 'Input Current (A)');
+        ylabel(app.UIAxes3, 'Measured Magnetic Field Strength (G)');
+
         cla(app.UIAxes);
         cla(app.UIAxes2);
+        cla(app.UIAxes3);
         app.hLine1 = plot(app.UIAxes, nan, nan, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
         xlim(app.UIAxes, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
         app.hLine2 = plot(app.UIAxes2, nan, nan, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
         if strcmp(mode, 'Supply + Gaussmeter')
             xlim(app.UIAxes2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
         end
+        app.hLine3 = plot(app.UIAxes3, nan, nan, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
+        xlim(app.UIAxes3, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
 
         app.CurrData = [];
         app.ResData = [];
@@ -311,6 +321,10 @@ methods (Access = private)
             elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
                 set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
                 set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
+            end
+
+            if length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+                set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
             end
 
             drawnow limitrate;
@@ -429,6 +443,18 @@ methods (Access = private)
         ylabel(app.UIAxes2, 'Measured Resistance (Ohms)')
         zlabel(app.UIAxes2, 'Z')
         app.UIAxes2.Position = [15 12 781 637];
+
+        % Create Tab3
+        app.Tab3 = uitab(app.TabGroup);
+        app.Tab3.Title = 'Tab3';
+
+        % Create UIAxes3
+        app.UIAxes3 = uiaxes(app.Tab3);
+        title(app.UIAxes3, 'Magnetic Field vs Current')
+        xlabel(app.UIAxes3, 'Input Current (A)')
+        ylabel(app.UIAxes3, 'Measured Magnetic Field Strength (G)')
+        zlabel(app.UIAxes3, 'Z')
+        app.UIAxes3.Position = [15 12 781 637];
 
         % Create ConnectionPanel
         app.ConnectionPanel = uipanel(app.UIFigure);
