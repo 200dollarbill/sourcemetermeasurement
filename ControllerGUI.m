@@ -7,9 +7,15 @@ properties (Access = public)
     ResistanceOhmsLabel           matlab.ui.control.Label
     StopButton                    matlab.ui.control.Button
     StartButton                   matlab.ui.control.Button
+    RealTimePlotCheckBox          matlab.ui.control.CheckBox
+    PlotResponseButton            matlab.ui.control.Button
     SettingsPanel                 matlab.ui.container.Panel
     FilenameEditField_2           matlab.ui.control.EditField
     FilenameEditField_2Label      matlab.ui.control.Label
+    MaxCurrentEditField           matlab.ui.control.EditField
+    MaxCurrentEditFieldLabel      matlab.ui.control.Label
+    MinCurrentEditField           matlab.ui.control.EditField
+    MinCurrentEditFieldLabel      matlab.ui.control.Label
     SteptimesEditField            matlab.ui.control.NumericEditField
     SteptimesEditFieldLabel       matlab.ui.control.Label
     SavetoExcelButton             matlab.ui.control.Button
@@ -193,23 +199,47 @@ methods (Access = private)
         app.StartButton.Enable = 'off';
         app.StopButton.Enable = 'on';
         app.DisconnectButton.Enable = 'off';
+        app.PlotResponseButton.Enable = 'off';
         app.StopFlag = false;
         s_I = app.StartCurrentAEditField.Value;
         e_I = app.SupplyAddrEditField_4.Value;
 
-        % current check max +/- 1.8
-        if s_I > 2
-            s_I = 2;
+        % Read max and min current limits
+        max_limit_str = strtrim(app.MaxCurrentEditField.Value);
+        min_limit_str = strtrim(app.MinCurrentEditField.Value);
+
+        if isempty(max_limit_str)
+            max_I = 2;
+        else
+            max_I = str2double(max_limit_str);
+            if isnan(max_I); max_I = 2; end
+        end
+
+        if isempty(min_limit_str)
+            min_I = -2;
+        else
+            min_I = str2double(min_limit_str);
+            if isnan(min_I); min_I = -2; end
+        end
+
+        % Ensure max_I > min_I
+        if max_I < min_I
+            temp = max_I; max_I = min_I; min_I = temp;
+        end
+
+        % current check max limits
+        if s_I > max_I
+            s_I = max_I;
             app.StartCurrentAEditField.Value = s_I;
-        elseif s_I < -2
-            s_I = -2;
+        elseif s_I < min_I
+            s_I = min_I;
             app.StartCurrentAEditField.Value = s_I;
         end
-        if e_I > 2
-            e_I = 2;
+        if e_I > max_I
+            e_I = max_I;
             app.SupplyAddrEditField_4.Value = e_I;
-        elseif e_I < -2
-            e_I = -2;
+        elseif e_I < min_I
+            e_I = min_I;
             app.SupplyAddrEditField_4.Value = e_I;
         end
         step_I = abs(app.StepsizeAEditField.Value);
@@ -305,7 +335,9 @@ methods (Access = private)
                 app.ResData(end+1) = res_val;
 
                 app.ResistanceOhmsLabel.Text = sprintf('Resistance : %.4f Ohms', res_val);
-                set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
+                if app.RealTimePlotCheckBox.Value
+                    set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
+                end
             end
 
             % gaussmeeter reading
@@ -317,15 +349,17 @@ methods (Access = private)
                 app.FieldData(end+1) = field_val;
             end
 
-            if ~isempty(app.ResData) && length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
-                set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
-            elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
-                set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
-                set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
-            end
+            if app.RealTimePlotCheckBox.Value
+                if ~isempty(app.ResData) && length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
+                    set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
+                elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+                    set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
+                    set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
+                end
 
-            if length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
-                set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
+                if length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+                    set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
+                end
             end
 
             drawnow limitrate;
@@ -342,7 +376,29 @@ methods (Access = private)
 
     if ~isempty(app.CurrData)
         app.SavetoExcelButton.Enable = 'on';
+        if ~app.RealTimePlotCheckBox.Value
+            app.PlotResponseButton.Enable = 'on';
+        end
     end
+    end
+
+    % Button pushed function: PlotResponseButton
+    function PlotResponseButtonPushed(app, event)
+        if ~isempty(app.ResData) && length(app.CurrData) == length(app.ResData)
+            set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
+        end
+        
+        if ~isempty(app.ResData) && length(app.ResData) == length(app.FieldData) && ~isempty(app.FieldData)
+            set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
+        elseif isempty(app.ResData) && length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+            set(app.hLine1, 'XData', app.CurrData, 'YData', app.FieldData);
+            set(app.hLine2, 'XData', app.CurrData, 'YData', app.FieldData);
+        end
+
+        if length(app.CurrData) == length(app.FieldData) && ~isempty(app.FieldData)
+            set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
+        end
+        drawnow;
     end
 
     % Button pushed function: StopButton
@@ -534,46 +590,57 @@ methods (Access = private)
         % Create StartCurrentAEditFieldLabel
         app.StartCurrentAEditFieldLabel = uilabel(app.SettingsPanel);
         app.StartCurrentAEditFieldLabel.HorizontalAlignment = 'right';
-        app.StartCurrentAEditFieldLabel.Position = [16 198 93 22];
+        app.StartCurrentAEditFieldLabel.Position = [16 220 93 22];
         app.StartCurrentAEditFieldLabel.Text = 'Start Current (A)';
 
         % Create StartCurrentAEditField
         app.StartCurrentAEditField = uieditfield(app.SettingsPanel, 'numeric');
-        app.StartCurrentAEditField.Position = [137 198 100 22];
+        app.StartCurrentAEditField.Position = [137 220 100 22];
         app.StartCurrentAEditField.Value = -1;
 
         % Create SupplyAddrEditFieldLabel_3
         app.SupplyAddrEditFieldLabel_3 = uilabel(app.SettingsPanel);
         app.SupplyAddrEditFieldLabel_3.HorizontalAlignment = 'right';
-        app.SupplyAddrEditFieldLabel_3.Position = [17 166 89 22];
+        app.SupplyAddrEditFieldLabel_3.Position = [17 195 89 22];
         app.SupplyAddrEditFieldLabel_3.Text = 'End Current (A)';
 
         % Create SupplyAddrEditField_4
         app.SupplyAddrEditField_4 = uieditfield(app.SettingsPanel, 'numeric');
-        app.SupplyAddrEditField_4.Position = [137 166 100 22];
+        app.SupplyAddrEditField_4.Position = [137 195 100 22];
         app.SupplyAddrEditField_4.Value = 1;
+
+        % Create MaxCurrentEditFieldLabel
+        app.MaxCurrentEditFieldLabel = uilabel(app.SettingsPanel);
+        app.MaxCurrentEditFieldLabel.HorizontalAlignment = 'right';
+        app.MaxCurrentEditFieldLabel.Position = [16 170 93 22];
+        app.MaxCurrentEditFieldLabel.Text = 'Max Current (A)';
+
+        % Create MaxCurrentEditField
+        app.MaxCurrentEditField = uieditfield(app.SettingsPanel, 'text');
+        app.MaxCurrentEditField.Position = [137 170 100 22];
+        app.MaxCurrentEditField.Value = '';
+
+        % Create MinCurrentEditFieldLabel
+        app.MinCurrentEditFieldLabel = uilabel(app.SettingsPanel);
+        app.MinCurrentEditFieldLabel.HorizontalAlignment = 'right';
+        app.MinCurrentEditFieldLabel.Position = [16 145 93 22];
+        app.MinCurrentEditFieldLabel.Text = 'Min Current (A)';
+
+        % Create MinCurrentEditField
+        app.MinCurrentEditField = uieditfield(app.SettingsPanel, 'text');
+        app.MinCurrentEditField.Position = [137 145 100 22];
+        app.MinCurrentEditField.Value = '';
 
         % Create StepsizeAEditFieldLabel
         app.StepsizeAEditFieldLabel = uilabel(app.SettingsPanel);
         app.StepsizeAEditFieldLabel.HorizontalAlignment = 'right';
-        app.StepsizeAEditFieldLabel.Position = [17 132 74 22];
+        app.StepsizeAEditFieldLabel.Position = [17 120 74 22];
         app.StepsizeAEditFieldLabel.Text = 'Step size (A)';
 
         % Create StepsizeAEditField
         app.StepsizeAEditField = uieditfield(app.SettingsPanel, 'numeric');
-        app.StepsizeAEditField.Position = [137 132 100 22];
+        app.StepsizeAEditField.Position = [137 120 100 22];
         app.StepsizeAEditField.Value = 0.1;
-
-        % Create SavetoExcelButton
-        app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
-        app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
-        app.SavetoExcelButton.Position = [137 12 100 33];
-        app.SavetoExcelButton.Text = 'Save to Excel';
-
-        % Create HysteresisCheckBox
-        app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
-        app.HysteresisCheckBox.Text = 'Hysteresis';
-        app.HysteresisCheckBox.Position = [17 17 100 22];
 
         % Create SteptimesEditFieldLabel
         app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
@@ -589,19 +656,36 @@ methods (Access = private)
         % Create FilenameEditField_2Label
         app.FilenameEditField_2Label = uilabel(app.SettingsPanel);
         app.FilenameEditField_2Label.HorizontalAlignment = 'right';
-        app.FilenameEditField_2Label.Position = [17 58 54 22];
+        app.FilenameEditField_2Label.Position = [17 70 54 22];
         app.FilenameEditField_2Label.Text = 'Filename';
 
         % Create FilenameEditField_2
         app.FilenameEditField_2 = uieditfield(app.SettingsPanel, 'text');
         app.FilenameEditField_2.HorizontalAlignment = 'right';
-        app.FilenameEditField_2.Position = [137 58 100 22];
+        app.FilenameEditField_2.Position = [137 70 100 22];
         app.FilenameEditField_2.Value = 'Data';
+
+        % Create SavetoExcelButton
+        app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
+        app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
+        app.SavetoExcelButton.Position = [137 12 100 33];
+        app.SavetoExcelButton.Text = 'Save to Excel';
+
+        % Create HysteresisCheckBox
+        app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
+        app.HysteresisCheckBox.Text = 'Hysteresis';
+        app.HysteresisCheckBox.Position = [17 17 100 22];
 
         % Create ControlPanel
         app.ControlPanel = uipanel(app.UIFigure);
         app.ControlPanel.Title = 'Control';
         app.ControlPanel.Position = [25 40 265 135];
+
+        % Create RealTimePlotCheckBox
+        app.RealTimePlotCheckBox = uicheckbox(app.ControlPanel);
+        app.RealTimePlotCheckBox.Text = 'Real-time Plot';
+        app.RealTimePlotCheckBox.Position = [17 105 150 22];
+        app.RealTimePlotCheckBox.Value = true;
 
         % Create StartButton
         app.StartButton = uibutton(app.ControlPanel, 'push');
@@ -619,6 +703,13 @@ methods (Access = private)
         app.ResistanceOhmsLabel = uilabel(app.ControlPanel);
         app.ResistanceOhmsLabel.Position = [17 23 118 22];
         app.ResistanceOhmsLabel.Text = 'Resistance : -- Ohms';
+
+        % Create PlotResponseButton
+        app.PlotResponseButton = uibutton(app.ControlPanel, 'push');
+        app.PlotResponseButton.ButtonPushedFcn = createCallbackFcn(app, @PlotResponseButtonPushed, true);
+        app.PlotResponseButton.Position = [135 17 100 33];
+        app.PlotResponseButton.Text = 'Plot Response';
+        app.PlotResponseButton.Enable = 'off';
 
         % Show the figure after all components are created
         app.UIFigure.Visible = 'on';
