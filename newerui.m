@@ -204,21 +204,21 @@ classdef newerui < matlab.apps.AppBase
         if isempty(app.CurrData)
             return;
         end
-        defaultName = sprintf('%s.fig', app.FilenameEditField_2.Value);
-        [file, path] = uiputfile('*.fig', 'Save Figures As', defaultName);
+        defaultName = sprintf('%s.png', app.FilenameEditField_2.Value);
+        [file, path] = uiputfile({'*.png', 'PNG Image (*.png)'; '*.fig', 'MATLAB Figure (*.fig)'}, 'Save Figures As', defaultName);
         if isequal(file, 0) || isequal(path, 0)
             return;
         end
         fullPath = fullfile(path, file);
         
         try
-            % Create a new figure to hold the subplots
+            % Create a new figure to hold the subplots (invisible while building)
             f = figure('Name', 'Exported Plots', 'NumberTitle', 'off', 'Visible', 'off');
             f.Position = [100 100 1200 400];
             
-            % Copy axes
+            % Replot axes 1
             ax1 = subplot(1,3,1, 'Parent', f);
-            copyobj(allchild(app.UIAxes), ax1);
+            plot(ax1, app.hLine1.XData, app.hLine1.YData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
             title(ax1, app.UIAxes.Title.String);
             xlabel(ax1, app.UIAxes.XLabel.String);
             ylabel(ax1, app.UIAxes.YLabel.String);
@@ -226,8 +226,9 @@ classdef newerui < matlab.apps.AppBase
                 xlim(ax1, app.UIAxes.XLim);
             end
             
+            % Replot axes 2
             ax2 = subplot(1,3,2, 'Parent', f);
-            copyobj(allchild(app.UIAxes2), ax2);
+            plot(ax2, app.hLine2.XData, app.hLine2.YData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
             title(ax2, app.UIAxes2.Title.String);
             xlabel(ax2, app.UIAxes2.XLabel.String);
             ylabel(ax2, app.UIAxes2.YLabel.String);
@@ -235,8 +236,9 @@ classdef newerui < matlab.apps.AppBase
                 xlim(ax2, app.UIAxes2.XLim);
             end
             
+            % Replot axes 3
             ax3 = subplot(1,3,3, 'Parent', f);
-            copyobj(allchild(app.UIAxes_2), ax3);
+            plot(ax3, app.hLine3.XData, app.hLine3.YData, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
             title(ax3, app.UIAxes_2.Title.String);
             xlabel(ax3, app.UIAxes_2.XLabel.String);
             ylabel(ax3, app.UIAxes_2.YLabel.String);
@@ -244,7 +246,16 @@ classdef newerui < matlab.apps.AppBase
                 xlim(ax3, app.UIAxes_2.XLim);
             end
             
-            savefig(f, fullPath);
+            % Set visible immediately before saving so .fig file loads visibly
+            f.Visible = 'on';
+            drawnow;
+            
+            [~, ~, ext] = fileparts(fullPath);
+            if strcmpi(ext, '.fig')
+                savefig(f, fullPath);
+            else
+                exportgraphics(f, fullPath, 'Resolution', 300);
+            end
             close(f);
             
             uialert(app.UIFigure, sprintf('Figures successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
