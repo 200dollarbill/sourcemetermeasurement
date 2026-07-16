@@ -1,4 +1,4 @@
-classdef ControllerGUIDesign < matlab.apps.AppBase
+classdef newerui < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
@@ -187,8 +187,7 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
 
         try
             writetable(T, fullPath);
-            uialert(app.UIFigure, sprintf('Data successfully saved to:
-%s', fullPath), 'Save Complete', 'Icon', 'success');
+            uialert(app.UIFigure, sprintf('Data successfully saved to:%s', fullPath), 'Save Complete', 'Icon', 'success');
         catch ME
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
@@ -307,6 +306,7 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
             fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
             pause(pause_T);
             
+
             % Extra settle time for the first measurement
             if i == 1
                 pause(0.5);
@@ -329,8 +329,8 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
 
             % gaussmeeter reading
             if ~isempty(app.Gaussmeter)
+                pause(0.1);
                 fprintf(app.Gaussmeter, 'RDGFIELD?');
-                pause(pause_T);
                 field_str = fscanf(app.Gaussmeter);
                 field_val = str2double(field_str);
                 app.FieldData(end+1) = field_val;
@@ -348,7 +348,7 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
                     set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
                 end
             end
-
+            pause(0.05);
             drawnow limitrate;
         end
 
@@ -534,10 +534,12 @@ end
             app.GaussmeterAddrEditFieldLabel.HorizontalAlignment = 'right';
             app.GaussmeterAddrEditFieldLabel.Position = [13 135 102 22];
             app.GaussmeterAddrEditFieldLabel.Text = 'Gaussmeter  Addr';
+            
 
             % Create GaussmeterAddrEditField
             app.GaussmeterAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
             app.GaussmeterAddrEditField.Position = [135 135 100 22];
+            app.GaussmeterAddrEditField.Value = 18;
 
             % Create ConnectButton
             app.ConnectButton = uibutton(app.ConnectionPanel, 'push');
@@ -646,7 +648,7 @@ end
             % Create StartCurrentAEditField_2
             app.StartCurrentAEditField_2 = uieditfield(app.SettingsPanel, 'numeric');
             app.StartCurrentAEditField_2.Position = [140 267 100 22];
-            app.StartCurrentAEditField_2.Value = -2;
+            app.StartCurrentAEditField_2.Value = 2;
 
             % Create StartCurrentAEditFieldLabel_3
             app.StartCurrentAEditFieldLabel_3 = uilabel(app.SettingsPanel);
@@ -657,7 +659,7 @@ end
             % Create StartCurrentAEditField_3
             app.StartCurrentAEditField_3 = uieditfield(app.SettingsPanel, 'numeric');
             app.StartCurrentAEditField_3.Position = [140 235 100 22];
-            app.StartCurrentAEditField_3.Value = -1;
+            app.StartCurrentAEditField_3.Value = -2;
 
             % Create HysteresisCheckBox
             app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
@@ -707,7 +709,7 @@ end
     methods (Access = public)
 
         % Construct app
-        function app = ControllerGUIDesign
+        function app = newerui
 
             % Create UIFigure and components
             createComponents(app)

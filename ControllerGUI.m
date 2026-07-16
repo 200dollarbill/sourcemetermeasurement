@@ -1,68 +1,70 @@
 classdef ControllerGUI < matlab.apps.AppBase
 
-% Properties that correspond to app components
-properties (Access = public)
-    UIFigure                      matlab.ui.Figure
-    ControlPanel                  matlab.ui.container.Panel
-    ResistanceOhmsLabel           matlab.ui.control.Label
-    StopButton                    matlab.ui.control.Button
-    StartButton                   matlab.ui.control.Button
-    RealTimePlotCheckBox          matlab.ui.control.CheckBox
-    PlotResponseButton            matlab.ui.control.Button
-    SettingsPanel                 matlab.ui.container.Panel
-    FilenameEditField_2           matlab.ui.control.EditField
-    FilenameEditField_2Label      matlab.ui.control.Label
-    MaxCurrentEditField           matlab.ui.control.EditField
-    MaxCurrentEditFieldLabel      matlab.ui.control.Label
-    MinCurrentEditField           matlab.ui.control.EditField
-    MinCurrentEditFieldLabel      matlab.ui.control.Label
-    SteptimesEditField            matlab.ui.control.NumericEditField
-    SteptimesEditFieldLabel       matlab.ui.control.Label
-    SavetoExcelButton             matlab.ui.control.Button
-    HysteresisCheckBox            matlab.ui.control.CheckBox
-    StepsizeAEditField            matlab.ui.control.NumericEditField
-    StepsizeAEditFieldLabel       matlab.ui.control.Label
-    SupplyAddrEditField_4         matlab.ui.control.NumericEditField
-    SupplyAddrEditFieldLabel_3    matlab.ui.control.Label
-    StartCurrentAEditField        matlab.ui.control.NumericEditField
-    StartCurrentAEditFieldLabel   matlab.ui.control.Label
-    ConnectionPanel               matlab.ui.container.Panel
-    DropDown                      matlab.ui.control.DropDown
-    Label                         matlab.ui.control.Label
-    StatusLabel                   matlab.ui.control.Label
-    DisconnectButton              matlab.ui.control.Button
-    ConnectButton                 matlab.ui.control.Button
-    GaussmeterAddrEditField       matlab.ui.control.NumericEditField
-    GaussmeterAddrEditFieldLabel  matlab.ui.control.Label
-    SupplyAddrEditField_2         matlab.ui.control.NumericEditField
-    SupplyAddrEditFieldLabel_2    matlab.ui.control.Label
-    SupplyAddrEditField           matlab.ui.control.NumericEditField
-    SupplyAddrEditFieldLabel      matlab.ui.control.Label
-    TabGroup                      matlab.ui.container.TabGroup
-    Tab1                          matlab.ui.container.Tab
-    UIAxes                        matlab.ui.control.UIAxes
-    Tab2                          matlab.ui.container.Tab
-    UIAxes2                       matlab.ui.control.UIAxes
-    Tab3                          matlab.ui.container.Tab
-    UIAxes3                       matlab.ui.control.UIAxes
-end
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                       matlab.ui.Figure
+        ControlPanel                   matlab.ui.container.Panel
+        ResistanceOhmsLabel            matlab.ui.control.Label
+        StopButton                     matlab.ui.control.Button
+        StartButton                    matlab.ui.control.Button
+        SettingsPanel                  matlab.ui.container.Panel
+        StartCurrentAEditField_3       matlab.ui.control.NumericEditField
+        StartCurrentAEditFieldLabel_3  matlab.ui.control.Label
+        StartCurrentAEditField_2       matlab.ui.control.NumericEditField
+        StartCurrentAEditFieldLabel_2  matlab.ui.control.Label
+        FilenameEditField_2            matlab.ui.control.EditField
+        FilenameEditField_2Label       matlab.ui.control.Label
+        SteptimesEditField             matlab.ui.control.NumericEditField
+        SteptimesEditFieldLabel        matlab.ui.control.Label
+        SavetoExcelButton              matlab.ui.control.Button
+        StepsizeAEditField             matlab.ui.control.NumericEditField
+        StepsizeAEditFieldLabel        matlab.ui.control.Label
+        SupplyAddrEditField_4          matlab.ui.control.NumericEditField
+        SupplyAddrEditFieldLabel_3     matlab.ui.control.Label
+        StartCurrentAEditField         matlab.ui.control.NumericEditField
+        StartCurrentAEditFieldLabel    matlab.ui.control.Label
+        ConnectionPanel                matlab.ui.container.Panel
+        DropDown                       matlab.ui.control.DropDown
+        Label                          matlab.ui.control.Label
+        StatusLabel                    matlab.ui.control.Label
+        DisconnectButton               matlab.ui.control.Button
+        ConnectButton                  matlab.ui.control.Button
+        GaussmeterAddrEditField        matlab.ui.control.NumericEditField
+        GaussmeterAddrEditFieldLabel   matlab.ui.control.Label
+        SupplyAddrEditField_2          matlab.ui.control.NumericEditField
+        SupplyAddrEditFieldLabel_2     matlab.ui.control.Label
+        SupplyAddrEditField            matlab.ui.control.NumericEditField
+        SupplyAddrEditFieldLabel       matlab.ui.control.Label
+        TabGroup                       matlab.ui.container.TabGroup
+        Tab1                           matlab.ui.container.Tab
+        UIAxes                         matlab.ui.control.UIAxes
+        Tab2                           matlab.ui.container.Tab
+        UIAxes2                        matlab.ui.control.UIAxes
+        Tab3                           matlab.ui.container.Tab
+        UIAxes_2                       matlab.ui.control.UIAxes
 
-% Non-UI properties for hardware handles and sweep data
-properties (Access = private)
-    Kepco
-    SMU
-    Gaussmeter
-    StopFlag = false
-    CurrData = []
-    ResData = []
-    FieldData = []
-    hLine1
-    hLine2
-    hLine3
-end
+        HysteresisCheckBox             matlab.ui.control.CheckBox
+        RealTimePlotCheckBox           matlab.ui.control.CheckBox
+        PlotResponseButton             matlab.ui.control.Button
+    end
 
-% Callbacks that handle component events
-methods (Access = private)
+    % Non-UI properties for hardware handles and sweep data
+    properties (Access = private)
+        Kepco
+        SMU
+        Gaussmeter
+        StopFlag = false
+        CurrData = []
+        ResData = []
+        FieldData = []
+        hLine1
+        hLine2
+        hLine3
+    end
+
+
+    % Callbacks that handle component events
+    methods (Access = private)
 
     % Button pushed function: ConnectButton
     function ConnectButtonPushed(app, event)
@@ -187,7 +189,7 @@ methods (Access = private)
 
         try
             writetable(T, fullPath);
-            uialert(app.UIFigure, sprintf('Data successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
+            uialert(app.UIFigure, sprintf('Data successfully saved to: x%s', fullPath), 'Save Complete', 'Icon', 'success');
         catch ME
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
@@ -205,22 +207,8 @@ methods (Access = private)
         e_I = app.SupplyAddrEditField_4.Value;
 
         % Read max and min current limits
-        max_limit_str = strtrim(app.MaxCurrentEditField.Value);
-        min_limit_str = strtrim(app.MinCurrentEditField.Value);
-
-        if isempty(max_limit_str)
-            max_I = 2;
-        else
-            max_I = str2double(max_limit_str);
-            if isnan(max_I); max_I = 2; end
-        end
-
-        if isempty(min_limit_str)
-            min_I = -2;
-        else
-            min_I = str2double(min_limit_str);
-            if isnan(min_I); min_I = -2; end
-        end
+        max_I = app.StartCurrentAEditField_2.Value;
+        min_I = app.StartCurrentAEditField_3.Value;
 
         % Ensure max_I > min_I
         if max_I < min_I
@@ -281,21 +269,21 @@ methods (Access = private)
             ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
         end
 
-        title(app.UIAxes3, 'Magnetic Field vs Current');
-        xlabel(app.UIAxes3, 'Input Current (A)');
-        ylabel(app.UIAxes3, 'Measured Magnetic Field Strength (G)');
+        title(app.UIAxes_2, 'Magnetic Field vs Current');
+        xlabel(app.UIAxes_2, 'Input Current (A)');
+        ylabel(app.UIAxes_2, 'Measured Magnetic Field Strength (G)');
 
         cla(app.UIAxes);
         cla(app.UIAxes2);
-        cla(app.UIAxes3);
+        cla(app.UIAxes_2);
         app.hLine1 = plot(app.UIAxes, nan, nan, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
         xlim(app.UIAxes, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
         app.hLine2 = plot(app.UIAxes2, nan, nan, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
         if strcmp(mode, 'Supply + Gaussmeter')
             xlim(app.UIAxes2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
         end
-        app.hLine3 = plot(app.UIAxes3, nan, nan, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
-        xlim(app.UIAxes3, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
+        app.hLine3 = plot(app.UIAxes_2, nan, nan, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
+        xlim(app.UIAxes_2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
 
         app.CurrData = [];
         app.ResData = [];
@@ -462,285 +450,288 @@ methods (Access = private)
     end
 end
 
-% Component initialization
-methods (Access = private)
 
-    % Create UIFigure and components
-    function createComponents(app)
-
-        % Create UIFigure and hide until all components are created
-        app.UIFigure = uifigure('Visible', 'off');
-        app.UIFigure.Position = [100 100 1147 761];
-        app.UIFigure.Name = 'MATLAB App';
-
-        % Create TabGroup
-        app.TabGroup = uitabgroup(app.UIFigure);
-        app.TabGroup.Position = [310 39 820 695];
-
-        % Create Tab1
-        app.Tab1 = uitab(app.TabGroup);
-        app.Tab1.Title = 'Tab1';
-
-        % Create UIAxes
-        app.UIAxes = uiaxes(app.Tab1);
-        title(app.UIAxes, 'Resistance vs Current')
-        xlabel(app.UIAxes, 'Input Current (A)')
-        ylabel(app.UIAxes, 'Measured Resistance (Ohms)')
-        zlabel(app.UIAxes, 'Z')
-        app.UIAxes.Position = [14 20 782 629];
-
-        % Create Tab2
-        app.Tab2 = uitab(app.TabGroup);
-        app.Tab2.Title = 'Tab2';
-
-        % Create UIAxes2
-        app.UIAxes2 = uiaxes(app.Tab2);
-        title(app.UIAxes2, 'Resistance vs Magnetic Field')
-        xlabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)')
-        ylabel(app.UIAxes2, 'Measured Resistance (Ohms)')
-        zlabel(app.UIAxes2, 'Z')
-        app.UIAxes2.Position = [15 12 781 637];
-
-        % Create Tab3
-        app.Tab3 = uitab(app.TabGroup);
-        app.Tab3.Title = 'Tab3';
-
-        % Create UIAxes3
-        app.UIAxes3 = uiaxes(app.Tab3);
-        title(app.UIAxes3, 'Magnetic Field vs Current')
-        xlabel(app.UIAxes3, 'Input Current (A)')
-        ylabel(app.UIAxes3, 'Measured Magnetic Field Strength (G)')
-        zlabel(app.UIAxes3, 'Z')
-        app.UIAxes3.Position = [15 12 781 637];
-
-        % Create ConnectionPanel
-        app.ConnectionPanel = uipanel(app.UIFigure);
-        app.ConnectionPanel.Title = 'Connection';
-        app.ConnectionPanel.Position = [25 448 265 286];
-
-        % Create SupplyAddrEditFieldLabel
-        app.SupplyAddrEditFieldLabel = uilabel(app.ConnectionPanel);
-        app.SupplyAddrEditFieldLabel.HorizontalAlignment = 'right';
-        app.SupplyAddrEditFieldLabel.Position = [13 230 70 22];
-        app.SupplyAddrEditFieldLabel.Text = 'Supply Addr';
-
-        % Create SupplyAddrEditField
-        app.SupplyAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
-        app.SupplyAddrEditField.Position = [136 230 100 22];
-        app.SupplyAddrEditField.Value = 6;
-
-        % Create SupplyAddrEditFieldLabel_2
-        app.SupplyAddrEditFieldLabel_2 = uilabel(app.ConnectionPanel);
-        app.SupplyAddrEditFieldLabel_2.HorizontalAlignment = 'right';
-        app.SupplyAddrEditFieldLabel_2.Position = [13 198 104 22];
-        app.SupplyAddrEditFieldLabel_2.Text = 'Source Meter addr';
-
-        % Create SupplyAddrEditField_2
-        app.SupplyAddrEditField_2 = uieditfield(app.ConnectionPanel, 'numeric');
-        app.SupplyAddrEditField_2.Position = [136 198 100 22];
-        app.SupplyAddrEditField_2.Value = 24;
-
-        % Create GaussmeterAddrEditFieldLabel
-        app.GaussmeterAddrEditFieldLabel = uilabel(app.ConnectionPanel);
-        app.GaussmeterAddrEditFieldLabel.HorizontalAlignment = 'right';
-        app.GaussmeterAddrEditFieldLabel.Position = [13 164 102 22];
-        app.GaussmeterAddrEditFieldLabel.Text = 'Gaussmeter  Addr';
-
-        % Create GaussmeterAddrEditField
-        app.GaussmeterAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
-        app.GaussmeterAddrEditField.Position = [135 164 100 22];
-        app.GaussmeterAddrEditField.Value = 18;
-
-        % Create ConnectButton
-        app.ConnectButton = uibutton(app.ConnectionPanel, 'push');
-        app.ConnectButton.ButtonPushedFcn = createCallbackFcn(app, @ConnectButtonPushed, true);
-        app.ConnectButton.Position = [18 66 100 33];
-        app.ConnectButton.Text = 'Connect';
-
-        % Create DisconnectButton
-        app.DisconnectButton = uibutton(app.ConnectionPanel, 'push');
-        app.DisconnectButton.ButtonPushedFcn = createCallbackFcn(app, @DisconnectButtonPushed, true);
-        app.DisconnectButton.Position = [17 17 100 33];
-        app.DisconnectButton.Text = 'Disconnect';
-
-        % Create StatusLabel
-        app.StatusLabel = uilabel(app.ConnectionPanel);
-        app.StatusLabel.Position = [183 22 39 22];
-        app.StatusLabel.Text = 'Status';
-
-        % Create Label
-        app.Label = uilabel(app.ConnectionPanel);
-        app.Label.HorizontalAlignment = 'right';
-        app.Label.Position = [62 122 25 22];
-        app.Label.Text = '';
-
-        % Create DropDown
-        app.DropDown = uidropdown(app.ConnectionPanel);
-        app.DropDown.Items = {'Supply + Source meter', 'Supply + Gaussmeter', 'All instruments'};
-        app.DropDown.ValueChangedFcn = createCallbackFcn(app, @DropDownValueChanged, true);
-        app.DropDown.ClickedFcn = createCallbackFcn(app, @DropDownClicked, true);
-        app.DropDown.Position = [17 122 219 22];
-        app.DropDown.Value = 'Supply + Source meter';
-
-        % Create SettingsPanel
-        app.SettingsPanel = uipanel(app.UIFigure);
-        app.SettingsPanel.Title = 'Settings';
-        app.SettingsPanel.Position = [26 185 265 254];
-
-        % Create StartCurrentAEditFieldLabel
-        app.StartCurrentAEditFieldLabel = uilabel(app.SettingsPanel);
-        app.StartCurrentAEditFieldLabel.HorizontalAlignment = 'right';
-        app.StartCurrentAEditFieldLabel.Position = [16 220 93 22];
-        app.StartCurrentAEditFieldLabel.Text = 'Start Current (A)';
-
-        % Create StartCurrentAEditField
-        app.StartCurrentAEditField = uieditfield(app.SettingsPanel, 'numeric');
-        app.StartCurrentAEditField.Position = [137 220 100 22];
-        app.StartCurrentAEditField.Value = -1;
-
-        % Create SupplyAddrEditFieldLabel_3
-        app.SupplyAddrEditFieldLabel_3 = uilabel(app.SettingsPanel);
-        app.SupplyAddrEditFieldLabel_3.HorizontalAlignment = 'right';
-        app.SupplyAddrEditFieldLabel_3.Position = [17 195 89 22];
-        app.SupplyAddrEditFieldLabel_3.Text = 'End Current (A)';
-
-        % Create SupplyAddrEditField_4
-        app.SupplyAddrEditField_4 = uieditfield(app.SettingsPanel, 'numeric');
-        app.SupplyAddrEditField_4.Position = [137 195 100 22];
-        app.SupplyAddrEditField_4.Value = 1;
-
-        % Create MaxCurrentEditFieldLabel
-        app.MaxCurrentEditFieldLabel = uilabel(app.SettingsPanel);
-        app.MaxCurrentEditFieldLabel.HorizontalAlignment = 'right';
-        app.MaxCurrentEditFieldLabel.Position = [16 170 93 22];
-        app.MaxCurrentEditFieldLabel.Text = 'Max Current (A)';
-
-        % Create MaxCurrentEditField
-        app.MaxCurrentEditField = uieditfield(app.SettingsPanel, 'text');
-        app.MaxCurrentEditField.Position = [137 170 100 22];
-        app.MaxCurrentEditField.Value = '';
-
-        % Create MinCurrentEditFieldLabel
-        app.MinCurrentEditFieldLabel = uilabel(app.SettingsPanel);
-        app.MinCurrentEditFieldLabel.HorizontalAlignment = 'right';
-        app.MinCurrentEditFieldLabel.Position = [16 145 93 22];
-        app.MinCurrentEditFieldLabel.Text = 'Min Current (A)';
-
-        % Create MinCurrentEditField
-        app.MinCurrentEditField = uieditfield(app.SettingsPanel, 'text');
-        app.MinCurrentEditField.Position = [137 145 100 22];
-        app.MinCurrentEditField.Value = '';
-
-        % Create StepsizeAEditFieldLabel
-        app.StepsizeAEditFieldLabel = uilabel(app.SettingsPanel);
-        app.StepsizeAEditFieldLabel.HorizontalAlignment = 'right';
-        app.StepsizeAEditFieldLabel.Position = [17 120 74 22];
-        app.StepsizeAEditFieldLabel.Text = 'Step size (A)';
-
-        % Create StepsizeAEditField
-        app.StepsizeAEditField = uieditfield(app.SettingsPanel, 'numeric');
-        app.StepsizeAEditField.Position = [137 120 100 22];
-        app.StepsizeAEditField.Value = 0.1;
-
-        % Create SteptimesEditFieldLabel
-        app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
-        app.SteptimesEditFieldLabel.HorizontalAlignment = 'right';
-        app.SteptimesEditFieldLabel.Position = [17 95 73 22];
-        app.SteptimesEditFieldLabel.Text = 'Step time (s)';
-
-        % Create SteptimesEditField
-        app.SteptimesEditField = uieditfield(app.SettingsPanel, 'numeric');
-        app.SteptimesEditField.Position = [137 95 100 22];
-        app.SteptimesEditField.Value = 0.2;
-
-        % Create FilenameEditField_2Label
-        app.FilenameEditField_2Label = uilabel(app.SettingsPanel);
-        app.FilenameEditField_2Label.HorizontalAlignment = 'right';
-        app.FilenameEditField_2Label.Position = [17 70 54 22];
-        app.FilenameEditField_2Label.Text = 'Filename';
-
-        % Create FilenameEditField_2
-        app.FilenameEditField_2 = uieditfield(app.SettingsPanel, 'text');
-        app.FilenameEditField_2.HorizontalAlignment = 'right';
-        app.FilenameEditField_2.Position = [137 70 100 22];
-        app.FilenameEditField_2.Value = 'Data';
-
-        % Create SavetoExcelButton
-        app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
-        app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
-        app.SavetoExcelButton.Position = [137 12 100 33];
-        app.SavetoExcelButton.Text = 'Save to Excel';
-
-        % Create HysteresisCheckBox
-        app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
-        app.HysteresisCheckBox.Text = 'Hysteresis';
-        app.HysteresisCheckBox.Position = [17 17 100 22];
-
-        % Create ControlPanel
-        app.ControlPanel = uipanel(app.UIFigure);
-        app.ControlPanel.Title = 'Control';
-        app.ControlPanel.Position = [25 40 265 135];
-
-        % Create RealTimePlotCheckBox
-        app.RealTimePlotCheckBox = uicheckbox(app.ControlPanel);
-        app.RealTimePlotCheckBox.Text = 'Real-time Plot';
-        app.RealTimePlotCheckBox.Position = [17 105 150 22];
-        app.RealTimePlotCheckBox.Value = true;
-
-        % Create StartButton
-        app.StartButton = uibutton(app.ControlPanel, 'push');
-        app.StartButton.ButtonPushedFcn = createCallbackFcn(app, @StartButtonPushed, true);
-        app.StartButton.Position = [17 65 99 33];
-        app.StartButton.Text = 'Start';
-
-        % Create StopButton
-        app.StopButton = uibutton(app.ControlPanel, 'push');
-        app.StopButton.ButtonPushedFcn = createCallbackFcn(app, @StopButtonPushed, true);
-        app.StopButton.Position = [135 65 100 33];
-        app.StopButton.Text = 'Stop';
-
-        % Create ResistanceOhmsLabel
-        app.ResistanceOhmsLabel = uilabel(app.ControlPanel);
-        app.ResistanceOhmsLabel.Position = [17 23 118 22];
-        app.ResistanceOhmsLabel.Text = 'Resistance : -- Ohms';
-
-        % Create PlotResponseButton
-        app.PlotResponseButton = uibutton(app.ControlPanel, 'push');
-        app.PlotResponseButton.ButtonPushedFcn = createCallbackFcn(app, @PlotResponseButtonPushed, true);
-        app.PlotResponseButton.Position = [135 17 100 33];
-        app.PlotResponseButton.Text = 'Plot Response';
-        app.PlotResponseButton.Enable = 'off';
-
-        % Show the figure after all components are created
-        app.UIFigure.Visible = 'on';
-    end
-end
-
-% App creation and deletion
-methods (Access = public)
-
-    % Construct app
-    function app = ControllerGUI
+    % Component initialization
+    methods (Access = private)
 
         % Create UIFigure and components
-        createComponents(app)
+        function createComponents(app)
 
-        % Register the app with App Designer
-        registerApp(app, app.UIFigure)
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 1147 797];
+            app.UIFigure.Name = 'MATLAB App';
 
-        if nargout == 0
-            clear app
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.UIFigure);
+            app.TabGroup.Position = [310 38 820 732];
+
+            % Create Tab1
+            app.Tab1 = uitab(app.TabGroup);
+            app.Tab1.Title = 'Tab1';
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.Tab1);
+            title(app.UIAxes, 'Resistance vs Current')
+            xlabel(app.UIAxes, 'Input Current (A)')
+            ylabel(app.UIAxes, 'Measured Resistance (Ohms)')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.Position = [14 22 782 664];
+
+            % Create Tab2
+            app.Tab2 = uitab(app.TabGroup);
+            app.Tab2.Title = 'Tab2';
+
+            % Create UIAxes2
+            app.UIAxes2 = uiaxes(app.Tab2);
+            title(app.UIAxes2, 'Resistance vs Magnetic Field')
+            xlabel(app.UIAxes2, 'Measured Resistance (Ohms)')
+            ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)')
+            zlabel(app.UIAxes2, 'Z')
+            app.UIAxes2.Position = [15 22 781 664];
+
+            % Create Tab3
+            app.Tab3 = uitab(app.TabGroup);
+            app.Tab3.Title = 'Tab3';
+
+            % Create UIAxes_2
+            app.UIAxes_2 = uiaxes(app.Tab3);
+            title(app.UIAxes_2, 'Magnetic field vs Current')
+            xlabel(app.UIAxes_2, 'Measured Magnetic Field (G)')
+            ylabel(app.UIAxes_2, 'Measured Resistance (Ohms)')
+            zlabel(app.UIAxes_2, 'Z')
+            app.UIAxes_2.Position = [14 31 782 655];
+
+            % Create ConnectionPanel
+            app.ConnectionPanel = uipanel(app.UIFigure);
+            app.ConnectionPanel.Title = 'Connection';
+            app.ConnectionPanel.Position = [25 513 265 257];
+
+            % Create SupplyAddrEditFieldLabel
+            app.SupplyAddrEditFieldLabel = uilabel(app.ConnectionPanel);
+            app.SupplyAddrEditFieldLabel.HorizontalAlignment = 'right';
+            app.SupplyAddrEditFieldLabel.Position = [13 201 70 22];
+            app.SupplyAddrEditFieldLabel.Text = 'Supply Addr';
+
+            % Create SupplyAddrEditField
+            app.SupplyAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
+            app.SupplyAddrEditField.Position = [136 201 100 22];
+            app.SupplyAddrEditField.Value = 6;
+
+            % Create SupplyAddrEditFieldLabel_2
+            app.SupplyAddrEditFieldLabel_2 = uilabel(app.ConnectionPanel);
+            app.SupplyAddrEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.SupplyAddrEditFieldLabel_2.Position = [13 169 104 22];
+            app.SupplyAddrEditFieldLabel_2.Text = 'Source Meter addr';
+
+            % Create SupplyAddrEditField_2
+            app.SupplyAddrEditField_2 = uieditfield(app.ConnectionPanel, 'numeric');
+            app.SupplyAddrEditField_2.Position = [136 169 100 22];
+            app.SupplyAddrEditField_2.Value = 24;
+
+            % Create GaussmeterAddrEditFieldLabel
+            app.GaussmeterAddrEditFieldLabel = uilabel(app.ConnectionPanel);
+            app.GaussmeterAddrEditFieldLabel.HorizontalAlignment = 'right';
+            app.GaussmeterAddrEditFieldLabel.Position = [13 135 102 22];
+            app.GaussmeterAddrEditFieldLabel.Text = 'Gaussmeter  Addr';
+
+            % Create GaussmeterAddrEditField
+            app.GaussmeterAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
+            app.GaussmeterAddrEditField.Position = [135 135 100 22];
+
+            % Create ConnectButton
+            app.ConnectButton = uibutton(app.ConnectionPanel, 'push');
+            app.ConnectButton.ButtonPushedFcn = createCallbackFcn(app, @ConnectButtonPushed, true);
+            app.ConnectButton.Position = [18 37 100 33];
+            app.ConnectButton.Text = 'Connect';
+
+            % Create DisconnectButton
+            app.DisconnectButton = uibutton(app.ConnectionPanel, 'push');
+            app.DisconnectButton.ButtonPushedFcn = createCallbackFcn(app, @DisconnectButtonPushed, true);
+            app.DisconnectButton.Position = [152 37 100 33];
+            app.DisconnectButton.Text = 'Disconnect';
+
+            % Create StatusLabel
+            app.StatusLabel = uilabel(app.ConnectionPanel);
+            app.StatusLabel.Position = [113 4 39 22];
+            app.StatusLabel.Text = 'Status';
+
+            % Create Label
+            app.Label = uilabel(app.ConnectionPanel);
+            app.Label.HorizontalAlignment = 'right';
+            app.Label.Position = [62 93 25 22];
+            app.Label.Text = '';
+
+            % Create DropDown
+            app.DropDown = uidropdown(app.ConnectionPanel);
+            app.DropDown.Items = {'Supply + Source meter', 'Supply + Gaussmeter', 'All instruments'};
+            app.DropDown.ValueChangedFcn = createCallbackFcn(app, @DropDownValueChanged, true);
+            app.DropDown.ClickedFcn = createCallbackFcn(app, @DropDownClicked, true);
+            app.DropDown.Position = [17 93 219 22];
+            app.DropDown.Value = 'Supply + Source meter';
+
+            % Create SettingsPanel
+            app.SettingsPanel = uipanel(app.UIFigure);
+            app.SettingsPanel.Title = 'Settings';
+            app.SettingsPanel.Position = [25 174 265 325];
+
+            % Create StartCurrentAEditFieldLabel
+            app.StartCurrentAEditFieldLabel = uilabel(app.SettingsPanel);
+            app.StartCurrentAEditFieldLabel.HorizontalAlignment = 'right';
+            app.StartCurrentAEditFieldLabel.Position = [17 182 93 22];
+            app.StartCurrentAEditFieldLabel.Text = 'Start Current (A)';
+
+            % Create StartCurrentAEditField
+            app.StartCurrentAEditField = uieditfield(app.SettingsPanel, 'numeric');
+            app.StartCurrentAEditField.Position = [138 182 100 22];
+            app.StartCurrentAEditField.Value = -1;
+
+            % Create SupplyAddrEditFieldLabel_3
+            app.SupplyAddrEditFieldLabel_3 = uilabel(app.SettingsPanel);
+            app.SupplyAddrEditFieldLabel_3.HorizontalAlignment = 'right';
+            app.SupplyAddrEditFieldLabel_3.Position = [18 150 89 22];
+            app.SupplyAddrEditFieldLabel_3.Text = 'End Current (A)';
+
+            % Create SupplyAddrEditField_4
+            app.SupplyAddrEditField_4 = uieditfield(app.SettingsPanel, 'numeric');
+            app.SupplyAddrEditField_4.Position = [138 150 100 22];
+            app.SupplyAddrEditField_4.Value = 1;
+
+            % Create StepsizeAEditFieldLabel
+            app.StepsizeAEditFieldLabel = uilabel(app.SettingsPanel);
+            app.StepsizeAEditFieldLabel.HorizontalAlignment = 'right';
+            app.StepsizeAEditFieldLabel.Position = [18 120 74 22];
+            app.StepsizeAEditFieldLabel.Text = 'Step size (A)';
+
+            % Create StepsizeAEditField
+            app.StepsizeAEditField = uieditfield(app.SettingsPanel, 'numeric');
+            app.StepsizeAEditField.Position = [138 120 100 22];
+            app.StepsizeAEditField.Value = 0.1;
+
+            % Create SavetoExcelButton
+            app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
+            app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
+            app.SavetoExcelButton.Position = [18 11 220 33];
+            app.SavetoExcelButton.Text = 'Save to Excel';
+
+            % Create SteptimesEditFieldLabel
+            app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
+            app.SteptimesEditFieldLabel.HorizontalAlignment = 'right';
+            app.SteptimesEditFieldLabel.Position = [18 88 73 22];
+            app.SteptimesEditFieldLabel.Text = 'Step time (s)';
+
+            % Create SteptimesEditField
+            app.SteptimesEditField = uieditfield(app.SettingsPanel, 'numeric');
+            app.SteptimesEditField.Position = [138 88 100 22];
+            app.SteptimesEditField.Value = 0.2;
+
+            % Create FilenameEditField_2Label
+            app.FilenameEditField_2Label = uilabel(app.SettingsPanel);
+            app.FilenameEditField_2Label.HorizontalAlignment = 'right';
+            app.FilenameEditField_2Label.Position = [18 55 54 22];
+            app.FilenameEditField_2Label.Text = 'Filename';
+
+            % Create FilenameEditField_2
+            app.FilenameEditField_2 = uieditfield(app.SettingsPanel, 'text');
+            app.FilenameEditField_2.HorizontalAlignment = 'right';
+            app.FilenameEditField_2.Position = [138 55 100 22];
+            app.FilenameEditField_2.Value = 'Data';
+
+            % Create StartCurrentAEditFieldLabel_2
+            app.StartCurrentAEditFieldLabel_2 = uilabel(app.SettingsPanel);
+            app.StartCurrentAEditFieldLabel_2.HorizontalAlignment = 'right';
+            app.StartCurrentAEditFieldLabel_2.Position = [21 258 89 22];
+            app.StartCurrentAEditFieldLabel_2.Text = 'Max Current (+)';
+
+            % Create StartCurrentAEditField_2
+            app.StartCurrentAEditField_2 = uieditfield(app.SettingsPanel, 'numeric');
+            app.StartCurrentAEditField_2.Position = [138 258 100 22];
+            app.StartCurrentAEditField_2.Value = -2;
+
+            % Create StartCurrentAEditFieldLabel_3
+            app.StartCurrentAEditFieldLabel_3 = uilabel(app.SettingsPanel);
+            app.StartCurrentAEditFieldLabel_3.HorizontalAlignment = 'right';
+            app.StartCurrentAEditFieldLabel_3.Position = [27 226 83 22];
+            app.StartCurrentAEditFieldLabel_3.Text = 'Min Current (-)';
+
+            % Create StartCurrentAEditField_3
+            app.StartCurrentAEditField_3 = uieditfield(app.SettingsPanel, 'numeric');
+            app.StartCurrentAEditField_3.Position = [138 226 100 22];
+            app.StartCurrentAEditField_3.Value = -1;
+
+            
+            % Create HysteresisCheckBox
+            app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
+            app.HysteresisCheckBox.Text = 'Hysteresis';
+            app.HysteresisCheckBox.Position = [18 290 100 22];
+
+            % Create ControlPanel
+            app.ControlPanel = uipanel(app.UIFigure);
+            app.ControlPanel.Title = 'Control';
+            app.ControlPanel.Position = [25 39 265 122];
+
+            
+            % Create RealTimePlotCheckBox
+            app.RealTimePlotCheckBox = uicheckbox(app.ControlPanel);
+            app.RealTimePlotCheckBox.Text = 'Real-time Plot';
+            app.RealTimePlotCheckBox.Position = [17 95 150 22];
+            app.RealTimePlotCheckBox.Value = true;
+
+            % Create StartButton
+            app.StartButton = uibutton(app.ControlPanel, 'push');
+            app.StartButton.ButtonPushedFcn = createCallbackFcn(app, @StartButtonPushed, true);
+            app.StartButton.Position = [17 49 99 36];
+            app.StartButton.Text = 'Start';
+
+            % Create StopButton
+            app.StopButton = uibutton(app.ControlPanel, 'push');
+            app.StopButton.ButtonPushedFcn = createCallbackFcn(app, @StopButtonPushed, true);
+            app.StopButton.Position = [135 49 100 36];
+            app.StopButton.Text = 'Stop';
+
+            % Create ResistanceOhmsLabel
+            app.ResistanceOhmsLabel = uilabel(app.ControlPanel);
+            app.ResistanceOhmsLabel.Position = [66 9 118 22];
+            app.ResistanceOhmsLabel.Text = 'Resistance : -- Ohms';
+
+            
+            % Create PlotResponseButton
+            app.PlotResponseButton = uibutton(app.ControlPanel, 'push');
+            app.PlotResponseButton.ButtonPushedFcn = createCallbackFcn(app, @PlotResponseButtonPushed, true);
+            app.PlotResponseButton.Position = [135 10 100 33];
+            app.PlotResponseButton.Text = 'Plot Response';
+            app.PlotResponseButton.Enable = 'off';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
         end
     end
 
-    % Code that executes before app deletion
-    function delete(app)
-        app.StopFlag = true;
-        app.safeShutdown();
-        DisconnectButtonPushed(app, []);
+    % App creation and deletion
+    methods (Access = public)
 
-        % Delete UIFigure when app is deleted
-        delete(app.UIFigure)
+        % Construct app
+        function app = ControllerGUI
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+            app.StopFlag = true;
+            app.safeShutdown();
+            DisconnectButtonPushed(app, []);
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
     end
-end
 end
