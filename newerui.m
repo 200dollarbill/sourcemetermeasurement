@@ -197,6 +197,7 @@ classdef newerui < matlab.apps.AppBase
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
     end
+    end
 
     % Button pushed function: SaveToFigureButton
     function SaveToFigureButtonPushed(app, event)
@@ -253,6 +254,7 @@ classdef newerui < matlab.apps.AppBase
                 close(f);
             end
         end
+    end
     end
 
     % Main start button
@@ -429,6 +431,7 @@ classdef newerui < matlab.apps.AppBase
         if ~app.RealTimePlotCheckBox.Value
             app.PlotButton.Enable = 'on';
         end
+    end
     end
 
     % Button pushed function: PlotButton
