@@ -20,6 +20,7 @@ classdef newerui < matlab.apps.AppBase
         SteptimesEditField             matlab.ui.control.NumericEditField
         SteptimesEditFieldLabel        matlab.ui.control.Label
         SavetoExcelButton              matlab.ui.control.Button
+        SaveToFigureButton             matlab.ui.control.Button
         StepsizeAEditField             matlab.ui.control.NumericEditField
         StepsizeAEditFieldLabel        matlab.ui.control.Label
         SupplyAddrEditField_4          matlab.ui.control.NumericEditField
@@ -187,11 +188,71 @@ classdef newerui < matlab.apps.AppBase
 
         try
             writetable(T, fullPath);
+<<<<<<< HEAD
             uialert(app.UIFigure, sprintf('Data successfully saved to:%s', fullPath), 'Save Complete', 'Icon', 'success');
+=======
+            uialert(app.UIFigure, sprintf('Data successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
+>>>>>>> bd5abce3f4ead16c21a59cec9d24e8eedcea0329
         catch ME
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
     end
+
+    % Button pushed function: SaveToFigureButton
+    function SaveToFigureButtonPushed(app, event)
+        if isempty(app.CurrData)
+            return;
+        end
+        defaultName = sprintf('%s.fig', app.FilenameEditField_2.Value);
+        [file, path] = uiputfile('*.fig', 'Save Figures As', defaultName);
+        if isequal(file, 0) || isequal(path, 0)
+            return;
+        end
+        fullPath = fullfile(path, file);
+        
+        try
+            % Create a new figure to hold the subplots
+            f = figure('Name', 'Exported Plots', 'NumberTitle', 'off', 'Visible', 'off');
+            f.Position = [100 100 1200 400];
+            
+            % Copy axes
+            ax1 = subplot(1,3,1, 'Parent', f);
+            copyobj(allchild(app.UIAxes), ax1);
+            title(ax1, app.UIAxes.Title.String);
+            xlabel(ax1, app.UIAxes.XLabel.String);
+            ylabel(ax1, app.UIAxes.YLabel.String);
+            if ~isempty(app.UIAxes.XLim) && app.UIAxes.XLim(2) > app.UIAxes.XLim(1)
+                xlim(ax1, app.UIAxes.XLim);
+            end
+            
+            ax2 = subplot(1,3,2, 'Parent', f);
+            copyobj(allchild(app.UIAxes2), ax2);
+            title(ax2, app.UIAxes2.Title.String);
+            xlabel(ax2, app.UIAxes2.XLabel.String);
+            ylabel(ax2, app.UIAxes2.YLabel.String);
+            if ~isempty(app.UIAxes2.XLim) && app.UIAxes2.XLim(2) > app.UIAxes2.XLim(1)
+                xlim(ax2, app.UIAxes2.XLim);
+            end
+            
+            ax3 = subplot(1,3,3, 'Parent', f);
+            copyobj(allchild(app.UIAxes_2), ax3);
+            title(ax3, app.UIAxes_2.Title.String);
+            xlabel(ax3, app.UIAxes_2.XLabel.String);
+            ylabel(ax3, app.UIAxes_2.YLabel.String);
+            if ~isempty(app.UIAxes_2.XLim) && app.UIAxes_2.XLim(2) > app.UIAxes_2.XLim(1)
+                xlim(ax3, app.UIAxes_2.XLim);
+            end
+            
+            savefig(f, fullPath);
+            close(f);
+            
+            uialert(app.UIFigure, sprintf('Figures successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
+        catch ME
+            uialert(app.UIFigure, ['Failed to save figure: ' ME.message], 'Save Error', 'Icon', 'warning');
+            if exist('f', 'var') && isvalid(f)
+                close(f);
+            end
+        end
     end
 
     % Main start button
@@ -287,6 +348,7 @@ classdef newerui < matlab.apps.AppBase
         app.ResData = [];
         app.FieldData = [];
         app.SavetoExcelButton.Enable = 'off';
+        app.SaveToFigureButton.Enable = 'off';
 
         try
         % output
@@ -363,10 +425,10 @@ classdef newerui < matlab.apps.AppBase
 
     if ~isempty(app.CurrData)
         app.SavetoExcelButton.Enable = 'on';
+        app.SaveToFigureButton.Enable = 'on';
         if ~app.RealTimePlotCheckBox.Value
             app.PlotButton.Enable = 'on';
         end
-    end
     end
 
     % Button pushed function: PlotButton
@@ -613,8 +675,14 @@ end
             % Create SavetoExcelButton
             app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
             app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
-            app.SavetoExcelButton.Position = [18 11 220 33];
-            app.SavetoExcelButton.Text = 'Save to Excel';
+            app.SavetoExcelButton.Position = [18 11 105 33];
+            app.SavetoExcelButton.Text = 'Save Excel';
+
+            % Create SaveToFigureButton
+            app.SaveToFigureButton = uibutton(app.SettingsPanel, 'push');
+            app.SaveToFigureButton.ButtonPushedFcn = createCallbackFcn(app, @SaveToFigureButtonPushed, true);
+            app.SaveToFigureButton.Position = [133 11 105 33];
+            app.SaveToFigureButton.Text = 'Save Fig';
 
             % Create SteptimesEditFieldLabel
             app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
