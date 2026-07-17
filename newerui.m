@@ -92,6 +92,7 @@ classdef newerui < matlab.apps.AppBase
                 fprintf(app.SMU, "*RST");
                 pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
+                fprintf(app.SMU, ":SENS:RES:OCOM ON"); % Offset Compensated Ohms
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
             case 'Supply + Gaussmeter'
@@ -115,6 +116,7 @@ classdef newerui < matlab.apps.AppBase
                 fprintf(app.SMU, "*RST");
                 pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
+                fprintf(app.SMU, ":SENS:RES:OCOM ON"); % Offset Compensated Ohms
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
                 % gaussmeter
