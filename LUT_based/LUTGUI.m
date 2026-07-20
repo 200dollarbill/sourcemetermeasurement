@@ -43,8 +43,6 @@ classdef LUTGUI < matlab.apps.AppBase
         UIAxes                         matlab.ui.control.UIAxes
         Tab2                           matlab.ui.container.Tab
         UIAxes2                        matlab.ui.control.UIAxes
-        Tab3                           matlab.ui.container.Tab
-        UIAxes_2                       matlab.ui.control.UIAxes
     end
     % Non-UI properties for hardware handles and sweep data
     properties (Access = private)
@@ -56,7 +54,6 @@ classdef LUTGUI < matlab.apps.AppBase
         FieldData = []
         hLine1
         hLine2
-        hLine3
         LUT_Current = []
         LUT_Field = []
     end
@@ -240,18 +237,11 @@ classdef LUTGUI < matlab.apps.AppBase
             xlabel(app.UIAxes2, 'Interpolated Magnetic Field (G)');
             ylabel(app.UIAxes2, 'Measured Resistance (Ohms)');
 
-            title(app.UIAxes_2, 'Magnetic Field vs Current');
-            xlabel(app.UIAxes_2, 'Input Current (A)');
-            ylabel(app.UIAxes_2, 'Interpolated Magnetic Field (G)');
-
             cla(app.UIAxes);
             cla(app.UIAxes2);
-            cla(app.UIAxes_2);
             app.hLine1 = plot(app.UIAxes, nan, nan, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
             xlim(app.UIAxes, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
             app.hLine2 = plot(app.UIAxes2, nan, nan, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
-            app.hLine3 = plot(app.UIAxes_2, nan, nan, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
-            xlim(app.UIAxes_2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
 
             app.CurrData = [];
             app.ResData = [];
@@ -301,7 +291,6 @@ classdef LUTGUI < matlab.apps.AppBase
                             set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
                             set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
                         end
-                        set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
                     end
                     pause(0.05);
                     drawnow limitrate;
@@ -341,7 +330,6 @@ classdef LUTGUI < matlab.apps.AppBase
                 set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
             end
             if length(app.CurrData) == length(app.FieldData)
-                set(app.hLine3, 'XData', app.CurrData, 'YData', app.FieldData);
             end
             drawnow;
         end
@@ -438,18 +426,6 @@ classdef LUTGUI < matlab.apps.AppBase
             ylabel(app.UIAxes2, 'Measured Magnetic Field Strength (G)')
             zlabel(app.UIAxes2, 'Z')
             app.UIAxes2.Position = [15 22 781 664];
-
-            % Create Tab3
-            app.Tab3 = uitab(app.TabGroup);
-            app.Tab3.Title = 'Tab3';
-
-            % Create UIAxes_2
-            app.UIAxes_2 = uiaxes(app.Tab3);
-            title(app.UIAxes_2, 'Magnetic field vs Current')
-            xlabel(app.UIAxes_2, 'Measured Magnetic Field (G)')
-            ylabel(app.UIAxes_2, 'Measured Resistance (Ohms)')
-            zlabel(app.UIAxes_2, 'Z')
-            app.UIAxes_2.Position = [14 31 782 655];
 
             % Create ConnectionPanel
             app.ConnectionPanel = uipanel(app.UIFigure);
