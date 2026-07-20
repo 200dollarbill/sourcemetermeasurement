@@ -24,6 +24,7 @@ classdef LUTGUI < matlab.apps.AppBase
         SteptimesEditField             matlab.ui.control.NumericEditField
         SteptimesEditFieldLabel        matlab.ui.control.Label
         SavetoExcelButton              matlab.ui.control.Button
+        SaveToFigureButton             matlab.ui.control.Button
         SupplyAddrEditField_4          matlab.ui.control.NumericEditField
         SupplyAddrEditFieldLabel_3     matlab.ui.control.Label
         StartCurrentAEditField         matlab.ui.control.NumericEditField
@@ -179,6 +180,72 @@ classdef LUTGUI < matlab.apps.AppBase
             end
         end
 
+        % Button pushed function: SaveToFigureButton
+        function SaveToFigureButtonPushed(app, event)
+            if isempty(app.CurrData)
+                return;
+            end
+            defaultName = sprintf('%s.png', app.FilenameEditField_2.Value);
+            [file, path] = uiputfile({'*.png', 'PNG Image (*.png)'; '*.fig', 'MATLAB Figure (*.fig)'}, 'Save Figures As', defaultName);
+            if isequal(file, 0) || isequal(path, 0)
+                return;
+            end
+            fullPath = fullfile(path, file);
+            
+            try
+                % Create a new figure to hold the subplots (invisible while building)
+                f = figure('Name', 'Exported Plots', 'NumberTitle', 'off', 'Visible', 'off');
+                f.Position = [100 100 800 400];
+                
+                % Replot axes 1
+                ax1 = subplot(1,2,1, 'Parent', f);
+                if ~isempty(app.hLine1) && isvalid(app.hLine1)
+                    plot(ax1, app.hLine1.XData, app.hLine1.YData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                else
+                    plot(ax1, app.CurrData, app.ResData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                end
+                title(ax1, app.UIAxes.Title.String);
+                xlabel(ax1, app.UIAxes.XLabel.String);
+                ylabel(ax1, app.UIAxes.YLabel.String);
+                if ~isempty(app.UIAxes.XLim) && app.UIAxes.XLim(2) > app.UIAxes.XLim(1)
+                    xlim(ax1, app.UIAxes.XLim);
+                end
+                
+                % Replot axes 2
+                ax2 = subplot(1,2,2, 'Parent', f);
+                if ~isempty(app.hLine2) && isvalid(app.hLine2)
+                    plot(ax2, app.hLine2.XData, app.hLine2.YData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                else
+                    plot(ax2, app.FieldData, app.ResData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                end
+                title(ax2, app.UIAxes2.Title.String);
+                xlabel(ax2, app.UIAxes2.XLabel.String);
+                ylabel(ax2, app.UIAxes2.YLabel.String);
+                if ~isempty(app.UIAxes2.XLim) && app.UIAxes2.XLim(2) > app.UIAxes2.XLim(1)
+                    xlim(ax2, app.UIAxes2.XLim);
+                end
+                
+                % Set visible immediately before saving so .fig file loads visibly
+                f.Visible = 'on';
+                drawnow;
+                
+                [~, ~, ext] = fileparts(fullPath);
+                if strcmpi(ext, '.fig')
+                    savefig(f, fullPath);
+                else
+                    exportgraphics(f, fullPath, 'Resolution', 300);
+                end
+                close(f);
+                
+                uialert(app.UIFigure, sprintf('Figures successfully saved to:\n%s', fullPath), 'Save Complete', 'Icon', 'success');
+            catch ME
+                uialert(app.UIFigure, ['Failed to save figure: ' ME.message], 'Save Error', 'Icon', 'warning');
+                if exist('f', 'var') && isvalid(f)
+                    close(f);
+                end
+            end
+        end
+
         % Main start button
         function StartButtonPushed(app, event)
             if isempty(app.LUT_Current) || isempty(app.LUT_Field)
@@ -247,6 +314,7 @@ classdef LUTGUI < matlab.apps.AppBase
             app.ResData = [];
             app.FieldData = [];
             app.SavetoExcelButton.Enable = 'off';
+            app.SaveToFigureButton.Enable = 'off';
 
             try
                 % output
@@ -315,6 +383,7 @@ classdef LUTGUI < matlab.apps.AppBase
 
             if ~isempty(app.CurrData)
                 app.SavetoExcelButton.Enable = 'on';
+                app.SaveToFigureButton.Enable = 'on';
                 if ~app.RealTimePlotCheckBox.Value
                     app.PlotButton.Enable = 'on';
                 end
@@ -514,8 +583,14 @@ classdef LUTGUI < matlab.apps.AppBase
             % Create SavetoExcelButton
             app.SavetoExcelButton = uibutton(app.SettingsPanel, 'push');
             app.SavetoExcelButton.ButtonPushedFcn = createCallbackFcn(app, @SavetoExcelButtonPushed, true);
-            app.SavetoExcelButton.Position = [23 11 220 33];
-            app.SavetoExcelButton.Text = 'Save to Excel';
+            app.SavetoExcelButton.Position = [18 11 105 33];
+            app.SavetoExcelButton.Text = 'Save Excel';
+
+            % Create SaveToFigureButton
+            app.SaveToFigureButton = uibutton(app.SettingsPanel, 'push');
+            app.SaveToFigureButton.ButtonPushedFcn = createCallbackFcn(app, @SaveToFigureButtonPushed, true);
+            app.SaveToFigureButton.Position = [133 11 105 33];
+            app.SaveToFigureButton.Text = 'Save Fig';
 
             % Create SteptimesEditFieldLabel
             app.SteptimesEditFieldLabel = uilabel(app.SettingsPanel);
