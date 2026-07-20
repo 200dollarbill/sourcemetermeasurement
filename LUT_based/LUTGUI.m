@@ -388,6 +388,7 @@ classdef LUTGUI < matlab.apps.AppBase
                 end
             end
         end
+    end
 
     methods (Access = private)
 
