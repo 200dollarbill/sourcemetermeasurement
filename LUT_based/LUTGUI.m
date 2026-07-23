@@ -333,7 +333,8 @@ classdef LUTGUI < matlab.apps.AppBase
                     target_I = I_steps(i);
                     fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
                     pause(pause_T);
-
+                    
+                    
                     if i == 1
                         pause(0.5);
                     end
@@ -360,7 +361,7 @@ classdef LUTGUI < matlab.apps.AppBase
                             set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
                         end
                     end
-                    pause(0.05);
+                    pause(1);
                     drawnow limitrate;
                 end
 
