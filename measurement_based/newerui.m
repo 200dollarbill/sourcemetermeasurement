@@ -55,6 +55,7 @@ classdef newerui < matlab.apps.AppBase
         Gaussmeter
         StopFlag = false
         CurrData = []
+        MeasuredCurrData = [] 
         ResData = []
         FieldData = []
         hLine1
@@ -358,6 +359,7 @@ classdef newerui < matlab.apps.AppBase
         xlim(app.UIAxes_2, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
 
         app.CurrData = [];
+        app.MeasuredCurrData = [];
         app.ResData = [];
         app.FieldData = [];
         app.SavetoExcelButton.Enable = 'off';
@@ -386,8 +388,17 @@ classdef newerui < matlab.apps.AppBase
             if i == 1
                 pause(0.5);
             end
-
-            app.CurrData(end+1) = target_I;
+            fprintf(app.Kepco, 'MEAS:CURR?');
+            
+            current_str = fscanf(app.Kepco);
+            measured_current = str2double(current_str);
+            
+            
+            % store actual measured current
+            app.MeasuredCurrData(end+1) = measured_current;
+            
+            % measured current for plotting/saving
+            app.CurrData(end+1) = measured_current;
 
             % source meter reading
             if ~isempty(app.SMU)
