@@ -1,4 +1,4 @@
-classdef RevisedMagneticStationController < matlab.apps.AppBase
+  classdef RevisedMagneticStationController < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
