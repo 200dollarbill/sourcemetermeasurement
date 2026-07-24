@@ -346,16 +346,15 @@
                         % current setup
                         target_I = I_steps(i);
                         fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
-                        pause(0.01)
                         
-                        % pause(0.05)
-                        pause(0.05);
+                        % pause constant delay
+                        pause(0.1);
                         
                         % Measure power supply & gaussmeter & plot (Start)
                         recordTimePoint(app);
                         
                         % pause(Measuretime-0.05)
-                        pause(max(0, meas_T - 0.05));
+                        pause(max(0, meas_T - 0.1));
                         
                         % Measure source meter, gauss meter, power supply & plot (Sensor measure)
                         recordTimePoint(app);
@@ -380,28 +379,28 @@
                         updateStaticPlots(app);
                         
                         % pause(step_time - Measuretime - 0.05)
-                        pause(max(0, step_T - meas_T - 0.05));
+                        pause(max(0, step_T - meas_T - 0.1));
                         
                         % Measure power supply & gaussmeter & plot (End)
                         recordTimePoint(app);
                         
                         % pause(0.05) before next Update current
-                        pause(0.05);
+                        pause(0.1);
                         
                         if isRTZ
                             fprintf(app.Kepco, 'CURR 0.0');
                             
                             % Same delay sequence for the zero point
-                            pause(0.05);
+                            pause(0.1);
                             recordTimePoint(app);
                             
-                            pause(max(0, meas_T - 0.05));
+                            pause(max(0, meas_T - 0.1));
                             recordTimePoint(app);
                             
-                            pause(max(0, step_T - meas_T - 0.05));
+                            pause(max(0, step_T - meas_T - 0.1));
                             recordTimePoint(app);
                             
-                            pause(0.05);
+                            pause(0.1);
                         end
                     end
                     
