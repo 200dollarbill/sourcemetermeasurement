@@ -265,9 +265,9 @@ classdef RevisedMagneticStationController < matlab.apps.AppBase
 
             % Setup ETA estimation
             points_per_cycle = length(I_steps);
-            time_per_point = step_T + meas_T + 1.2; % 1.2s overhead approx
+            time_per_point = step_T + 1.0; % 1.0s overhead approx for two recordTimePoint calls
             if isRTZ
-                time_per_point = time_per_point + step_T + 0.5;
+                time_per_point = 2 * step_T + 2.0;
             end
             total_time_est = cycles * points_per_cycle * time_per_point + (cycles - 1) * delay_cycle;
 
@@ -347,17 +347,16 @@ classdef RevisedMagneticStationController < matlab.apps.AppBase
                         target_I = I_steps(i);
                         fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
                         
-                        % 1. Start measure
+                        % pause(0.05)
+                        pause(0.05);
+                        
+                        % Measure power supply & gaussmeter & plot (Start)
                         recordTimePoint(app);
                         
-                        pause(step_T);
+                        % pause(Measuretime-0.05)
+                        pause(max(0, meas_T - 0.05));
                         
-                        % Extra settle time for the first measurement of first cycle
-                        if i == 1 && c == 1
-                            pause(0.5);
-                        end
-                        
-                        % 2. Gaussmeter / Sensor measure
+                        % Measure source meter, gauss meter, power supply & plot (Sensor measure)
                         recordTimePoint(app);
                         
                         % Record for static plots
@@ -379,19 +378,20 @@ classdef RevisedMagneticStationController < matlab.apps.AppBase
 
                         updateStaticPlots(app);
                         
-                        pause(meas_T);
-                        
-                        % 3. End measure
-                        recordTimePoint(app);
+                        % pause(step_time - Measuretime - 0.05)
+                        pause(max(0, step_T - meas_T - 0.05));
                         
                         if isRTZ
                             fprintf(app.Kepco, 'CURR 0.0');
-                            pause(step_T / 2);
                             
-                            % 4. Middle of zero measure
+                            % Same delay sequence for the zero point
+                            pause(0.05);
                             recordTimePoint(app);
                             
-                            pause(step_T / 2);
+                            pause(max(0, meas_T - 0.05));
+                            recordTimePoint(app);
+                            
+                            pause(max(0, step_T - meas_T - 0.05));
                         end
                     end
                     
