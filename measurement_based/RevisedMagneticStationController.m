@@ -381,6 +381,12 @@ classdef RevisedMagneticStationController < matlab.apps.AppBase
                         % pause(step_time - Measuretime - 0.05)
                         pause(max(0, step_T - meas_T - 0.05));
                         
+                        % Measure power supply & gaussmeter & plot (End)
+                        recordTimePoint(app);
+                        
+                        % pause(0.05) before next Update current
+                        pause(0.05);
+                        
                         if isRTZ
                             fprintf(app.Kepco, 'CURR 0.0');
                             
@@ -392,6 +398,9 @@ classdef RevisedMagneticStationController < matlab.apps.AppBase
                             recordTimePoint(app);
                             
                             pause(max(0, step_T - meas_T - 0.05));
+                            recordTimePoint(app);
+                            
+                            pause(0.05);
                         end
                     end
                     
