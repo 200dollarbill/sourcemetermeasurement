@@ -346,6 +346,7 @@
                         % current setup
                         target_I = I_steps(i);
                         fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
+                        pause(0.01)
                         
                         % 1. Start measure
                         recordTimePoint(app);
