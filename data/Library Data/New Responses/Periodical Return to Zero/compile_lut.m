@@ -93,9 +93,9 @@ fprintf('Equation: Y = (%.6f) * X + (%.6f)\n', slope, intercept);
 x_min = min(all_x);
 x_max = max(all_x);
 
-% Define how many points you want in your LUT (e.g., 1000 steps)
-num_steps = 1000;
-x_lut = linspace(x_min, x_max, num_steps)';
+% Define your desired step size for the LUT
+step_size = 0.01; 
+x_lut = (x_min : step_size : x_max)';
 y_lut = polyval(p, x_lut); % Calculate theoretical Y for every LUT X step
 
 % Prepare data to write to Excel
