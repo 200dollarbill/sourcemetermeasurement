@@ -33,30 +33,25 @@ save_fig_cb = """        % Button pushed function: SaveToFigureButton
                 f = figure('Name', 'Exported Plots', 'NumberTitle', 'off', 'Visible', 'off');
                 f.Position = [100 100 1200 800];
                 
-                ax1 = subplot(2,3,1, 'Parent', f);
+                ax1 = subplot(2,2,1, 'Parent', f);
                 plot(ax1, app.hLine1.XData, app.hLine1.YData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
                 title(ax1, app.UIAxes.Title.String); xlabel(ax1, app.UIAxes.XLabel.String); ylabel(ax1, app.UIAxes.YLabel.String);
                 if ~isempty(app.UIAxes.XLim) && app.UIAxes.XLim(2) > app.UIAxes.XLim(1); xlim(ax1, app.UIAxes.XLim); end
                 
-                ax2 = subplot(2,3,2, 'Parent', f);
+                ax2 = subplot(2,2,2, 'Parent', f);
                 plot(ax2, app.hLine2.XData, app.hLine2.YData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
                 title(ax2, app.UIAxes2.Title.String); xlabel(ax2, app.UIAxes2.XLabel.String); ylabel(ax2, app.UIAxes2.YLabel.String);
                 if ~isempty(app.UIAxes2.XLim) && app.UIAxes2.XLim(2) > app.UIAxes2.XLim(1); xlim(ax2, app.UIAxes2.XLim); end
                 
-                ax3 = subplot(2,3,3, 'Parent', f);
+                ax3 = subplot(2,2,3, 'Parent', f);
                 plot(ax3, app.hLine3.XData, app.hLine3.YData, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
                 title(ax3, app.UIAxes_2.Title.String); xlabel(ax3, app.UIAxes_2.XLabel.String); ylabel(ax3, app.UIAxes_2.YLabel.String);
                 if ~isempty(app.UIAxes_2.XLim) && app.UIAxes_2.XLim(2) > app.UIAxes_2.XLim(1); xlim(ax3, app.UIAxes_2.XLim); end
                 
-                ax4 = subplot(2,3,4, 'Parent', f);
+                ax4 = subplot(2,2,4, 'Parent', f);
                 plot(ax4, app.hLine4.XData, app.hLine4.YData, '-ko', 'LineWidth', 1.5, 'MarkerFaceColor', 'k');
                 title(ax4, app.UIAxes_3.Title.String); xlabel(ax4, app.UIAxes_3.XLabel.String); ylabel(ax4, app.UIAxes_3.YLabel.String);
                 if ~isempty(app.UIAxes_3.XLim) && app.UIAxes_3.XLim(2) > app.UIAxes_3.XLim(1); xlim(ax4, app.UIAxes_3.XLim); end
-                
-                ax5 = subplot(2,3,5, 'Parent', f);
-                plot(ax5, app.hLine5.XData, app.hLine5.YData, '-mo', 'LineWidth', 1.5, 'MarkerFaceColor', 'm');
-                title(ax5, app.UIAxes_4.Title.String); xlabel(ax5, app.UIAxes_4.XLabel.String); ylabel(ax5, app.UIAxes_4.YLabel.String);
-                if ~isempty(app.UIAxes_4.XLim) && app.UIAxes_4.XLim(2) > app.UIAxes_4.XLim(1); xlim(ax5, app.UIAxes_4.XLim); end
                 
                 f.Visible = 'on';
                 drawnow;

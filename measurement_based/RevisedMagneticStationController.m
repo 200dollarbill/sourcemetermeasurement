@@ -104,16 +104,14 @@
             if ~isempty(app.Gaussmeter)
                 fprintf(app.Gaussmeter, 'RDGFIELD?');
                 f_val = str2double(fscanf(app.Gaussmeter));
+                if isnan(f_val); f_val = 0; end
                 app.TimeFieldData(end+1) = f_val;
             else
-                app.TimeFieldData(end+1) = NaN;
+                app.TimeFieldData(end+1) = 0;
             end
             
             if app.RealTimePlotCheckBox.Value
                 set(app.hLine4, 'XData', app.TimeData, 'YData', app.TimeCurrData);
-                if ~isempty(app.Gaussmeter)
-                    set(app.hLine5, 'XData', app.TimeData, 'YData', app.TimeFieldData);
-                end
             end
             drawnow limitrate;
         end
@@ -266,6 +264,7 @@
 
         % Button pushed function: StartButton
         function StartButtonPushed(app, event)
+            setdelay = 0.2;
             app.StartButton.Enable = 'off';
             app.StopButton.Enable = 'on';
             app.DisconnectButton.Enable = 'off';
@@ -404,26 +403,28 @@
                         
                         elapsed = toc(app.ticStart);
                         eta = max(0, total_time_est - elapsed);
-                        app.TimetofinishLabel.Text = sprintf('Time to finish : %.1f s', eta);
+                        app.TimetofinishLabel.Text = sprintf('%.1f s', eta);
 
                         % current setup
                         target_I = I_steps(i);
                         fprintf(app.Kepco, sprintf('CURR %.3f', target_I));
                         
                         % pause constant delay
-                        pause(0.1);
+                        pause(setdelay);
                         
                         % Measure power supply & gaussmeter & plot (Start)
                         recordTimePoint(app);
                         
                         % pause(Measuretime-0.05)
-                        pause(max(0, meas_T - 0.1));
+                        pause(max(0, meas_T - setdelay));
                         
                         % Measure source meter, gauss meter, power supply & plot (Sensor measure)
                         recordTimePoint(app);
                         
                         % Record for static plots
-                        app.CurrData(end+1) = app.TimeCurrData(end);
+                        if ~isempty(app.TimeCurrData)
+                            app.CurrData(end+1) = app.TimeCurrData(end);
+                        end
                         
                         % source meter reading
                         if ~isempty(app.SMU)
@@ -434,36 +435,36 @@
                             app.ResistanceOhmsLabel.Text = sprintf('Resistance : %.4f Ohms', res_val);
                         end
 
-                        % gaussmeeter reading from TimeFieldData
-                        if ~isempty(app.Gaussmeter)
+                        % gaussmeter reading from TimeFieldData
+                        if ~isempty(app.Gaussmeter) && ~isempty(app.TimeFieldData)
                             app.FieldData(end+1) = app.TimeFieldData(end);
                         end
 
                         updateStaticPlots(app);
                         
                         % pause(step_time - Measuretime - 0.05)
-                        pause(max(0, step_T - meas_T - 0.1));
+                        pause(max(0, step_T - meas_T - setdelay));
                         
                         % Measure power supply & gaussmeter & plot (End)
                         recordTimePoint(app);
                         
                         % pause(0.05) before next Update current
-                        pause(0.1);
+                        pause(setdelay);
                         
                         if isRTZ
                             fprintf(app.Kepco, 'CURR 0.0');
                             
                             % Same delay sequence for the zero point
-                            pause(0.1);
+                            pause(setdelay);
                             recordTimePoint(app);
                             
-                            pause(max(0, meas_T - 0.1));
+                            pause(max(0, meas_T - setdelay));
                             recordTimePoint(app);
                             
-                            pause(max(0, step_T - meas_T - 0.1));
+                            pause(max(0, step_T - meas_T - setdelay));
                             recordTimePoint(app);
                             
-                            pause(0.1);
+                            pause(setdelay);
                         end
                     end
                     
@@ -504,9 +505,6 @@
             
             if ~isempty(app.TimeData)
                 set(app.hLine4, 'XData', app.TimeData, 'YData', app.TimeCurrData);
-                if ~isempty(app.Gaussmeter)
-                    set(app.hLine5, 'XData', app.TimeData, 'YData', app.TimeFieldData);
-                end
             end
             drawnow limitrate;
         end
@@ -932,6 +930,7 @@
             % Create GaussmeterAddrEditField
             app.GaussmeterAddrEditField = uieditfield(app.ConnectionPanel, 'numeric');
             app.GaussmeterAddrEditField.Position = [135 135 100 22];
+            app.GaussmeterAddrEditField.Value = 18;
 
             % Create DropDown
             app.DropDown = uidropdown(app.ConnectionPanel);
