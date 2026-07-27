@@ -1,4 +1,4 @@
-classdef newerui < matlab.apps.AppBase
+classdef ControllerGUI < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
@@ -806,7 +806,7 @@ end
     methods (Access = public)
 
         % Construct app
-        function app = newerui
+        function app = ControllerGUI
 
             % Create UIFigure and components
             createComponents(app)

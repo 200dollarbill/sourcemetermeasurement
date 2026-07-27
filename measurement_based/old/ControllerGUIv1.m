@@ -1,4 +1,4 @@
-classdef ControllerGUIDesign < matlab.apps.AppBase
+classdef ControllerGUIv1 < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
@@ -93,7 +93,6 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
                 fprintf(app.SMU, "*RST");
                 pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
-                fprintf(app.SMU, ":SENS:RES:OCOM ON"); % Offset Compensated Ohms
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
             case 'Supply + Gaussmeter'
@@ -117,7 +116,6 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
                 fprintf(app.SMU, "*RST");
                 pause(2);
                 fprintf(app.SMU, ":SENS:FUNC 'RES'");
-                fprintf(app.SMU, ":SENS:RES:OCOM ON"); % Offset Compensated Ohms
                 fprintf(app.SMU, ":FORM:ELEM RES");
 
                 % gaussmeter
@@ -191,8 +189,7 @@ classdef ControllerGUIDesign < matlab.apps.AppBase
 
         try
             writetable(T, fullPath);
-            uialert(app.UIFigure, sprintf('Data successfully saved to:
-%s', fullPath), 'Save Complete', 'Icon', 'success');
+            uialert(app.UIFigure, sprintf('Data successfully saved to: x%s', fullPath), 'Save Complete', 'Icon', 'success');
         catch ME
             uialert(app.UIFigure, ['Failed to save Excel file: ' ME.message], 'Save Error', 'Icon', 'warning');
         end
@@ -714,7 +711,7 @@ end
     methods (Access = public)
 
         % Construct app
-        function app = ControllerGUIDesign
+        function app = ControllerGUIv1
 
             % Create UIFigure and components
             createComponents(app)
