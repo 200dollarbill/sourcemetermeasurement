@@ -8,9 +8,9 @@ sheetName = 'StaticData';
 
 for i = 1:length(files)
     filename = files(i).name;
-    if startsWith(filename, '~$') || strcmp(filename, 'Compiled_LUT_Linear.xlsx')
-        continue;
-    end
+        if startsWith(filename, '~$') || strcmp(filename, 'Compiled_LUT_Linear.xlsx') || strcmp(filename, 'Library.xlsx')
+            continue;
+        end
     try
         data = readmatrix(filename, 'Sheet', sheetName);        
         x_col = 1; 
@@ -47,16 +47,16 @@ fprintf('n %d', length(all_x));
 p = polyfit(all_x, all_y, 1);
 slope = p(1);
 intercept = p(2);
-fprintf('');ao
+fprintf('');
 fprintf('b: %.6f\n', slope);
 fprintf('a: %.6f\n', intercept);
 fprintf('f(x) = (%.6f) * x + (%.6f)\n', slope, intercept);
-x_min = min(all_x);
-x_max = max(all_x);
+x_min = -2.0;
+x_max = 2.0;
 
-step_size = 0.01;
+step_size = 0.01; % 10 mA step size
 x_lut = (x_min : step_size : x_max)';
-y_lut = polyval(p, x_lut); 
+y_lut = polyval(p, x_lut); % exact unrounded fitted Y values 
 % make table
 lut_table = table(x_lut, y_lut, 'VariableNames', {'Input_X', 'Fitted_Output_Y'});
 params_table = table(slope, intercept, 'VariableNames', {'Slope', 'Intercept'});
