@@ -30,6 +30,9 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
         StartCurrentAEditField         matlab.ui.control.NumericEditField
         StartCurrentAEditFieldLabel    matlab.ui.control.Label
         ConnectionPanel                matlab.ui.container.Panel
+        ModeButtonGroup                matlab.ui.container.ButtonGroup
+        StaircaseRadioButton           matlab.ui.control.RadioButton
+        RTZRadioButton                 matlab.ui.control.RadioButton
         DropDown                       matlab.ui.control.DropDown
         Label                          matlab.ui.control.Label
         StatusLabel                    matlab.ui.control.Label
@@ -55,6 +58,9 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
         FieldData = []
         hLine1
         hLine2
+        hLine1_bwd
+        hLine2_bwd
+        split_index = 0
         LUT_Current = []
         LUT_Field = []
     end
@@ -199,11 +205,21 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
                 
                 % Replot axes 1
                 ax1 = subplot(1,2,1, 'Parent', f);
+                hold(ax1, 'on');
                 if ~isempty(app.hLine1) && isvalid(app.hLine1)
                     plot(ax1, app.hLine1.XData, app.hLine1.YData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                    if ~isempty(app.hLine1_bwd) && isvalid(app.hLine1_bwd) && ~isempty(app.hLine1_bwd.XData) && ~all(isnan(app.hLine1_bwd.XData))
+                        plot(ax1, app.hLine1_bwd.XData, app.hLine1_bwd.YData, '-mo', 'LineWidth', 1.5, 'MarkerFaceColor', 'm');
+                    end
                 else
-                    plot(ax1, app.CurrData, app.ResData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                    if app.split_index > 0 && length(app.CurrData) > app.split_index
+                        plot(ax1, app.CurrData(1:app.split_index), app.ResData(1:app.split_index), '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                        plot(ax1, app.CurrData(app.split_index:end), app.ResData(app.split_index:end), '-mo', 'LineWidth', 1.5, 'MarkerFaceColor', 'm');
+                    else
+                        plot(ax1, app.CurrData, app.ResData, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+                    end
                 end
+                hold(ax1, 'off');
                 title(ax1, app.UIAxes.Title.String);
                 xlabel(ax1, app.UIAxes.XLabel.String);
                 ylabel(ax1, app.UIAxes.YLabel.String);
@@ -213,11 +229,21 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
                 
                 % Replot axes 2
                 ax2 = subplot(1,2,2, 'Parent', f);
+                hold(ax2, 'on');
                 if ~isempty(app.hLine2) && isvalid(app.hLine2)
                     plot(ax2, app.hLine2.XData, app.hLine2.YData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                    if ~isempty(app.hLine2_bwd) && isvalid(app.hLine2_bwd) && ~isempty(app.hLine2_bwd.XData) && ~all(isnan(app.hLine2_bwd.XData))
+                        plot(ax2, app.hLine2_bwd.XData, app.hLine2_bwd.YData, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
+                    end
                 else
-                    plot(ax2, app.FieldData, app.ResData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                    if app.split_index > 0 && length(app.CurrData) > app.split_index
+                        plot(ax2, app.FieldData(1:app.split_index), app.ResData(1:app.split_index), '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                        plot(ax2, app.FieldData(app.split_index:end), app.ResData(app.split_index:end), '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
+                    else
+                        plot(ax2, app.FieldData, app.ResData, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+                    end
                 end
+                hold(ax2, 'off');
                 title(ax2, app.UIAxes2.Title.String);
                 xlabel(ax2, app.UIAxes2.XLabel.String);
                 ylabel(ax2, app.UIAxes2.YLabel.String);
@@ -289,10 +315,20 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
             end
 
             % hysteresis loop
+            app.split_index = length(I_steps); % default to end of array
             if app.HysteresisCheckBox.Value
                 if length(I_steps) > 1
+                    app.split_index = length(I_steps);
                     I_steps = [I_steps, I_steps(end-1:-1:1)];
                 end
+            end
+
+            % Return to Zero mode
+            if app.RTZRadioButton.Value
+                rtz_steps = zeros(1, length(I_steps)*2);
+                rtz_steps(1:2:end) = I_steps;
+                I_steps = rtz_steps;
+                app.split_index = app.split_index * 2; % Adjust for 0s
             end
 
             % plots titles
@@ -306,9 +342,16 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
 
             cla(app.UIAxes);
             cla(app.UIAxes2);
+            hold(app.UIAxes, 'on');
             app.hLine1 = plot(app.UIAxes, nan, nan, '-ro', 'LineWidth', 1.5, 'MarkerFaceColor', 'r');
+            app.hLine1_bwd = plot(app.UIAxes, nan, nan, '-mo', 'LineWidth', 1.5, 'MarkerFaceColor', 'm');
+            hold(app.UIAxes, 'off');
             xlim(app.UIAxes, [min(s_I, e_I)-0.1, max(s_I, e_I)+0.1]);
+            
+            hold(app.UIAxes2, 'on');
             app.hLine2 = plot(app.UIAxes2, nan, nan, '-bo', 'LineWidth', 1.5, 'MarkerFaceColor', 'b');
+            app.hLine2_bwd = plot(app.UIAxes2, nan, nan, '-go', 'LineWidth', 1.5, 'MarkerFaceColor', 'g');
+            hold(app.UIAxes2, 'off');
 
             app.CurrData = [];
             app.ResData = [];
@@ -368,8 +411,16 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
 
                     if app.RealTimePlotCheckBox.Value
                         if ~isempty(app.ResData)
-                            set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
-                            set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
+                            idx = min(length(app.CurrData), app.split_index);
+                            set(app.hLine1, 'XData', app.CurrData(1:idx), 'YData', app.ResData(1:idx));
+                            set(app.hLine2, 'XData', app.FieldData(1:idx), 'YData', app.ResData(1:idx));
+                            if length(app.CurrData) > app.split_index
+                                set(app.hLine1_bwd, 'XData', app.CurrData(app.split_index:end), 'YData', app.ResData(app.split_index:end));
+                                set(app.hLine2_bwd, 'XData', app.FieldData(app.split_index:end), 'YData', app.ResData(app.split_index:end));
+                            else
+                                set(app.hLine1_bwd, 'XData', nan, 'YData', nan);
+                                set(app.hLine2_bwd, 'XData', nan, 'YData', nan);
+                            end
                         end
                     end
 
@@ -409,10 +460,16 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
         % Button pushed function: PlotButton
         function PlotButtonPushed(app, event)
             if ~isempty(app.ResData) && length(app.CurrData) == length(app.ResData)
-                set(app.hLine1, 'XData', app.CurrData, 'YData', app.ResData);
-                set(app.hLine2, 'XData', app.FieldData, 'YData', app.ResData);
-            end
-            if length(app.CurrData) == length(app.FieldData)
+                idx = min(length(app.CurrData), app.split_index);
+                set(app.hLine1, 'XData', app.CurrData(1:idx), 'YData', app.ResData(1:idx));
+                set(app.hLine2, 'XData', app.FieldData(1:idx), 'YData', app.ResData(1:idx));
+                if length(app.CurrData) > app.split_index
+                    set(app.hLine1_bwd, 'XData', app.CurrData(app.split_index:end), 'YData', app.ResData(app.split_index:end));
+                    set(app.hLine2_bwd, 'XData', app.FieldData(app.split_index:end), 'YData', app.ResData(app.split_index:end));
+                else
+                    set(app.hLine1_bwd, 'XData', nan, 'YData', nan);
+                    set(app.hLine2_bwd, 'XData', nan, 'YData', nan);
+                end
             end
             drawnow;
         end
@@ -630,7 +687,22 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
             % Create HysteresisCheckBox
             app.HysteresisCheckBox = uicheckbox(app.SettingsPanel);
             app.HysteresisCheckBox.Text = 'Hysteresis';
-            app.HysteresisCheckBox.Position = [23 54 78 22];
+            app.HysteresisCheckBox.Position = [23 48 78 22];
+
+            % Create ModeButtonGroup
+            app.ModeButtonGroup = uibuttongroup(app.SettingsPanel);
+            app.ModeButtonGroup.BorderType = 'none';
+            app.ModeButtonGroup.Position = [120 40 140 40];
+
+            % Create StaircaseRadioButton
+            app.StaircaseRadioButton = uiradiobutton(app.ModeButtonGroup);
+            app.StaircaseRadioButton.Text = 'Staircase';
+            app.StaircaseRadioButton.Position = [0 20 70 22];
+
+            % Create RTZRadioButton
+            app.RTZRadioButton = uiradiobutton(app.ModeButtonGroup);
+            app.RTZRadioButton.Text = 'Return to Zero';
+            app.RTZRadioButton.Position = [0 0 100 22];
 
             % Create ControlPanel
             app.ControlPanel = uipanel(app.UIFigure);
