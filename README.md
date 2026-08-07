@@ -14,6 +14,8 @@ Sweeping the coil current and recording resistance at each step lets you plot re
 
 ## Hardware involved
 
+![alt text](https://media.discordapp.net/attachments/822876863776030750/1535164904234033232/DEVICE_UNDER_TEST_DUT.png?ex=6a76c53b&is=6a7573bb&hm=6977e304907adda2e78693635a2b92b07f04a2f398f010e18ae292912cb61c84&=&format=webp&quality=lossless&width=1024&height=276)
+
 - Kepco 36 12M power supply, driving current into the Helmholtz coil
 - Helmholtz coil, generating the magnetic field around the DUT
 - DUT board with TMR sensor blocks
