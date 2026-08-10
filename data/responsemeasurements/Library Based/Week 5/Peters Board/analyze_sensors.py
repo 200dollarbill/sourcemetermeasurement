@@ -4,7 +4,6 @@ import sys
 import glob
 import os
 import csv
-import math
 
 def read_xlsx(filename):
     with zipfile.ZipFile(filename, 'r') as z:
@@ -98,15 +97,11 @@ def process_file(filename):
         return None
 
     overall_mr = max(mr_ratios)
-    sensitivity = max(sensitivities) # Assuming we take max sensitivity or max absolute sensitivity
+    sensitivity = max(sensitivities)
 
-    # Find nominal resistance closest to 0G
     closest_0g = min(res_mag, key=lambda x: abs(x[0]))
     nominal_res = closest_0g[1]
 
-    # Hysteresis
-    # Since sweeps might not perfectly align, let's round magnetic field to 1 decimal place to group
-    # or find max difference for identical fields
     field_to_res = {}
     for mag, res in res_mag:
         rounded_mag = round(mag, 1)
@@ -130,23 +125,19 @@ def process_file(filename):
 
 base_dir = '/mnt/Data/yep/Kuliah/Tugas/Magang Programs/MagneticStationGUI/data/responsemeasurements/Library Based/Week 5/Peters Board'
 boards = ['Board1', 'Board2', 'Board3']
-pins = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+pins_raw = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
 
-results = {}
+raw_results = {}
 
 for board in boards:
     board_dir = os.path.join(base_dir, board)
-    results[board] = {}
-    for pin in pins:
-        # Search for exact match B1A.xlsx, B2A.xlsx, etc.
-        # Note some files are B1F-Meas.xlsx, B2H-X.xlsx, etc., but we'll focus on the standard ones or grab them all?
-        # User specified B1A means Board1 Pin A. So search for {B[123]}{pin}.xlsx
+    raw_results[board] = {}
+    for pin in pins_raw:
         b_prefix = 'B' + board[-1]
         pattern = os.path.join(board_dir, f"{b_prefix}{pin}*.xlsx")
         files = glob.glob(pattern)
         if not files:
             continue
-        # If multiple, take the first one or process all? Let's take the first one or exactly matching
         target_file = None
         for f in files:
             fname = os.path.basename(f)
@@ -158,15 +149,41 @@ for board in boards:
             
         res = process_file(target_file)
         if res:
-            results[board][pin] = res
+            raw_results[board][pin] = res
 
-# Prepare CSV output
+# Average paired pins: A&G, B&H, C&I, D&J, E&K, F&L
+results = {}
+pin_pairs = [('A', 'G'), ('B', 'H'), ('C', 'I'), ('D', 'J'), ('E', 'K'), ('F', 'L')]
+pins = ['A', 'B', 'C', 'D', 'E', 'F']
+
+for board in boards:
+    results[board] = {}
+    for p1, p2 in pin_pairs:
+        r1 = raw_results[board].get(p1)
+        r2 = raw_results[board].get(p2)
+        
+        if r1 and r2:
+            results[board][p1] = {
+                'overall_mr': (r1['overall_mr'] + r2['overall_mr']) / 2,
+                'sensitivity': (r1['sensitivity'] + r2['sensitivity']) / 2,
+                'max_hysteresis': (r1['max_hysteresis'] + r2['max_hysteresis']) / 2,
+                'nominal_res': (r1['nominal_res'] + r2['nominal_res']) / 2
+            }
+        elif r1:
+            results[board][p1] = r1
+        elif r2:
+            results[board][p1] = r2
+
 csv_file = os.path.join(base_dir, 'Sensor_Measurements_Analysis.csv')
 with open(csv_file, 'w', newline='') as f:
     writer = csv.writer(f)
     
-    # Block 1 (Board 1 & 2)
     writer.writerow(['--- SENSOR BLOCK 1 (Board 1 & Board 2) ---'])
+    writer.writerow(['Pin', 'Board 1 Overall MR (%), Board 2 Overall MR (%), Average Overall MR (%)',
+                     'Board 1 Sensitivity (Ohms/G), Board 2 Sensitivity (Ohms/G), Average Sensitivity (Ohms/G)',
+                     'Board 1 Max Hysteresis (Ohms), Board 2 Max Hysteresis (Ohms), Average Max Hysteresis (Ohms)',
+                     'Board 1 Nominal Res (Ohms), Board 2 Nominal Res (Ohms), Average Nominal Res (Ohms)'])
+    # Write the actual headers correctly
     writer.writerow(['Pin', 'Board 1 Overall MR (%)', 'Board 2 Overall MR (%)', 'Average Overall MR (%)',
                      'Board 1 Sensitivity (Ohms/G)', 'Board 2 Sensitivity (Ohms/G)', 'Average Sensitivity (Ohms/G)',
                      'Board 1 Max Hysteresis (Ohms)', 'Board 2 Max Hysteresis (Ohms)', 'Average Max Hysteresis (Ohms)',
@@ -240,7 +257,6 @@ with open(csv_file, 'w', newline='') as f:
     writer.writerow(['OVERALL BLOCK 1 AVERAGE', '', '', block1_avg_mr, '', '', block1_avg_sens, '', '', block1_avg_hyst, '', '', block1_avg_nom])
     writer.writerow([])
     
-    # Block 2 (Board 3)
     writer.writerow(['--- SENSOR BLOCK 2 (Board 3) ---'])
     writer.writerow(['Pin', 'Board 3 Overall MR (%)', 'Board 3 Sensitivity (Ohms/G)', 'Board 3 Max Hysteresis (Ohms)', 'Board 3 Nominal Res (Ohms)'])
     

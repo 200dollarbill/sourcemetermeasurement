@@ -4,7 +4,7 @@ csv_file = '/mnt/Data/yep/Kuliah/Tugas/Magang Programs/MagneticStationGUI/data/r
 
 block1_data = {'MR': [], 'Sens': [], 'Hys': [], 'Nom': []}
 block2_data = {'MR': [], 'Sens': [], 'Hys': [], 'Nom': []}
-pins = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+pins = ['A', 'B', 'C', 'D', 'E', 'F']
 
 current_block = 0
 with open(csv_file, 'r') as f:
@@ -19,9 +19,6 @@ with open(csv_file, 'r') as f:
             continue
         
         if current_block == 1 and row[0] in pins:
-            # We take the Average columns for Block 1 (Board 1 & 2 avg)
-            # Row structure: 0:Pin, 1:B1_MR, 2:B2_MR, 3:Avg_MR, 4:B1_Sens, 5:B2_Sens, 6:Avg_Sens
-            # 7:B1_Hys, 8:B2_Hys, 9:Avg_Hys, 10:B1_Nom, 11:B2_Nom, 12:Avg_Nom
             mr_avg = row[3]
             sens_avg = row[6]
             hys_avg = row[9]
@@ -33,7 +30,6 @@ with open(csv_file, 'r') as f:
             block1_data['Nom'].append(float(nom_avg) if nom_avg else float('nan'))
             
         if current_block == 2 and row[0] in pins:
-            # Row structure for Block 2: 0:Pin, 1:B3_MR, 2:B3_Sens, 3:B3_Hys, 4:B3_Nom
             mr3 = row[1]
             sens3 = row[2]
             hys3 = row[3]
@@ -52,16 +48,16 @@ matlab_script = f"""%% render_measurements.m
 clear; clc; close all;
 
 %% Data definition
-pins = {{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'}};
+pins = {{'A', 'B', 'C', 'D', 'E', 'F'}};
 x = 1:length(pins);
 
-% --- Block 1 Data (Average of Board 1 & 2) ---
+% --- Block 1 Data (Average of Board 1 & 2, and Average of Pins A&G, etc) ---
 B1_Nom = {format_matlab_array(block1_data['Nom'])};
 B1_Hys = {format_matlab_array(block1_data['Hys'])};
 B1_Sens = {format_matlab_array(block1_data['Sens'])};
 B1_MR = {format_matlab_array(block1_data['MR'])};
 
-% --- Block 2 Data (Board 3) ---
+% --- Block 2 Data (Board 3, Average of Pins A&G, etc) ---
 B2_Nom = {format_matlab_array(block2_data['Nom'])};
 B2_Hys = {format_matlab_array(block2_data['Hys'])};
 B2_Sens = {format_matlab_array(block2_data['Sens'])};
@@ -119,4 +115,4 @@ out_file = '/mnt/Data/yep/Kuliah/Tugas/Magang Programs/MagneticStationGUI/data/r
 with open(out_file, 'w') as f:
     f.write(matlab_script)
 
-print(f"Successfully overwrote {out_file} with bar charts.")
+print(f"Successfully overwrote {out_file} with updated pins A-F.")
