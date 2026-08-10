@@ -24,7 +24,7 @@ color_b2 = [0.90 0.50 0.05]; % Orange for Block 2
 
 %% Plotting Function
 function createBarChart(x, data, blockName, paramName, yLabelText, pins, barColor)
-    fig = figure('Color', 'w', 'Position', [80 80 1000 600]);
+    fig = figure('Color', [0.96, 0.96, 0.96], 'Position', [80 80 1000 600]);
     ax = axes(fig);
     hold(ax, 'on');
     
@@ -50,6 +50,10 @@ function createBarChart(x, data, blockName, paramName, yLabelText, pins, barColo
     ax.YAxis.Exponent = 0;
     ax.XAxis.FontWeight = 'bold';
     ax.YAxis.FontWeight = 'bold';
+    
+    % Save figure
+    cleanName = strrep([blockName '_' paramName], ' ', '_');
+    savefig(fig, [cleanName '.fig']);
 end
 
 %% Generate Figures
