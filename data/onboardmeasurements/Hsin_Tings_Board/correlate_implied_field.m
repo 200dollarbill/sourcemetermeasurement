@@ -1,0 +1,114 @@
+% correlate_implied_field.m
+% This script correlates the onboard measurements with the true sensitivity 
+% derived from the response measurements. It calculates the Implied Magnetic 
+% Field (Gauss) and finds the linear correlation (Gauss per Ampere) generated 
+% by the onboard coil.
+
+% Define base directories relative to this script's location
+base_onboard = pwd; 
+base_response = fullfile(pwd, '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+
+% Create directory to save the correlation plots
+analysis_dir = fullfile(base_onboard, 'Analysis', 'ImpliedField');
+if ~exist(analysis_dir, 'dir')
+    mkdir(analysis_dir);
+end
+
+fprintf('======================================================\n');
+fprintf('         ONBOARD VS RESPONSE CORRELATION\n');
+fprintf('======================================================\n\n');
+
+% Find all onboard Excel files in all subdirectories of Board*
+files = dir(fullfile(base_onboard, 'Board*', '**', '*.xlsx'));
+
+for i = 1:length(files)
+    file_path = fullfile(files(i).folder, files(i).name);
+    
+    % Ignore temporary lock files and anything already inside Analysis
+    if contains(file_path, '~$') || contains(file_path, 'Analysis')
+        continue;
+    end
+    
+    try
+        % Extract folder parts from the absolute path
+        % e.g., .../Board1/PointX/B1A.xlsx
+        parts = strsplit(file_path, filesep);
+        filename = parts{end};
+        orientation = parts{end-1};
+        board_folder = parts{end-2};
+        
+        % Locate the exact same board and test point in the response measurements
+        response_file = fullfile(base_response, board_folder, filename);
+        
+        if ~isfile(response_file)
+            fprintf('Skipping %s in %s/%s: No corresponding response measurement found.\n', filename, board_folder, orientation);
+            continue;
+        end
+        
+        % 1. Read Response Measurement for the true Sensitivity
+        opts = detectImportOptions(response_file);
+        resp_df = readtable(response_file, opts);
+        
+        % Extract Sensitivity (Ohms/G)
+        if ismember('Sensitivity_Ohms_per_G', resp_df.Properties.VariableNames)
+            sens = resp_df.Sensitivity_Ohms_per_G(1);
+        else
+            sens = resp_df{1, 5}; % fallback to 5th column
+        end
+        
+        % 2. Read Onboard Measurement
+        opts_onboard = detectImportOptions(file_path);
+        onboard_df = readtable(file_path, opts_onboard);
+        
+        if ismember('Resistance_Ohms', onboard_df.Properties.VariableNames)
+            R = onboard_df.Resistance_Ohms;
+            I = onboard_df.Kepco_Current_A;
+        else
+            I = onboard_df{:, 1};
+            R = onboard_df{:, 2};
+        end
+        
+        % 3. Calculate Implied Gauss
+        % We assume the lowest resistance point correlates to the ~0 Gauss field baseline
+        implied_G = (R - min(R)) / sens;
+        
+        % 4. Correlate Implied Gauss with the Onboard Current
+        % Since magnetic field strength is proportional to current magnitude, we correlate Implied G with absolute Current (A)
+        max_I = max(abs(I));
+        max_G = max(implied_G);
+        
+        % Calculate the linear correlation slope (Gauss per Ampere)
+        p = polyfit(abs(I), implied_G, 1);
+        slope = p(1);
+        
+        % Print the results nicely
+        rel_path = fullfile(board_folder, orientation, filename);
+        fprintf('File: %s\n', rel_path);
+        fprintf('  -> True Sensitivity (from Response): %.4f Ohms/G\n', sens);
+        fprintf('  -> Max Implied Field (Generated):    %.4f G\n', max_G);
+        fprintf('  -> Max Coil Current:                 %.4f A\n', max_I);
+        fprintf('  -> Generated Field Correlation:      %.4f G/A\n', slope);
+        fprintf('------------------------------------------------------\n');
+        
+        % 5. Save a plot of the Implied Field vs Current
+        fig = figure('Visible', 'off');
+        plot(I, implied_G, 'bo-', 'MarkerSize', 4, 'DisplayName', 'Implied Field vs Current');
+        
+        % Clean up the title for display
+        clean_filename = strrep(filename, '.xlsx', '');
+        title_str = sprintf('Implied Magnetic Field vs Onboard Current\n%s - %s (%s)', board_folder, clean_filename, orientation);
+        title(title_str, 'Interpreter', 'none');
+        
+        xlabel('Kepco Current (A)');
+        ylabel('Implied Magnetic Field (G)');
+        grid on;
+        legend('Location', 'best');
+        
+        plot_name = sprintf('%s_%s_%s.png', board_folder, orientation, clean_filename);
+        saveas(fig, fullfile(analysis_dir, plot_name));
+        close(fig);
+        
+    catch ME
+        fprintf('Error processing %s: %s\n', file_path, ME.message);
+    end
+end
