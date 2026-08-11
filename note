@@ -114,4 +114,10 @@ C (6) - 9.1797%, 62.1887
 D (6) - 9.6%, 66.713
 
 
-
+1. Add a table for easy comparison
+2. Fix the images on the first page, make the numbers accurate
+3. Make a real conclusion on the results
+4. Know that sensor size and sensor block AR is different
+5. Make a relationship between the current range of sensor measurement, sensor sensitivity, and sensor resistance change with the measured magnetic field change. base this off of the sensitivity
+6. Change relationship on onboard measurement to res. vs current
+7. Change the wire definitons, its free layer not pinned layer
