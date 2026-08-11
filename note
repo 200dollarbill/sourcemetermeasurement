@@ -11,6 +11,10 @@ Onboard measurements
 3. Interpolated results
 4. Compare X and Y points
 
+Tommorow presentation
+Add in to out vs out to in difference in Onboard measurement
+Results from measuring on the X 
+
 
 
 Board 1
@@ -51,7 +55,7 @@ B (5) - 6.0088%, 40.4081 71031.7
 C (6) - 9.1797%, 62.1887 72601.73 
 13.85, 1.458G
 D (6) - 9.6%, 66.713 74542.27
-14.11, -0.0927G
+14.11, -0.0927
 
 Board 5 
 A (3) - 2.92%, 12.1142 43403.36 -0.0805
@@ -70,8 +74,8 @@ AR 0.1 = 20k - 17.5k
 
 
 per block
-
-Block 3 AR = 0.04 (real = 0.0375)
+r
+Block 3 AR = 0.04 (real = 0.0375) RMSE 1.151125 1.2% FSO 
 Board 5
 A (3) - 2.92%, 12.1142
 B (3) - 2.64% 11.0075
@@ -79,8 +83,8 @@ Board 3
 A (3) - 1.827% 6.245
 B (3) - 1.865% 6.4283
 
-Block 5 AR = 0.05 (real = 0.05)
-Board 1
+Block 5 AR = 0.05 (real = 0.05) RMSE 2.2377 2.133% FSO
+Board 1 
 A (5) - 12.3% 70.42ohms/G
 B (5) - 14.28% 89.195ohms/G
 Board 2
@@ -90,7 +94,7 @@ Board 4
 A (5) - 5.052%, 31.5426
 B (5) - 6.0088%, 40.4081
 
-Block 4 AR = 0.06 (real = 0.0625)
+Block 4 AR = 0.06 (real = 0.0625) RMSE 0.92555 0.977 FSO
 Board 3
 C (4) - 3.6016% 13.56
 D (4) - 4.225 17.172
@@ -98,7 +102,7 @@ Board 5
 C (4) - 4.6%, 20.117
 D (4) - 5.89%, 28,74
 
-Block 6 AR = 0.1 (real = 0.1125)
+Block 6 AR = 0.1 (real = 0.1125) RMSE 2.47111 2.054% FSO
 Board 1
 C (6) - 18.119% 81.63ohms/G
 D (6) - 21.103% 103.142
