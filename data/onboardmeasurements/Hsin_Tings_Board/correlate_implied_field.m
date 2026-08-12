@@ -129,6 +129,9 @@ for i = 1:length(files)
         grid on;
         
         plot_name = sprintf('%s_%s_%s.fig', board_folder, orientation, clean_filename);
+        
+        % Set figure visible right before saving so it opens visibly for the user
+        set(fig, 'Visible', 'on');
         savefig(fig, fullfile(analysis_dir, plot_name));
         close(fig);
         
