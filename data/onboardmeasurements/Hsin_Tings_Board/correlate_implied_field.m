@@ -97,7 +97,7 @@ for i = 1:length(files)
         results_summary(end+1, :) = {board_folder, orientation, filename, sens, max_G, max_I, slope};
         
         % 5. Save a plot of the Implied Field vs Current
-        fig = figure('Visible', 'off');
+        fig = figure('Visible', 'on');
         set(fig, 'Units', 'normalized', 'Position', [0.2 0.2 0.4500 0.400]);
         
         % Split forward and backward sweep
