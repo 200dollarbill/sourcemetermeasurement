@@ -21,6 +21,9 @@ fprintf('======================================================\n\n');
 % Find all onboard Excel files in all subdirectories of Board*
 files = dir(fullfile(base_onboard, 'Board*', '**', '*.xlsx'));
 
+% Initialize results cell array for Excel summary
+results_summary = {};
+
 for i = 1:length(files)
     file_path = fullfile(files(i).folder, files(i).name);
     
@@ -90,25 +93,54 @@ for i = 1:length(files)
         fprintf('  -> Generated Field Correlation:      %.4f G/A\n', slope);
         fprintf('------------------------------------------------------\n');
         
+        % Add to summary
+        results_summary(end+1, :) = {board_folder, orientation, filename, sens, max_G, max_I, slope};
+        
         % 5. Save a plot of the Implied Field vs Current
         fig = figure('Visible', 'off');
-        plot(I, implied_G, 'bo-', 'MarkerSize', 4, 'DisplayName', 'Implied Field vs Current');
+        set(fig, 'Units', 'normalized', 'Position', [0.2 0.2 0.4500 0.400]);
+        
+        % Split forward and backward sweep
+        [~, max_idx] = max(I);
+        if max_idx > 1 && max_idx < length(I)
+            plot(I(1:max_idx), implied_G(1:max_idx), 'b-', 'LineWidth', 2.0, 'DisplayName', 'Forward Sweep');
+            hold on;
+            plot(I(max_idx:end), implied_G(max_idx:end), 'r-', 'LineWidth', 2.0, 'DisplayName', 'Backward Sweep');
+            hold off;
+        else
+            plot(I, implied_G, 'b-', 'LineWidth', 2.0, 'DisplayName', 'Sweep');
+        end
         
         % Clean up the title for display
         clean_filename = strrep(filename, '.xlsx', '');
         title_str = sprintf('Implied Magnetic Field vs Onboard Current\n%s - %s (%s)', board_folder, clean_filename, orientation);
-        title(title_str, 'Interpreter', 'none');
+        title(title_str, 'Interpreter', 'none', 'FontSize', 20, 'FontWeight', 'bold');
         
-        xlabel('Kepco Current (A)');
-        ylabel('Implied Magnetic Field (G)');
+        xlabel('Kepco Current (A)', 'FontSize', 20, 'FontWeight', 'bold');
+        ylabel('Implied Magnetic Field (G)', 'FontSize', 20, 'FontWeight', 'bold');
+        
+        ax = gca;
+        ax.LineWidth = 2.0;
+        ax.Box = 'on';
+        
+        lgd = legend('Location', 'best');
+        lgd.FontSize = 20;
+        lgd.FontWeight = 'bold';
         grid on;
-        legend('Location', 'best');
         
-        plot_name = sprintf('%s_%s_%s.png', board_folder, orientation, clean_filename);
-        saveas(fig, fullfile(analysis_dir, plot_name));
+        plot_name = sprintf('%s_%s_%s.fig', board_folder, orientation, clean_filename);
+        savefig(fig, fullfile(analysis_dir, plot_name));
         close(fig);
         
     catch ME
         fprintf('Error processing %s: %s\n', file_path, ME.message);
     end
+end
+
+% Save summary to Excel
+if ~isempty(results_summary)
+    T = cell2table(results_summary, 'VariableNames', {'Board', 'Orientation', 'File', 'Sensitivity_Ohms_per_G', 'Max_Implied_G', 'Max_Current_A', 'Correlation_G_per_A'});
+    summary_path = fullfile(analysis_dir, 'Correlation_Summary.xlsx');
+    writetable(T, summary_path);
+    fprintf('Saved summary to %s\n', summary_path);
 end
