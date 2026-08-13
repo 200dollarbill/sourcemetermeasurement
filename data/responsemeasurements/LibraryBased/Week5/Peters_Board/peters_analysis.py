@@ -115,7 +115,7 @@ def process_directory(base_dir):
     excel_files = sorted(excel_files, key=sort_key)
 
     print("======================================================")
-    print("      PETERS BOARD FULL SENSOR RESPONSE ANALYSIS")
+    print("   PETERS BOARD RESPONSE MEASUREMENT FULL ANALYSIS")
     print("======================================================\n")
 
     records = []
