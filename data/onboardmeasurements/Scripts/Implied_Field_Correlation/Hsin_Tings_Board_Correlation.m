@@ -5,8 +5,8 @@
 % by the onboard coil.
 
 % Define base directories relative to this script's location
-base_onboard = pwd; 
-base_response = fullfile(pwd, '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+base_onboard = fullfile(pwd, '..', '..', 'Hsin_Tings_Board'); 
+base_response = fullfile(pwd, '..', '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
 
 % Create directory to save the correlation plots
 analysis_dir = fullfile(base_onboard, 'Analysis', 'ImpliedField');

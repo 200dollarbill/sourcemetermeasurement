@@ -115,7 +115,7 @@ def process_directory(base_dir):
     excel_files = sorted(excel_files, key=sort_key)
 
     print("======================================================")
-    print("   PETERS BOARD RESPONSE MEASUREMENT FULL ANALYSIS")
+    print("      PETERS BOARD FULL SENSOR RESPONSE ANALYSIS")
     print("======================================================\n")
 
     records = []
@@ -196,5 +196,5 @@ def process_directory(base_dir):
         print(f"\nSuccessfully saved Excel summary to: {out_path}")
 
 if __name__ == "__main__":
-    target_dir = os.path.dirname(os.path.abspath(__file__))
+    target_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Peters_Board'))
     process_directory(target_dir)

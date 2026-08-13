@@ -84,5 +84,5 @@ def process_directory(base_dir):
             pass
 
 if __name__ == "__main__":
-    target_dir = os.path.dirname(os.path.abspath(__file__))
+    target_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'LibraryBased', 'Week5', 'Hsin_Tings_Board'))
     process_directory(target_dir)
