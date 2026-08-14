@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 def main():
     base_onboard = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Peters_Board'))
-    base_response = os.path.abspath(os.path.join(base_onboard, '..', '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board'))
+    base_response = os.path.abspath(os.path.join(base_onboard, '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board'))
 
     # We will save the plots inside an Analysis/ImpliedField_Python folder
     analysis_dir = os.path.join(base_onboard, 'Analysis', 'ImpliedField_Python')

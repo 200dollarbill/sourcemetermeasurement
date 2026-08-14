@@ -4,9 +4,29 @@
 % Field (Gauss) and finds the linear correlation (Gauss per Ampere) generated 
 % by the onboard coil.
 
+% Determine script directory reliably
+script_dir = fileparts(mfilename('fullpath'));
+if isempty(script_dir)
+    script_dir = pwd;
+end
+
 % Define base directories relative to this script's location
-base_onboard = fullfile(pwd, '..', '..', 'Peters_Board'); 
-base_response = fullfile(pwd, '..', '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board');
+base_onboard = fullfile(script_dir, '..', '..', 'Peters_Board'); 
+base_response = fullfile(script_dir, '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board');
+
+% Fallback checks if script is run from different working directories (e.g. repo root or Peters_Board folder)
+if ~exist(base_onboard, 'dir')
+    if exist(fullfile(pwd, 'data', 'onboardmeasurements', 'Peters_Board'), 'dir')
+        base_onboard = fullfile(pwd, 'data', 'onboardmeasurements', 'Peters_Board');
+        base_response = fullfile(pwd, 'data', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board');
+    elseif exist(fullfile(pwd, 'Peters_Board'), 'dir')
+        base_onboard = fullfile(pwd, 'Peters_Board');
+        base_response = fullfile(pwd, '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board');
+    elseif exist(fullfile(pwd, '..', 'Peters_Board'), 'dir')
+        base_onboard = fullfile(pwd, '..', 'Peters_Board');
+        base_response = fullfile(pwd, '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Peters_Board');
+    end
+end
 
 % Create directory to save the correlation plots
 analysis_dir = fullfile(base_onboard, 'Analysis', 'ImpliedField');
@@ -152,7 +172,7 @@ for i = 1:length(files)
         close(fig);
         
     catch ME
-        % Do not print anything
+        fprintf('Error processing %s: %s\n', file_path, ME.message);
     end
 end
 

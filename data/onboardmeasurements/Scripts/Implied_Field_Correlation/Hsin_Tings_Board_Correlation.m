@@ -4,9 +4,29 @@
 % Field (Gauss) and finds the linear correlation (Gauss per Ampere) generated 
 % by the onboard coil.
 
+% Determine script directory reliably
+script_dir = fileparts(mfilename('fullpath'));
+if isempty(script_dir)
+    script_dir = pwd;
+end
+
 % Define base directories relative to this script's location
-base_onboard = fullfile(pwd, '..', '..', 'Hsin_Tings_Board'); 
-base_response = fullfile(pwd, '..', '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+base_onboard = fullfile(script_dir, '..', '..', 'Hsin_Tings_Board'); 
+base_response = fullfile(script_dir, '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+
+% Fallback checks if script is run from different working directories (e.g. repo root or Hsin_Tings_Board folder)
+if ~exist(base_onboard, 'dir')
+    if exist(fullfile(pwd, 'data', 'onboardmeasurements', 'Hsin_Tings_Board'), 'dir')
+        base_onboard = fullfile(pwd, 'data', 'onboardmeasurements', 'Hsin_Tings_Board');
+        base_response = fullfile(pwd, 'data', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+    elseif exist(fullfile(pwd, 'Hsin_Tings_Board'), 'dir')
+        base_onboard = fullfile(pwd, 'Hsin_Tings_Board');
+        base_response = fullfile(pwd, '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+    elseif exist(fullfile(pwd, '..', 'Hsin_Tings_Board'), 'dir')
+        base_onboard = fullfile(pwd, '..', 'Hsin_Tings_Board');
+        base_response = fullfile(pwd, '..', '..', '..', 'responsemeasurements', 'LibraryBased', 'Week5', 'Hsin_Tings_Board');
+    end
+end
 
 % Create directory to save the correlation plots
 analysis_dir = fullfile(base_onboard, 'Analysis', 'ImpliedField');
