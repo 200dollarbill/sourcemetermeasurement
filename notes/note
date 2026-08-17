@@ -9,7 +9,15 @@ Onboard measurements
 1. Method
 2. Results
 3. Interpolated results
-4. Compare X and Y points
+4. RMSE, Hysteresis, Variability
+
+STDDEV at G/A = Sensor - sensor detectability variation
+RMSE = single sensor Measurement error
+STDDEV at RMSE = consistency of errors
+
+G/A = Polynomial fitting of the measurements, and then 
+
+
 
 Tommorow presentation
 Add in to out vs out to in difference in Onboard measurement

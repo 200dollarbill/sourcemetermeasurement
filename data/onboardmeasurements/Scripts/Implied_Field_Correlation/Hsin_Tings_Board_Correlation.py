@@ -20,6 +20,8 @@ def process_onboard_measurements():
     # Find all onboard Excel files
     onboard_files = glob.glob(os.path.join(base_onboard, 'Board*', '**', '*.xlsx'), recursive=True)
     
+    results_summary = []
+    
     for file in sorted(onboard_files):
         # Ignore temporary lock files and anything already in Analysis
         if '~$' in file or 'Analysis' in file:
@@ -72,6 +74,10 @@ def process_onboard_measurements():
             # Calculate the linear correlation slope (Gauss per Ampere)
             slope, intercept = np.polyfit(I, implied_G, 1)
             
+            # Calculate RMSE of the linear fit
+            implied_G_fit = slope * I + intercept
+            rmse = np.sqrt(np.mean((implied_G - implied_G_fit)**2))
+            
             # Print the results nicely
             rel_path = os.path.relpath(file, base_onboard)
             print(f"File: {rel_path}")
@@ -79,7 +85,19 @@ def process_onboard_measurements():
             print(f"  -> Max Implied Field (Generated):    {max_G:.4f} G")
             print(f"  -> Max Coil Current:                 {max_I:.4f} A")
             print(f"  -> Generated Field Correlation:      {slope:.4f} G/A")
+            print(f"  -> RMSE (Fit Error):                 {rmse:.4f} G")
             print("-" * 54)
+            
+            results_summary.append({
+                'Board': board_folder,
+                'Orientation': orientation,
+                'File': filename,
+                'Sensitivity_Ohms_per_G': sens,
+                'Max_Implied_G': max_G,
+                'Max_Current_A': max_I,
+                'Correlation_G_per_A': slope,
+                'RMSE_G': rmse
+            })
             
             # 5. Save a plot of the Implied Field vs Current
             plt.figure(figsize=(8, 5))
@@ -97,6 +115,13 @@ def process_onboard_measurements():
             
         except Exception as e:
             print(f"Error processing {os.path.relpath(file, base_onboard)}: {e}")
+
+    # Save summary excel sheet
+    if results_summary:
+        df_summary = pd.DataFrame(results_summary)
+        summary_path = os.path.join(analysis_dir, 'Correlation_Summary.xlsx')
+        df_summary.to_excel(summary_path, index=False)
+        print(f"Saved summary to {summary_path}")
 
 if __name__ == "__main__":
     process_onboard_measurements()

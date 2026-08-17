@@ -121,6 +121,10 @@ for i = 1:length(files)
         p = polyfit(I, implied_G, 1);
         slope = p(1);
         
+        % Calculate RMSE of the linear fit
+        implied_G_fit = slope * I + p(2);
+        rmse_val = sqrt(mean((implied_G - implied_G_fit).^2));
+        
         % Print the results nicely
         rel_path = fullfile(board_folder, orientation, filename);
         fprintf('File: %s\n', rel_path);
@@ -128,10 +132,11 @@ for i = 1:length(files)
         fprintf('  -> Max Implied Field (Generated):    %.4f G\n', max_G);
         fprintf('  -> Max Coil Current:                 %.4f A\n', max_I);
         fprintf('  -> Generated Field Correlation:      %.4f G/A\n', slope);
+        fprintf('  -> RMSE (Fit Error):                 %.4f G\n', rmse_val);
         fprintf('------------------------------------------------------\n');
         
         % Add to summary
-        results_summary(end+1, :) = {board_folder, orientation, filename, sens, max_G, max_I, slope};
+        results_summary(end+1, :) = {board_folder, orientation, filename, sens, max_G, max_I, slope, rmse_val};
         
         % 5. Save a plot of the Implied Field vs Current
         fig = figure('Visible', 'off'); % Do not spam screen
@@ -179,7 +184,7 @@ end
 
 % Save summary to Excel
 if ~isempty(results_summary)
-    T = cell2table(results_summary, 'VariableNames', {'Board', 'Orientation', 'File', 'Sensitivity_Ohms_per_G', 'Max_Implied_G', 'Max_Current_A', 'Correlation_G_per_A'});
+    T = cell2table(results_summary, 'VariableNames', {'Board', 'Orientation', 'File', 'Sensitivity_Ohms_per_G', 'Max_Implied_G', 'Max_Current_A', 'Correlation_G_per_A', 'RMSE_G'});
     summary_path = fullfile(analysis_dir, 'Correlation_Summary.xlsx');
     writetable(T, summary_path);
     fprintf('Saved summary to %s\n', summary_path);

@@ -77,12 +77,17 @@ def main():
             p = np.polyfit(I, implied_G, 1)
             slope = p[0]
             
+            # Calculate RMSE of the linear fit
+            implied_G_fit = slope * I + p[1]
+            rmse = np.sqrt(np.mean((implied_G - implied_G_fit)**2))
+            
             rel_path = os.path.join(board_folder, orientation, filename)
             print(f"File: {rel_path}")
             print(f"  -> True Sensitivity (from Response): {sens:.4f} Ohms/G")
             print(f"  -> Max Implied Field (Generated):    {max_G:.4f} G")
             print(f"  -> Max Coil Current:                 {max_I:.4f} A")
             print(f"  -> Generated Field Correlation:      {slope:.4f} G/A")
+            print(f"  -> RMSE (Fit Error):                 {rmse:.4f} G")
             print("-" * 54)
             
             results_summary.append({
@@ -92,7 +97,8 @@ def main():
                 'Sensitivity_Ohms_per_G': sens,
                 'Max_Implied_G': max_G,
                 'Max_Current_A': max_I,
-                'Correlation_G_per_A': slope
+                'Correlation_G_per_A': slope,
+                'RMSE_G': rmse
             })
             
             # Plotting (Matplotlib)
