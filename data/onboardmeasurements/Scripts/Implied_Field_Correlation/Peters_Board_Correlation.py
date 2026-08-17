@@ -72,8 +72,9 @@ def main():
             max_I = np.max(np.abs(I))
             max_G = np.max(implied_G)
             
-            # Linear Fit: abs(I) vs implied_G
-            p = np.polyfit(np.abs(I), implied_G, 1)
+            # Linear Fit: raw I vs implied_G
+            # We use raw I because the sensor response is linear (straight line), not a V-shape
+            p = np.polyfit(I, implied_G, 1)
             slope = p[0]
             
             rel_path = os.path.join(board_folder, orientation, filename)

@@ -117,7 +117,8 @@ for i = 1:length(files)
         max_G = max(implied_G);
         
         % Calculate the linear correlation slope (Gauss per Ampere)
-        p = polyfit(abs(I), implied_G, 1);
+        % We use raw I because the sensor response is linear (straight line)
+        p = polyfit(I, implied_G, 1);
         slope = p(1);
         
         % Print the results nicely
