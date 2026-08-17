@@ -101,7 +101,7 @@ for i = 1:length(files)
         max_G = max(implied_G);
         
         % Calculate the linear correlation slope (Gauss per Ampere)
-        p = polyfit(abs(I), implied_G, 1);
+        p = polyfit(I, implied_G, 1);
         slope = p(1);
         
         % Print the results nicely

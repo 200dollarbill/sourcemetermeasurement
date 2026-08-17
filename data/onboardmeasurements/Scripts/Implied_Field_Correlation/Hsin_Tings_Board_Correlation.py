@@ -70,7 +70,7 @@ def process_onboard_measurements():
             max_G = implied_G.max()
             
             # Calculate the linear correlation slope (Gauss per Ampere)
-            slope, intercept = np.polyfit(np.abs(I), implied_G, 1)
+            slope, intercept = np.polyfit(I, implied_G, 1)
             
             # Print the results nicely
             rel_path = os.path.relpath(file, base_onboard)
