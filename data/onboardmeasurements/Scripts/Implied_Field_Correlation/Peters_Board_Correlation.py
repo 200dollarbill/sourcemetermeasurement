@@ -67,7 +67,10 @@ def main():
                 R = onboard_df.iloc[:, 1].values
                 
             # Calculate Implied Gauss
-            implied_G = (R - np.min(R)) / sens
+            # Find the resistance when current is 0A to use as our 0 Gauss baseline
+            idx_0 = np.argmin(np.abs(I))
+            R_at_0A = R[idx_0]
+            implied_G = (R - R_at_0A) / sens
             
             max_I = np.max(np.abs(I))
             max_G = np.max(implied_G)

@@ -63,8 +63,10 @@ def process_onboard_measurements():
                 R = onboard_df.iloc[:, 1]
                 
             # 3. Calculate Implied Gauss
-            # We assume the lowest resistance point correlates to the ~0 Gauss field baseline
-            implied_G = (R - R.min()) / sens
+            # Find the resistance when current is 0A to use as our 0 Gauss generated field baseline
+            idx_0 = np.argmin(np.abs(I))
+            R_at_0A = R.iloc[idx_0] if isinstance(R, pd.Series) else R[idx_0]
+            implied_G = (R - R_at_0A) / sens
             
             # 4. Correlate Implied Gauss with the Onboard Current
             # Since magnetic field strength is proportional to current magnitude, we correlate Implied G with absolute Current (A)

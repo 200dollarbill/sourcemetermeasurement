@@ -92,8 +92,10 @@ for i = 1:length(files)
         end
         
         % 3. Calculate Implied Gauss
-        % We assume the lowest resistance point correlates to the ~0 Gauss field baseline
-        implied_G = (R - min(R)) / sens;
+        % Find the resistance when current is 0A to use as our 0 Gauss baseline
+        [~, idx_0] = min(abs(I));
+        R_at_0A = R(idx_0);
+        implied_G = (R - R_at_0A) / sens;
         
         % 4. Correlate Implied Gauss with the Onboard Current
         % Since magnetic field strength is proportional to current magnitude, we correlate Implied G with absolute Current (A)
