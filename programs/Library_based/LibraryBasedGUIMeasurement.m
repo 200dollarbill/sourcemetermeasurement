@@ -328,7 +328,6 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
                 rtz_steps = zeros(1, length(I_steps)*2);
                 rtz_steps(1:2:end) = I_steps;
                 I_steps = rtz_steps;
-                app.split_index = app.split_index * 2; % Adjust for 0s
             end
 
             % plots titles
@@ -382,32 +381,37 @@ classdef LibraryBasedGUIMeasurement < matlab.apps.AppBase
                         pause(0.5);
                     end
 
-                    % 3. Measure sensor resistance
-                    if ~isempty(app.SMU) && isvalid(app.SMU)
-                        pause(0.01);
-                        fprintf(app.SMU, ':READ?');
-                        res_str = fscanf(app.SMU);
-                        res_val = str2double(res_str);
-                        app.ResData(end+1) = res_val;
+                    % Determine if this is an RTZ zero-step
+                    is_rtz_step = app.RTZRadioButton.Value && (mod(i, 2) == 0);
 
-                        app.ResistanceOhmsLabel.Text = sprintf('Resistance : %.4f Ohms', res_val);
-                    end
+                    if ~is_rtz_step
+                        % 3. Measure sensor resistance
+                        if ~isempty(app.SMU) && isvalid(app.SMU)
+                            pause(0.01);
+                            fprintf(app.SMU, ':READ?');
+                            res_str = fscanf(app.SMU);
+                            res_val = str2double(res_str);
+                            app.ResData(end+1) = res_val;
 
-                    % 4. Measure current output from power supply
-                    meas_I = target_I;
-                    if ~isempty(app.Kepco) && isvalid(app.Kepco)
-                        fprintf(app.Kepco, 'MEAS:CURR?');
-                        meas_str = fscanf(app.Kepco);
-                        parsed_I = str2double(meas_str);
-                        if ~isnan(parsed_I)
-                            meas_I = parsed_I;
+                            app.ResistanceOhmsLabel.Text = sprintf('Resistance : %.4f Ohms', res_val);
                         end
-                    end
-                    app.CurrData(end+1) = meas_I;
 
-                    % Interpolate Magnetic Field from LUT using measured current
-                    field_val = interp1(app.LUT_Current, app.LUT_Field, meas_I, 'linear', 'extrap');
-                    app.FieldData(end+1) = field_val;
+                        % 4. Measure current output from power supply
+                        meas_I = target_I;
+                        if ~isempty(app.Kepco) && isvalid(app.Kepco)
+                            fprintf(app.Kepco, 'MEAS:CURR?');
+                            meas_str = fscanf(app.Kepco);
+                            parsed_I = str2double(meas_str);
+                            if ~isnan(parsed_I)
+                                meas_I = parsed_I;
+                            end
+                        end
+                        app.CurrData(end+1) = meas_I;
+
+                        % Interpolate Magnetic Field from LUT using measured current
+                        field_val = interp1(app.LUT_Current, app.LUT_Field, meas_I, 'linear', 'extrap');
+                        app.FieldData(end+1) = field_val;
+                    end
 
                     if app.RealTimePlotCheckBox.Value
                         if ~isempty(app.ResData)
